@@ -1,0 +1,24 @@
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  padding: 10px 15px;
+  margin-right: 300px;
+  background-color: #1b1b28;
+  border-radius: 2rem;
+}
+
+.inputWrapper input {
+  color: white;
+  font-family: "Space Grotesk";
+  outline: none;
+  background-color: transparent;
+  border: 0;
+  width: 150px;
+  transition: width 0.4s ease-out;
+}
+
+.inputWrapper .stretch {
+  width: 300px;
+}
