@@ -1,0 +1,13 @@
+.noteCard {
+  width: 15rem;
+  background-color: #000;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.noteCard span {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 0.6rem;
+  display: block;
+}

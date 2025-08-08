@@ -1,6 +1,8 @@
 import styles from "./App.module.css";
+import { NoteCard } from "./components/NoteCard/NoteCard.jsx";
 import { SearchInput } from "./components/SearchInput.jsx";
 import { SettingsBtn } from "./components/SettingsBtn/SettingsBtn.jsx";
+import { NOTES } from "./data/notes.js";
 
 export function App() {
   return (
@@ -14,7 +16,11 @@ export function App() {
           </div>
         </div>
       </header>
-      <main className={styles.main}></main>
+      <main className={styles.main}>
+        {NOTES.map((note) => (
+          <NoteCard key={note.id} note={note} />
+        ))}
+      </main>
     </div>
   );
 }

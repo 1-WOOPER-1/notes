@@ -20,9 +20,15 @@
 }
 
 .logo {
+  user-select: none;
 }
 
 .main {
   width: 1300px;
   margin: auto;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
