@@ -22,6 +22,11 @@ export function App() {
     }
   }
 
+  function deleteNote(note) {
+    setNotes(notes.filter((n) => n.id !== note.id));
+    setPinnedNotes(pinnedNotes.filter((n) => n.id !== note.id));
+  }
+
   return (
     <div>
       <header className={styles.header}>
@@ -39,7 +44,12 @@ export function App() {
             <h4>Pinned</h4>
             <div className={styles.notesContainer}>
               {pinnedNotes.map((note) => (
-                <NoteCard key={note.id} note={note} pinNote={pinNote} />
+                <NoteCard
+                  key={note.id}
+                  note={note}
+                  pinNote={pinNote}
+                  deleteNote={deleteNote}
+                />
               ))}
             </div>
           </div>
@@ -47,7 +57,12 @@ export function App() {
         {!!pinnedNotes.length && !!notes.length && <h4>Others</h4>}
         <div className={styles.notesContainer}>
           {notes.map((note) => (
-            <NoteCard key={note.id} note={note} pinNote={pinNote} />
+            <NoteCard
+              key={note.id}
+              note={note}
+              pinNote={pinNote}
+              deleteNote={deleteNote}
+            />
           ))}
         </div>
       </main>
