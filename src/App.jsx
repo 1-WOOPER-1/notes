@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./App.module.css";
 import { NoteCard } from "./components/NoteCard/NoteCard.jsx";
 import { SearchInput } from "./components/SearchInput.jsx";
@@ -5,6 +6,22 @@ import { SettingsBtn } from "./components/SettingsBtn/SettingsBtn.jsx";
 import { NOTES } from "./data/notes.js";
 
 export function App() {
+  const [notes, setNotes] = useState(NOTES.filter((note) => !note.isPinned));
+  const [pinnedNotes, setPinnedNotes] = useState(
+    NOTES.filter((note) => note.isPinned)
+  );
+
+  function pinNote(note) {
+    note.isPinned = !note.isPinned;
+    if (note.isPinned) {
+      setNotes(notes.filter((n) => n.id !== note.id));
+      setPinnedNotes([...pinnedNotes, note]);
+    } else {
+      setPinnedNotes(pinnedNotes.filter((n) => n.id !== note.id));
+      setNotes([...notes, note]);
+    }
+  }
+
   return (
     <div>
       <header className={styles.header}>
@@ -17,9 +34,22 @@ export function App() {
         </div>
       </header>
       <main className={styles.main}>
-        {NOTES.map((note) => (
-          <NoteCard key={note.id} note={note} />
-        ))}
+        {!!pinnedNotes.length && (
+          <div>
+            <h4>Pinned</h4>
+            <div className={styles.notesContainer}>
+              {pinnedNotes.map((note) => (
+                <NoteCard key={note.id} note={note} pinNote={pinNote} />
+              ))}
+            </div>
+          </div>
+        )}
+        {!!pinnedNotes.length && !!notes.length && <h4>Others</h4>}
+        <div className={styles.notesContainer}>
+          {notes.map((note) => (
+            <NoteCard key={note.id} note={note} pinNote={pinNote} />
+          ))}
+        </div>
       </main>
     </div>
   );

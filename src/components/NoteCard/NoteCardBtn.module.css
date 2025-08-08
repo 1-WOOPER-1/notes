@@ -1,0 +1,15 @@
+.toolbarBtn {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border: 0;
+  border-radius: 2rem;
+  color: white;
+  background-color: transparent;
+}
+
+.toolbarBtn:hover {
+  background-color: #2c2f32;
+}

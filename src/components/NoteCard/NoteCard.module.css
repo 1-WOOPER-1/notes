@@ -2,7 +2,7 @@
   width: 15rem;
   background-color: #000;
   border-radius: 1rem;
-  padding: 1rem;
+  padding: 1rem 1rem 0.7rem 1rem;
 }
 
 .noteCard span {
@@ -10,4 +10,12 @@
   font-size: 1.5rem;
   margin-bottom: 0.6rem;
   display: block;
+}
+
+.noteCardToolbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 0.6rem;
 }
