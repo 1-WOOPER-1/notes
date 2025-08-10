@@ -7,7 +7,7 @@ import styles from "./NoteCard.module.css";
 export function NoteCard({ note, pinNote, deleteNote }) {
   return (
     <div className={styles.noteCard}>
-      <span>{note.title}</span>
+      <h2>{note.title}</h2>
       <p>{note.body}</p>
       <div className={styles.noteCardToolbar}>
         <NoteCardBtn note={note} onClick={deleteNote}>
