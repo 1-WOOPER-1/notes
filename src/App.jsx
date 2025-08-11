@@ -1,9 +1,8 @@
 import { useState } from "react";
 import styles from "./App.module.scss";
 import { NoteCard } from "./components/NoteCard/NoteCard.jsx";
-import { SearchInput } from "./components/SearchInput.jsx";
-import { SettingsBtn } from "./components/SettingsBtn/SettingsBtn.jsx";
 import { NOTES } from "./data/notes.js";
+import { Header } from "./components/Header/Header.jsx";
 
 export function App() {
   const [allNotes, setAllNotes] = useState(NOTES);
@@ -32,15 +31,7 @@ export function App() {
 
   return (
     <div>
-      <header className={styles.header}>
-        <div className={styles.headerContainer}>
-          <h1 className={styles.logo}>NOTES</h1>
-          <div className={styles.headerSecondary}>
-            <SearchInput setQuery={setQuery} />
-            <SettingsBtn />
-          </div>
-        </div>
-      </header>
+      <Header setQuery={setQuery} />
       <main className={styles.main}>
         {!!query.trim().length ? (
           <div className={styles.notesContainer}>
