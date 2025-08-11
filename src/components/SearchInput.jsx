@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import styles from "./SearchInput.module.css";
+import styles from "./SearchInput.module.scss";
 
 export function SearchInput({ setQuery }) {
   const [focused, setFocused] = useState(false);

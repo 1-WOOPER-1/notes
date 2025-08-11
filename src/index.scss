@@ -1,0 +1,44 @@
+@use "./styles/colors.scss" as c;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: c.$color-background;
+  color: #fff;
+  font-family: "Space Grotesk";
+}
+
+h1 {
+  font: {
+    family: "Ndot-55", sans-serif;
+    size: 3rem;
+  }
+}
+
+p {
+  line-height: 1.4rem;
+}
+
+@font-face {
+  src: url("./src/assets/fonts/Ndot-55.otf") format("opentype");
+  font: {
+    family: "Ndot-55";
+    weight: bold;
+    style: normal;
+    display: swap;
+  }
+}
+
+@font-face {
+  src: url("./src/assets/fonts/SpaceGrotesk-Regular.otf") format("opentype");
+  font: {
+    family: "Space Grotesk";
+    weight: bold;
+    style: normal;
+    display: swap;
+  }
+}

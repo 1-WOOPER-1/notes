@@ -1,3 +1,5 @@
+@use "../../styles/colors.scss" as c;
+
 .settingsBtn {
   font-size: 2rem;
   display: flex;
@@ -8,9 +10,9 @@
   color: white;
   background-color: transparent;
   padding: 0.5rem;
-}
 
-.settingsBtn:hover {
-  color: #d71921;
-  background-color: #2c2f32;
+  &:hover {
+    color: c.$color-primary;
+    background-color: c.$color-hover-button;
+  }
 }

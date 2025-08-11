@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "./App.module.css";
+import styles from "./App.module.scss";
 import { NoteCard } from "./components/NoteCard/NoteCard.jsx";
 import { SearchInput } from "./components/SearchInput.jsx";
 import { SettingsBtn } from "./components/SettingsBtn/SettingsBtn.jsx";

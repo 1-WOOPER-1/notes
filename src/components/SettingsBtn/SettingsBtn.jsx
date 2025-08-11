@@ -1,5 +1,5 @@
 import { PiGearFineBold } from "react-icons/pi";
-import styles from "./SettingsBtn.module.css";
+import styles from "./SettingsBtn.module.scss";
 
 export function SettingsBtn() {
   return (

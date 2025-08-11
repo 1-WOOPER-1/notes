@@ -1,4 +1,4 @@
-import styles from "./NoteCardBtn.module.css";
+import styles from "./NoteCardBtn.module.scss";
 
 export function NoteCardBtn({ children, note, onClick }) {
   return (

@@ -2,7 +2,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { MdOutlineUnarchive } from "react-icons/md";
 import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
 import { NoteCardBtn } from "./NoteCardBtn.jsx";
-import styles from "./NoteCard.module.css";
+import styles from "./NoteCard.module.scss";
 
 export function NoteCard({ note, pinNote, deleteNote }) {
   return (

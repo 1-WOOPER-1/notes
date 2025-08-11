@@ -1,0 +1,19 @@
+.noteCard {
+  width: 15rem;
+  background-color: #000;
+  border-radius: 1rem;
+  padding: 1rem 1rem 0.7rem 1rem;
+
+  h2 {
+    margin-bottom: 0.6rem;
+    line-height: 1.6rem;
+  }
+
+  .noteCardToolbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 0.6rem;
+  }
+}
