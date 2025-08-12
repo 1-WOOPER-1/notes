@@ -1,6 +1,7 @@
+import { PiGearFineBold } from "react-icons/pi";
 import styles from "./Header.module.scss";
 import { SearchInput } from "../SearchInput/SearchInput.jsx";
-import { SettingsBtn } from "../SettingsBtn/SettingsBtn.jsx";
+import { Button } from "../Button/Button.jsx";
 
 export function Header({ setQuery }) {
   return (
@@ -9,7 +10,9 @@ export function Header({ setQuery }) {
         <h1 className={styles.logo}>NOTES</h1>
         <div className={styles.headerSecondary}>
           <SearchInput setQuery={setQuery} />
-          <SettingsBtn />
+          <Button className={styles.settingsBtn}>
+            <PiGearFineBold />
+          </Button>
         </div>
       </div>
     </header>
