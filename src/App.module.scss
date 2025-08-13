@@ -4,9 +4,14 @@
   padding: 2rem;
   display: flex;
   gap: 1rem;
+  transition: transform 0.8s ease;
 
   .notesList {
     display: flex;
     flex-direction: column;
   }
+}
+
+.moveRight {
+  transform: translateX(calc((650px - 3rem) / 2));
 }

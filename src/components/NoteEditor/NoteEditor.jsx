@@ -1,37 +1,57 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { CSSTransition } from "react-transition-group";
 import { IoCloseOutline } from "react-icons/io5";
 import { Button } from "../Button/Button";
 import styles from "./NoteEditor.module.scss";
 
-export function NoteEditor({ note, closeNote, saveNote }) {
+export function NoteEditor({ note, isOpen, closeEditor, closeNote, saveNote }) {
   const [value, setValue] = useState("");
+  const editorRef = useRef(null);
 
   useEffect(() => {
-    setValue(note.body);
-  }, [note.body]);
+    if (note) setValue(note.body);
+  }, [note]);
 
   useEffect(() => {
-    saveNote({ ...note, body: value });
+    if (note) saveNote({ ...note, body: value });
   }, [value]);
 
   return (
-    <div className={styles.noteEditor}>
-      <h2>
-        {note.id} {note.title}
-      </h2>
-      <textarea
-        value={value}
-        placeholder="Take a note"
-        onChange={(event) => setValue(event.target.value)}
-      ></textarea>
-      <Button
-        className={styles.closeBtn}
-        onClick={() => {
-          closeNote();
-        }}
-      >
-        <IoCloseOutline />
-      </Button>
-    </div>
+    <CSSTransition
+      nodeRef={editorRef}
+      in={isOpen}
+      timeout={1000}
+      classNames={{
+        enter: styles.noteEditorEnter,
+        enterActive: styles.noteEditorEnterActive,
+        enterDone: styles.noteEditorEnterDone,
+        exit: styles.noteEditorExit,
+        exitActive: styles.noteEditorExitActive,
+        exitDone: styles.noteEditorExitDone,
+      }}
+      // unmountOnExit
+      onExited={() => {
+        closeNote();
+      }}
+    >
+      <div ref={editorRef} className={styles.noteEditor}>
+        <h2>
+          {note?.id} {note?.title}
+        </h2>
+        <textarea
+          value={value}
+          placeholder="Take a note"
+          onChange={(event) => setValue(event.target.value)}
+        ></textarea>
+        <Button
+          className={styles.closeBtn}
+          onClick={() => {
+            closeEditor(false);
+          }}
+        >
+          <IoCloseOutline />
+        </Button>
+      </div>
+    </CSSTransition>
   );
 }

@@ -1,13 +1,13 @@
 .noteEditor {
-  //   border: 1px solid gray;
-  width: 650px;
+  width: 0;
   height: fit-content;
   position: sticky;
   top: 2rem;
-  flex: 0 0 650px;
+  flex: 0 0 auto;
   padding: 1rem;
   border-radius: 1rem;
   background-color: #000;
+  opacity: 0;
 
   h2 {
     margin-bottom: 0.6rem;
@@ -28,8 +28,46 @@
 
   .closeBtn {
     position: absolute;
-    right: 1rem;
-    top: 1rem;
+    right: 0.6rem;
+    top: 0.6rem;
     font-size: 2rem;
   }
+}
+
+.noteEditorEnter {
+  width: 0;
+  opacity: 0;
+}
+
+.noteEditorEnterActive {
+  width: 650px;
+  opacity: 1;
+  transition: width 0.65s ease-out, opacity 0.2s ease-in;
+}
+
+.noteEditorEnterDone {
+  width: 650px;
+  opacity: 1;
+  flex: 0 0 650px;
+}
+
+.noteEditorExit {
+  width: 650px;
+  opacity: 1;
+}
+
+.noteEditorExitActive {
+  width: 0;
+  opacity: 0;
+  transition: width 0.65s ease-in-out, opacity 0.55s ease-in;
+  h2,
+  textarea {
+    text-wrap: nowrap;
+    overflow: hidden;
+  }
+}
+
+.noteEditorExitDone {
+  opacity: 0;
+  width: 0;
 }

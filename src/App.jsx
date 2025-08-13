@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styles from "./App.module.scss";
-import { NoteCard } from "./components/NoteCard/NoteCard.jsx";
 import { NOTES } from "./data/notes.js";
 import { Header } from "./components/Header/Header.jsx";
 import { NoteEditor } from "./components/NoteEditor/NoteEditor.jsx";
@@ -14,9 +13,11 @@ export function App() {
   const otherNotes = allNotes.filter((note) => !note.isPinned);
 
   const [openedNote, setOpenedNote] = useState(null);
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
 
   function openNote(note) {
     setOpenedNote(note);
+    setIsEditorOpen(true);
   }
 
   function closeNote() {
@@ -48,14 +49,16 @@ export function App() {
   return (
     <div>
       <Header setQuery={setQuery} />
-      <main className={styles.main}>
-        {openedNote && (
-          <NoteEditor
-            note={openedNote}
-            closeNote={closeNote}
-            saveNote={saveNote}
-          />
-        )}
+      <main
+        className={`${styles.main} ${isEditorOpen ? styles.moveRight : ""}`}
+      >
+        <NoteEditor
+          note={openedNote}
+          isOpen={isEditorOpen}
+          closeEditor={setIsEditorOpen}
+          closeNote={closeNote}
+          saveNote={saveNote}
+        />
         <div className={styles.notesList}>
           {!!query.trim().length ? (
             <NotesContainer
