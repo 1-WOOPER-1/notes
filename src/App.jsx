@@ -3,6 +3,8 @@ import styles from "./App.module.scss";
 import { NoteCard } from "./components/NoteCard/NoteCard.jsx";
 import { NOTES } from "./data/notes.js";
 import { Header } from "./components/Header/Header.jsx";
+import { NoteEditor } from "./components/NoteEditor/NoteEditor.jsx";
+import { NotesContainer } from "./components/NoteCardContainer/NotesContainer.jsx";
 
 export function App() {
   const [allNotes, setAllNotes] = useState(NOTES);
@@ -10,6 +12,20 @@ export function App() {
 
   const pinnedNotes = allNotes.filter((note) => note.isPinned);
   const otherNotes = allNotes.filter((note) => !note.isPinned);
+
+  const [openedNote, setOpenedNote] = useState(null);
+
+  function openNote(note) {
+    setOpenedNote(note);
+  }
+
+  function closeNote() {
+    setOpenedNote(null);
+  }
+
+  function saveNote(note) {
+    setAllNotes(allNotes.map((n) => (n.id === note.id ? { ...note } : n)));
+  }
 
   const filteredNotes = allNotes.filter(
     (note) =>
@@ -33,47 +49,44 @@ export function App() {
     <div>
       <Header setQuery={setQuery} />
       <main className={styles.main}>
-        {!!query.trim().length ? (
-          <div className={styles.notesContainer}>
-            {filteredNotes.map((note) => (
-              <NoteCard
-                key={note.id}
-                note={note}
+        {openedNote && (
+          <NoteEditor
+            note={openedNote}
+            closeNote={closeNote}
+            saveNote={saveNote}
+          />
+        )}
+        <div className={styles.notesList}>
+          {!!query.trim().length ? (
+            <NotesContainer
+              notes={filteredNotes}
+              openNote={openNote}
+              pinNote={pinNote}
+              deleteNote={deleteNote}
+            />
+          ) : (
+            <>
+              {!!pinnedNotes.length && (
+                <div>
+                  <h4>Pinned</h4>
+                  <NotesContainer
+                    notes={pinnedNotes}
+                    openNote={openNote}
+                    pinNote={pinNote}
+                    deleteNote={deleteNote}
+                  />
+                </div>
+              )}
+              {!!pinnedNotes.length && !!otherNotes.length && <h4>Others</h4>}
+              <NotesContainer
+                notes={otherNotes}
+                openNote={openNote}
                 pinNote={pinNote}
                 deleteNote={deleteNote}
               />
-            ))}
-          </div>
-        ) : (
-          <>
-            {!!pinnedNotes.length && (
-              <div>
-                <h4>Pinned</h4>
-                <div className={styles.notesContainer}>
-                  {pinnedNotes.map((note) => (
-                    <NoteCard
-                      key={note.id}
-                      note={note}
-                      pinNote={pinNote}
-                      deleteNote={deleteNote}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
-            {!!pinnedNotes.length && !!otherNotes.length && <h4>Others</h4>}
-            <div className={styles.notesContainer}>
-              {otherNotes.map((note) => (
-                <NoteCard
-                  key={note.id}
-                  note={note}
-                  pinNote={pinNote}
-                  deleteNote={deleteNote}
-                />
-              ))}
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
       </main>
     </div>
   );

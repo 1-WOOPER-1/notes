@@ -1,0 +1,35 @@
+.noteEditor {
+  //   border: 1px solid gray;
+  width: 650px;
+  height: fit-content;
+  position: sticky;
+  top: 2rem;
+  flex: 0 0 650px;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: #000;
+
+  h2 {
+    margin-bottom: 0.6rem;
+    line-height: 1.6rem;
+  }
+
+  textarea {
+    width: 100%;
+    min-height: 60vh;
+    background-color: transparent;
+    color: #fff;
+    font-family: "Space Grotesk";
+    outline: none;
+    border: 0;
+    resize: none;
+    line-height: 1.4rem;
+  }
+
+  .closeBtn {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 2rem;
+  }
+}

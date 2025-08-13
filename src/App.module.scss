@@ -3,13 +3,10 @@
   margin: auto;
   padding: 2rem;
   display: flex;
-  flex-direction: column;
-}
-
-.notesContainer {
-  display: flex;
-  flex-wrap: wrap;
   gap: 1rem;
-  margin: 1rem;
-  justify-content: center;
+
+  .notesList {
+    display: flex;
+    flex-direction: column;
+  }
 }
