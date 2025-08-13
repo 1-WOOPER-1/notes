@@ -10,7 +10,7 @@ export function NoteCard({ note, openNote, pinNote, deleteNote }) {
       <h2>{note.title}</h2>
       <p>{note.body}</p>
       <div className={styles.noteCardToolbar}>
-        <Button note={note} onClick={deleteNote}>
+        <Button note={note} onClick={deleteNote} className={styles.deleteBtn}>
           <FaRegTrashAlt style={{ fontSize: "1rem" }} />
         </Button>
         <Button>
