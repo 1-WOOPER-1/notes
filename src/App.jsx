@@ -3,7 +3,7 @@ import styles from "./App.module.scss";
 import { NOTES } from "./data/notes.js";
 import { Header } from "./components/Header/Header.jsx";
 import { NoteEditor } from "./components/NoteEditor/NoteEditor.jsx";
-import { NotesContainer } from "./components/NoteCardContainer/NotesContainer.jsx";
+import { NotesContainer } from "./components/NotesContainer/NotesContainer.jsx";
 
 export function App() {
   const [allNotes, setAllNotes] = useState(NOTES);
