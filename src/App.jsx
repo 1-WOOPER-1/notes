@@ -74,6 +74,7 @@ export function App() {
                   <h4>Pinned</h4>
                   <NotesContainer
                     notes={pinnedNotes}
+                    reorderNotes={setAllNotes}
                     openNote={openNote}
                     pinNote={pinNote}
                     deleteNote={deleteNote}
@@ -83,6 +84,7 @@ export function App() {
               {!!pinnedNotes.length && !!otherNotes.length && <h4>Others</h4>}
               <NotesContainer
                 notes={otherNotes}
+                reorderNotes={setAllNotes}
                 openNote={openNote}
                 pinNote={pinNote}
                 deleteNote={deleteNote}

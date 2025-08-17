@@ -5,10 +5,17 @@
   background-color: #000;
   border-radius: 1rem;
   padding: 1rem 1rem 0.7rem 1rem;
+  display: flex;
+  flex-direction: column;
+  user-select: none;
 
   h2 {
     margin-bottom: 0.6rem;
     line-height: 1.6rem;
+  }
+
+  p {
+    margin-bottom: auto;
   }
 
   .noteCardToolbar {
@@ -25,4 +32,11 @@
       }
     }
   }
+}
+
+.deleting {
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+  opacity: 0;
+  transform: scale(0.9);
+  background-color: c.$color-primary;
 }
