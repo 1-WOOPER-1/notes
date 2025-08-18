@@ -25,7 +25,8 @@ p {
 }
 
 @font-face {
-  src: url("./src/assets/fonts/Ndot-55.otf") format("opentype");
+  src: url("./assets/fonts/Ndot-55.woff2") format("woff2"),
+    url("./assets/fonts/Ndot-55.woff") format("woff");
   font: {
     family: "Ndot-55";
     weight: bold;
@@ -35,7 +36,8 @@ p {
 }
 
 @font-face {
-  src: url("./src/assets/fonts/SpaceGrotesk-Regular.otf") format("opentype");
+  src: url("./assets/fonts/SpaceGrotesk-Regular.woff2") format("woff2"),
+    url("./assets/fonts/SpaceGrotesk-Regular.woff") format("woff");
   font: {
     family: "Space Grotesk";
     weight: bold;
