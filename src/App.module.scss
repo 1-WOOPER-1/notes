@@ -1,17 +1,26 @@
+@use "./styles/mixins" as m;
+
 .main {
-  width: 1300px;
+  width: 70%;
   margin: auto;
-  padding: 2rem;
+  padding: 2rem 1rem;
   display: flex;
   gap: 1rem;
   transition: transform 0.8s ease;
 
   .notesList {
-    display: flex;
-    flex-direction: column;
+    width: 100%;
   }
 }
 
 .moveRight {
-  transform: translateX(calc((650px - 3rem) / 2));
+  transform: translateX(calc(15vw));
+}
+
+@include m.tablet {
+  .main {
+    width: 100%;
+    flex-direction: column;
+    transform: none;
+  }
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./App.module.scss";
 import { NOTES } from "./data/notes.js";
 import { Header } from "./components/Header/Header.jsx";
@@ -14,6 +14,12 @@ export function App() {
 
   const [openedNote, setOpenedNote] = useState(null);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
+
+  useEffect(() => {
+    isEditorOpen
+      ? document.body.classList.add("scrollLocked")
+      : document.body.classList.remove("scrollLocked");
+  }, [isEditorOpen]);
 
   function openNote(note) {
     setOpenedNote(note);

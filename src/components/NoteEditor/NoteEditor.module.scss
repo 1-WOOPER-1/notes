@@ -1,3 +1,5 @@
+@use "../../styles/mixins.scss" as m;
+
 .noteEditor {
   width: 0;
   height: fit-content;
@@ -16,7 +18,7 @@
 
   textarea {
     width: 100%;
-    min-height: 60vh;
+    min-height: 75vh;
     background-color: transparent;
     color: #fff;
     font-family: "Space Grotesk";
@@ -40,19 +42,19 @@
 }
 
 .noteEditorEnterActive {
-  width: 650px;
+  width: 50%;
   opacity: 1;
   transition: width 0.65s ease-out, opacity 0.2s ease-in;
 }
 
 .noteEditorEnterDone {
-  width: 650px;
+  width: 50%;
   opacity: 1;
-  flex: 0 0 650px;
+  flex: 0 0 50%;
 }
 
 .noteEditorExit {
-  width: 650px;
+  width: 50%;
   opacity: 1;
 }
 
@@ -70,4 +72,50 @@
 .noteEditorExitDone {
   opacity: 0;
   width: 0;
+}
+
+@include m.tablet {
+  .noteEditor {
+    width: 100vw;
+    height: 0;
+    border-radius: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+
+    textarea {
+      height: 100%;
+    }
+  }
+
+  .noteEditorEnter {
+    height: 0;
+    opacity: 0;
+    display: block;
+  }
+
+  .noteEditorEnterActive {
+    height: 100vh;
+    opacity: 1;
+    transition: height 0.5s ease-out, opacity 0.2s ease-in;
+  }
+
+  .noteEditorEnterDone {
+    height: 100vh;
+    opacity: 1;
+    display: block;
+  }
+
+  .noteEditorExit {
+    height: 100vh;
+    opacity: 1;
+    display: block;
+  }
+
+  .noteEditorExitActive {
+    height: 0;
+    opacity: 0;
+    transition: height 0.5s ease-in-out, opacity 0.55s ease-in;
+  }
 }
