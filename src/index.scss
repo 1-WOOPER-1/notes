@@ -10,7 +10,7 @@
 body {
   background-color: c.$color-background;
   color: #fff;
-  font-family: "Space Grotesk";
+  font-family: "Space Grotesk", sans-serif;
 }
 
 h1 {
@@ -22,6 +22,17 @@ h1 {
 
 p {
   line-height: 1.4rem;
+}
+
+input {
+  outline: none;
+  color: white;
+  border: 0;
+  background-color: transparent;
+  font: {
+    family: "Space Grotesk", sans-serif;
+    size: 1rem;
+  }
 }
 
 @font-face {

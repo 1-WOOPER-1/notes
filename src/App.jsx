@@ -4,6 +4,7 @@ import { NOTES } from "./data/notes.js";
 import { Header } from "./components/Header/Header.jsx";
 import { NoteEditor } from "./components/NoteEditor/NoteEditor.jsx";
 import { NotesContainer } from "./components/NotesContainer/NotesContainer.jsx";
+import { UserModal } from "./components/UserModal/UserModal.jsx";
 
 export function App() {
   const [allNotes, setAllNotes] = useState(NOTES);
@@ -14,6 +15,8 @@ export function App() {
 
   const [openedNote, setOpenedNote] = useState(null);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     isEditorOpen
@@ -52,9 +55,14 @@ export function App() {
     setAllNotes(allNotes.filter((n) => n.id !== note.id));
   }
 
+  function toggleModal() {
+    setIsModalOpen((prev) => !prev);
+  }
+
   return (
     <div>
-      <Header setQuery={setQuery} />
+      <Header setQuery={setQuery} toggleModal={toggleModal} />
+      {isModalOpen && <UserModal toggleModal={toggleModal} />}
       <main
         className={`${styles.main} ${isEditorOpen ? styles.moveRight : ""}`}
       >

@@ -1,0 +1,56 @@
+@use "../../styles/colors.scss" as c;
+
+.userModal {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  padding: 0 1rem;
+  z-index: 9999;
+  background-color: hsl(235, 22%, 6%);
+  top: 6rem;
+  right: 1rem;
+  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.5);
+
+  .avatar {
+    font-size: 1.8rem;
+    margin: 2.5rem;
+  }
+
+  .listItem {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    width: 100%;
+    padding: 1rem;
+    border: 0;
+    color: white;
+    background-color: c.$color-background;
+
+    &Top {
+      margin-bottom: 0.2rem;
+      border-radius: 1rem 1rem 0.3rem 0.3rem;
+    }
+
+    &Bottom {
+      margin-bottom: 1rem;
+      border-radius: 0.3rem 0.3rem 1rem 1rem;
+    }
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    &:hover {
+      color: c.$color-primary;
+    }
+  }
+
+  .closeBtn {
+    position: absolute;
+    right: 0.6rem;
+    top: 0.6rem;
+    font-size: 2rem;
+  }
+}
