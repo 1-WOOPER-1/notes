@@ -17,6 +17,7 @@ export function App() {
   const [isEditorOpen, setIsEditorOpen] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [listView, setlistView] = useState(false);
 
   useEffect(() => {
     isEditorOpen
@@ -61,7 +62,12 @@ export function App() {
 
   return (
     <div>
-      <Header setQuery={setQuery} toggleModal={toggleModal} />
+      <Header
+        setQuery={setQuery}
+        toggleModal={toggleModal}
+        listView={listView}
+        setlistView={setlistView}
+      />
       {isModalOpen && <UserModal toggleModal={toggleModal} />}
       <main
         className={`${styles.main} ${isEditorOpen ? styles.moveRight : ""}`}
@@ -73,13 +79,16 @@ export function App() {
           closeNote={closeNote}
           saveNote={saveNote}
         />
-        <div className={styles.notesList}>
+        <div
+          className={`${styles.notesList} ${listView ? styles.listView : ""}`}
+        >
           {!!query.trim().length ? (
             <NotesContainer
               notes={filteredNotes}
               openNote={openNote}
               pinNote={pinNote}
               deleteNote={deleteNote}
+              listView={listView}
             />
           ) : (
             <>
@@ -92,6 +101,7 @@ export function App() {
                     openNote={openNote}
                     pinNote={pinNote}
                     deleteNote={deleteNote}
+                    listView={listView}
                   />
                 </div>
               )}
@@ -102,6 +112,7 @@ export function App() {
                 openNote={openNote}
                 pinNote={pinNote}
                 deleteNote={deleteNote}
+                listView={listView}
               />
             </>
           )}

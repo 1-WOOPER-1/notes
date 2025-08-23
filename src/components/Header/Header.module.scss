@@ -28,12 +28,29 @@
     align-items: center;
     gap: 1rem;
 
-    .settingsBtn {
+    .headerBtn {
       font-size: 2rem;
-      transform: rotate(180deg);
       &:hover {
         color: c.$color-primary;
-        background-color: c.$color-hover-button;
+      }
+    }
+
+    .settingsBtn {
+      transform: rotate(180deg);
+    }
+
+    .userModalBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem;
+      border-radius: 2rem;
+      width: 2.8rem;
+      height: 2.8rem;
+      background-color: c.$color-hover-button;
+      cursor: pointer;
+      &:hover {
+        color: c.$color-primary;
       }
     }
   }

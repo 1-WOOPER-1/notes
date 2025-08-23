@@ -19,6 +19,7 @@ export function NotesContainer({
   openNote,
   pinNote,
   deleteNote,
+  listView,
 }) {
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 30 } })
@@ -46,7 +47,11 @@ export function NotesContainer({
       onDragEnd={handleDragEnd}
     >
       <SortableContext items={notes} strategy={rectSortingStrategy}>
-        <div className={styles.notesContainer}>
+        <div
+          className={`${styles.notesContainer} ${
+            listView ? styles.listView : ""
+          }`}
+        >
           {notes.map((note) => (
             <NoteCard
               key={note.id}
