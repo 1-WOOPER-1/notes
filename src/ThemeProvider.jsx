@@ -1,11 +1,18 @@
 import { useState, useEffect } from "react";
 import { ThemeContext } from "./context/ThemeContext.js";
+import { LocalStorageService } from "./utils/localStorage.js";
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState(
+    LocalStorageService.getItem("theme") || "dark"
+  );
 
   function toggleTheme() {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    setTheme((prev) => {
+      const newTheme = prev === "dark" ? "light" : "dark";
+      LocalStorageService.setItem("theme", newTheme);
+      return newTheme;
+    });
   }
 
   useEffect(() => {

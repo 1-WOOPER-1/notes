@@ -2,15 +2,19 @@ import { useEffect, useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import styles from "./SearchInput.module.scss";
 import { useDebounce } from "@/hooks/useDebounce";
+import { LocalStorageService } from "@/utils/localStorage.js";
 
 export function SearchInput({ setQuery }) {
   const [focused, setFocused] = useState(false);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(
+    LocalStorageService.getItem("query") || ""
+  );
 
   const debouncedValue = useDebounce(value, 500);
 
   useEffect(() => {
     setQuery(debouncedValue);
+    LocalStorageService.setItem("query", debouncedValue);
   }, [debouncedValue, setQuery]);
 
   return (

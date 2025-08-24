@@ -8,6 +8,7 @@ import { Button } from "@components/Button/Button.jsx";
 import { DefaultUserIcon } from "@/icons/DefaultUserIcon.jsx";
 import { DropDown } from "@components/DropDown/DropDown.jsx";
 import { useTheme } from "@/hooks/useTheme.js";
+import { LocalStorageService } from "@/utils/localStorage.js";
 
 export function Header({ setQuery, toggleModal, listView, setlistView }) {
   const { theme, toggleTheme } = useTheme();
@@ -39,7 +40,11 @@ export function Header({ setQuery, toggleModal, listView, setlistView }) {
   }, [isDropDownOpen, setIsDropDownOpen]);
 
   function toggleView() {
-    setlistView((prev) => !prev);
+    setlistView((prev) => {
+      const newListView = !prev;
+      LocalStorageService.setItem("listView", newListView);
+      return newListView;
+    });
   }
 
   function toggleDropDown() {

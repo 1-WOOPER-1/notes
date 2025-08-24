@@ -6,16 +6,23 @@ import { NoteEditor } from "@components/NoteEditor/NoteEditor.jsx";
 import { UserModal } from "@components/UserModal/UserModal.jsx";
 import { NoteActionsContext } from "./context/NoteActionsContext.js";
 import { NotesList } from "@components/NotesList/NotesList.jsx";
+import { LocalStorageService } from "./utils/localStorage.js";
 
 export function App() {
-  const [allNotes, setAllNotes] = useState(NOTES);
+  const [allNotes, setAllNotes] = useState(
+    LocalStorageService.getItem("allNotes") || NOTES
+  );
   const [query, setQuery] = useState("");
 
-  const [openedNote, setOpenedNote] = useState(null);
+  const [openedNote, setOpenedNote] = useState(
+    LocalStorageService.getItem("openedNote") || null
+  );
   const [isEditorOpen, setIsEditorOpen] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [listView, setlistView] = useState(false);
+  const [listView, setlistView] = useState(
+    LocalStorageService.getItem("listView") || false
+  );
 
   useEffect(() => {
     isEditorOpen
@@ -23,13 +30,25 @@ export function App() {
       : document.body.classList.remove("scrollLocked");
   }, [isEditorOpen]);
 
+  useEffect(() => {
+    if (openedNote) {
+      openNote(openedNote);
+    }
+  }, []);
+
+  useEffect(() => {
+    LocalStorageService.setItem("allNotes", allNotes);
+  }, [allNotes]);
+
   function openNote(note) {
     setOpenedNote(note);
     setIsEditorOpen(true);
+    LocalStorageService.setItem("openedNote", note);
   }
 
   function closeNote() {
     setOpenedNote(null);
+    LocalStorageService.removeItem("openedNote");
   }
 
   function saveNote(note) {
