@@ -4,9 +4,9 @@ import { CSS } from "@dnd-kit/utilities";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { MdOutlineUnarchive } from "react-icons/md";
 import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
-import { Button } from "../Button/Button.jsx";
+import { Button } from "@components/Button/Button.jsx";
 import styles from "./NoteCard.module.scss";
-import { NoteActionsContext } from "../../context/NoteActionsContext.js";
+import { NoteActionsContext } from "@/context/NoteActionsContext.js";
 
 export function NoteCard({ note }) {
   const { attributes, listeners, setNodeRef, transform, transition } =

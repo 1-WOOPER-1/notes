@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import { IoCloseOutline } from "react-icons/io5";
-import { Button } from "../Button/Button";
+import { Button } from "@components/Button/Button.jsx";
 import styles from "./NoteEditor.module.scss";
 
 export function NoteEditor({ note, isOpen, closeEditor, closeNote, saveNote }) {

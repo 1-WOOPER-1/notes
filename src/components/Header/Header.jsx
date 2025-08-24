@@ -4,10 +4,10 @@ import { FaMoon, FaSun } from "react-icons/fa6";
 import { TbLayoutList, TbLayoutGrid } from "react-icons/tb";
 import styles from "./Header.module.scss";
 import { SearchInput } from "./SearchInput/SearchInput.jsx";
-import { Button } from "../Button/Button.jsx";
-import { DefaultUserIcon } from "../../icons/DefaultUserIcon.jsx";
-import { DropDown } from "../DropDown/DropDown.jsx";
-import { ThemeContext } from "../../context/ThemeContext.js";
+import { Button } from "@components/Button/Button.jsx";
+import { DefaultUserIcon } from "@/icons/DefaultUserIcon.jsx";
+import { DropDown } from "@components/DropDown/DropDown.jsx";
+import { ThemeContext } from "@/context/ThemeContext.js";
 
 export function Header({ setQuery, toggleModal, listView, setlistView }) {
   const { theme, toggleTheme } = useContext(ThemeContext);

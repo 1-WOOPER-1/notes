@@ -1,4 +1,4 @@
-import { NotesContainer } from "../NotesContainer/NotesContainer";
+import { NotesContainer } from "@components/NotesContainer/NotesContainer.jsx";
 import styles from "./NotesList.module.scss";
 
 export function NotesList({ allNotes, setAllNotes, query, listView }) {

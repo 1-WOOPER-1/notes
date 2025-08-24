@@ -11,7 +11,7 @@ import {
   rectSortingStrategy,
 } from "@dnd-kit/sortable";
 import styles from "./NotesContainer.module.scss";
-import { NoteCard } from "../NoteCard/NoteCard.jsx";
+import { NoteCard } from "@components/NoteCard/NoteCard.jsx";
 
 export function NotesContainer({ notes, reorderNotes, listView }) {
   const sensors = useSensors(

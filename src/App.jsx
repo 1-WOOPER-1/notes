@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import styles from "./App.module.scss";
 import { NOTES } from "./data/notes.js";
-import { Header } from "./components/Header/Header.jsx";
-import { NoteEditor } from "./components/NoteEditor/NoteEditor.jsx";
-import { UserModal } from "./components/UserModal/UserModal.jsx";
+import { Header } from "@components/Header/Header.jsx";
+import { NoteEditor } from "@components/NoteEditor/NoteEditor.jsx";
+import { UserModal } from "@components/UserModal/UserModal.jsx";
 import { NoteActionsContext } from "./context/NoteActionsContext.js";
-import { NotesList } from "./components/NotesList/NotesList.jsx";
+import { NotesList } from "@components/NotesList/NotesList.jsx";
 
 export function App() {
   const [allNotes, setAllNotes] = useState(NOTES);

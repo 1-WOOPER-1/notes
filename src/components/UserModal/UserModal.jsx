@@ -3,8 +3,8 @@ import { FiAtSign } from "react-icons/fi";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
 import styles from "./UserModal.module.scss";
-import { DefaultUserIcon } from "../../icons/DefaultUserIcon.jsx";
-import { Button } from "../Button/Button.jsx";
+import { DefaultUserIcon } from "@/icons/DefaultUserIcon.jsx";
+import { Button } from "@components/Button/Button.jsx";
 
 export function UserModal({ toggleModal }) {
   return (
