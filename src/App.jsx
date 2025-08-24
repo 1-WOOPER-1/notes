@@ -3,7 +3,6 @@ import styles from "./App.module.scss";
 import { NOTES } from "./data/notes.js";
 import { Header } from "@components/Header/Header.jsx";
 import { NoteEditor } from "@components/NoteEditor/NoteEditor.jsx";
-import { UserModal } from "@components/UserModal/UserModal.jsx";
 import { NoteActionsContext } from "./context/NoteActionsContext.js";
 import { NotesList } from "@components/NotesList/NotesList.jsx";
 import { LocalStorageService } from "./utils/localStorage.js";
@@ -19,7 +18,6 @@ export function App() {
   );
   const [isEditorOpen, setIsEditorOpen] = useState(false);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [listView, setlistView] = useState(
     LocalStorageService.getItem("listView") || false
   );
@@ -67,19 +65,13 @@ export function App() {
     setAllNotes(allNotes.filter((n) => n.id !== note.id));
   }
 
-  function toggleModal() {
-    setIsModalOpen((prev) => !prev);
-  }
-
   return (
     <div>
       <Header
         setQuery={setQuery}
-        toggleModal={toggleModal}
         listView={listView}
         setlistView={setlistView}
       />
-      {isModalOpen && <UserModal toggleModal={toggleModal} />}
       <main
         className={`${styles.main} ${isEditorOpen ? styles.moveRight : ""}`}
       >

@@ -7,37 +7,24 @@ import { SearchInput } from "./SearchInput/SearchInput.jsx";
 import { Button } from "@components/Button/Button.jsx";
 import { DefaultUserIcon } from "@/icons/DefaultUserIcon.jsx";
 import { DropDown } from "@components/DropDown/DropDown.jsx";
+import { UserModal } from "@components/UserModal/UserModal.jsx";
 import { useTheme } from "@/hooks/useTheme.js";
 import { LocalStorageService } from "@/utils/localStorage.js";
+import { useClickOutside } from "@/hooks/useClickOutside.js";
 
-export function Header({ setQuery, toggleModal, listView, setlistView }) {
+export function Header({ setQuery, listView, setlistView }) {
   const { theme, toggleTheme } = useTheme();
+
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const dropDownRef = useRef(null);
   const settingsBtnRef = useRef(null);
+  const userModalRef = useRef(null);
+  const userModalBtnRef = useRef(null);
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (
-        dropDownRef &&
-        !dropDownRef.current.contains(event.target) &&
-        !settingsBtnRef.current.contains(event.target)
-      ) {
-        setIsDropDownOpen(false);
-      }
-    }
-
-    if (isDropDownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isDropDownOpen, setIsDropDownOpen]);
+  useClickOutside(dropDownRef, settingsBtnRef, toggleDropDown);
+  useClickOutside(userModalRef, userModalBtnRef, toggleModal);
 
   function toggleView() {
     setlistView((prev) => {
@@ -49,6 +36,10 @@ export function Header({ setQuery, toggleModal, listView, setlistView }) {
 
   function toggleDropDown() {
     setIsDropDownOpen((prev) => !prev);
+  }
+
+  function toggleModal() {
+    setIsModalOpen((prev) => !prev);
   }
 
   return (
@@ -78,9 +69,16 @@ export function Header({ setQuery, toggleModal, listView, setlistView }) {
               </div>
             )}
           </div>
-          <Button className={styles.userModalBtn} onClick={() => toggleModal()}>
-            <DefaultUserIcon style={{ fontSize: "1.8rem" }} />
-          </Button>
+          <div ref={userModalBtnRef}>
+            <Button className={styles.userModalBtn} onClick={toggleModal}>
+              <DefaultUserIcon style={{ fontSize: "1.8rem" }} />
+            </Button>
+            {isModalOpen && (
+              <div ref={userModalRef}>
+                <UserModal ref={userModalRef} toggleModal={toggleModal} />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </header>
