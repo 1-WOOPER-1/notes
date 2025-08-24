@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { CSSTransition } from "react-transition-group";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { MdOutlineUnarchive } from "react-icons/md";
 import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
@@ -14,6 +15,8 @@ export function NoteCard({ note }) {
   const { openNote, pinNote, deleteNote } = useNoteActions();
 
   const [isDeleting, setIsDeleting] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const toolbarRef = useRef(null);
 
   function handleDelete() {
     setIsDeleting(true);
@@ -26,6 +29,8 @@ export function NoteCard({ note }) {
     <div
       className={`${styles.noteCard} ${isDeleting ? styles.deleting : ""}`}
       onClick={() => openNote(note)}
+      onMouseOver={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       ref={setNodeRef}
       {...attributes}
       {...listeners}
@@ -37,17 +42,34 @@ export function NoteCard({ note }) {
     >
       <h2>{note.title}</h2>
       <p>{note.body}</p>
-      <div className={styles.noteCardToolbar}>
-        <Button note={note} onClick={handleDelete} className={styles.deleteBtn}>
-          <FaRegTrashAlt style={{ fontSize: "1rem" }} />
-        </Button>
-        <Button>
-          <MdOutlineUnarchive />
-        </Button>
-        <Button note={note} onClick={pinNote}>
-          {note.isPinned ? <RiPushpin2Fill /> : <RiPushpin2Line />}
-        </Button>
-      </div>
+      <CSSTransition
+        nodeRef={toolbarRef}
+        in={hovered}
+        timeout={250}
+        classNames={{
+          enter: styles.noteCardToolbarEnter,
+          enterActive: styles.noteCardToolbarEnterActive,
+          enterDone: styles.noteCardToolbarEnterDone,
+          exit: styles.noteCardToolbarExit,
+          exitActive: styles.noteCardToolbarExitActive,
+        }}
+      >
+        <div className={styles.noteCardToolbar} ref={toolbarRef}>
+          <Button
+            note={note}
+            onClick={handleDelete}
+            className={styles.deleteBtn}
+          >
+            <FaRegTrashAlt style={{ fontSize: "1rem" }} />
+          </Button>
+          <Button>
+            <MdOutlineUnarchive />
+          </Button>
+          <Button note={note} onClick={pinNote}>
+            {note.isPinned ? <RiPushpin2Fill /> : <RiPushpin2Line />}
+          </Button>
+        </div>
+      </CSSTransition>
     </div>
   );
 }
