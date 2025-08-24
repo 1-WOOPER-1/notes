@@ -1,3 +1,4 @@
+@use "../../styles/colors.scss" as c;
 @use "../../styles/mixins.scss" as m;
 
 .noteEditor {
@@ -8,7 +9,7 @@
   flex: 0 0 auto;
   padding: 1rem;
   border-radius: 1rem;
-  background-color: #000;
+  background-color: var(--surface);
   opacity: 0;
 
   h2 {
@@ -20,7 +21,7 @@
     width: 100%;
     min-height: 75vh;
     background-color: transparent;
-    color: #fff;
+    color: var(--text);
     font-family: "Space Grotesk";
     outline: none;
     border: 0;

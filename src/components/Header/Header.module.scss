@@ -6,7 +6,8 @@
   top: 0;
   width: 100%;
   height: 5rem;
-  background-color: #000;
+  background-color: c.$dark-surface;
+  color: c.$dark-text;
   padding: 1rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 
@@ -30,8 +31,10 @@
 
     .headerBtn {
       font-size: 2rem;
+      color: inherit;
       &:hover {
-        color: c.$color-primary;
+        color: c.$primary;
+        background-color: c.$dark-hover-button;
       }
     }
 
@@ -40,6 +43,7 @@
     }
 
     .userModalBtn {
+      color: c.$dark-text;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -47,10 +51,11 @@
       border-radius: 2rem;
       width: 2.8rem;
       height: 2.8rem;
-      background-color: c.$color-hover-button;
+      background-color: c.$dark-hover-button;
       cursor: pointer;
       &:hover {
-        color: c.$color-primary;
+        color: c.$primary;
+        background-color: c.$dark-hover-button;
       }
     }
   }

@@ -1,6 +1,20 @@
 @use "./styles/colors.scss" as c;
 @use "./styles/mixins.scss" as m;
 
+html.dark {
+  --text: #{c.$dark-text};
+  --background: #{c.$dark-background};
+  --hover-button: #{c.$dark-hover-button};
+  --surface: #{c.$dark-surface};
+}
+
+html.light {
+  --text: #{c.$light-text};
+  --background: #{c.$light-background};
+  --hover-button: #{c.$light-hover-button};
+  --surface: #{c.$light-surface};
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -8,8 +22,8 @@
 }
 
 body {
-  background-color: c.$color-background;
-  color: #fff;
+  background-color: var(--background);
+  color: var(--text);
   font-family: "Space Grotesk", sans-serif;
 }
 
@@ -26,13 +40,23 @@ p {
 
 input {
   outline: none;
-  color: white;
+  color: inherit;
   border: 0;
   background-color: transparent;
   font: {
     family: "Space Grotesk", sans-serif;
     size: 1rem;
   }
+}
+
+button {
+  color: inherit;
+  display: flex;
+  align-items: center;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  font-family: "Space Grotesk";
 }
 
 @font-face {

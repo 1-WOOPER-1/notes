@@ -9,10 +9,11 @@
   border-radius: 1rem;
   padding: 0 1rem;
   z-index: 9999;
-  background-color: hsl(235, 22%, 6%);
+  background-color: var(--background);
   top: 6rem;
   right: 1rem;
-  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  color: var(--text);
 
   .avatar {
     font-size: 1.8rem;
@@ -26,8 +27,8 @@
     width: 100%;
     padding: 1rem;
     border: 0;
-    color: white;
-    background-color: c.$color-background;
+    color: var(--text);
+    background-color: var(--surface);
 
     &Top {
       margin-bottom: 0.2rem;
@@ -43,7 +44,7 @@
   .btn {
     font-size: 0.9rem;
     &:hover {
-      color: c.$color-primary;
+      color: c.$primary;
     }
   }
 
