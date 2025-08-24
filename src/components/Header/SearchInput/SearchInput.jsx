@@ -1,20 +1,17 @@
 import { useEffect, useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import styles from "./SearchInput.module.scss";
+import { useDebounce } from "@/hooks/useDebounce";
 
 export function SearchInput({ setQuery }) {
   const [focused, setFocused] = useState(false);
   const [value, setValue] = useState("");
 
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setQuery(value);
-    }, 500);
+  const debouncedValue = useDebounce(value, 500);
 
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [value, setQuery]);
+  useEffect(() => {
+    setQuery(debouncedValue);
+  }, [debouncedValue, setQuery]);
 
   return (
     <div className={styles.inputWrapper}>

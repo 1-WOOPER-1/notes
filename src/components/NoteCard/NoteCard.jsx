@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -6,12 +6,12 @@ import { MdOutlineUnarchive } from "react-icons/md";
 import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
 import { Button } from "@components/Button/Button.jsx";
 import styles from "./NoteCard.module.scss";
-import { NoteActionsContext } from "@/context/NoteActionsContext.js";
+import { useNoteActions } from "@/hooks/useNoteActions";
 
 export function NoteCard({ note }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: note.id });
-  const { openNote, pinNote, deleteNote } = useContext(NoteActionsContext);
+  const { openNote, pinNote, deleteNote } = useNoteActions();
 
   const [isDeleting, setIsDeleting] = useState(false);
 

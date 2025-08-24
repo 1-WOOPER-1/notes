@@ -1,4 +1,4 @@
-import { useContext, useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { PiGearFineBold } from "react-icons/pi";
 import { FaMoon, FaSun } from "react-icons/fa6";
 import { TbLayoutList, TbLayoutGrid } from "react-icons/tb";
@@ -7,10 +7,10 @@ import { SearchInput } from "./SearchInput/SearchInput.jsx";
 import { Button } from "@components/Button/Button.jsx";
 import { DefaultUserIcon } from "@/icons/DefaultUserIcon.jsx";
 import { DropDown } from "@components/DropDown/DropDown.jsx";
-import { ThemeContext } from "@/context/ThemeContext.js";
+import { useTheme } from "@/hooks/useTheme.js";
 
 export function Header({ setQuery, toggleModal, listView, setlistView }) {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { theme, toggleTheme } = useTheme();
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
   const dropDownRef = useRef(null);
