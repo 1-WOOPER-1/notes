@@ -6,6 +6,7 @@ import { NoteEditor } from "@components/NoteEditor/NoteEditor.jsx";
 import { NoteActionsContext } from "./context/NoteActionsContext.js";
 import { NotesList } from "@components/NotesList/NotesList.jsx";
 import { LocalStorageService } from "./utils/localStorage.js";
+import { Sidebar } from "./components/Sidebar/Sidebar.jsx";
 
 export function App() {
   const [allNotes, setAllNotes] = useState(
@@ -72,6 +73,7 @@ export function App() {
         listView={listView}
         setlistView={setlistView}
       />
+      <Sidebar />
       <main
         className={`${styles.main} ${isEditorOpen ? styles.moveRight : ""}`}
       >
