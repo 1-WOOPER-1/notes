@@ -2,8 +2,8 @@ import { useRef, useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { CSSTransition } from "react-transition-group";
-import { FaRegTrashAlt } from "react-icons/fa";
-import { MdOutlineUnarchive } from "react-icons/md";
+import { PiTrashBold } from "react-icons/pi";
+import { MdOutlineArchive } from "react-icons/md";
 import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
 import { Button } from "@components/Button/Button.jsx";
 import styles from "./NoteCard.module.scss";
@@ -60,10 +60,10 @@ export function NoteCard({ note }) {
             onClick={handleDelete}
             className={styles.deleteBtn}
           >
-            <FaRegTrashAlt style={{ fontSize: "1rem" }} />
+            <PiTrashBold />
           </Button>
           <Button>
-            <MdOutlineUnarchive />
+            <MdOutlineArchive />
           </Button>
           <Button note={note} onClick={pinNote}>
             {note.isPinned ? <RiPushpin2Fill /> : <RiPushpin2Line />}

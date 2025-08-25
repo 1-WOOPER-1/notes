@@ -5,6 +5,7 @@ html.dark {
   --text: #{c.$dark-text};
   --background: #{c.$dark-background};
   --hover-button: #{c.$dark-hover-button};
+  --hover-listitem: #{c.$dark-hover-listitem};
   --surface: #{c.$dark-surface};
 }
 
@@ -12,6 +13,7 @@ html.light {
   --text: #{c.$light-text};
   --background: #{c.$light-background};
   --hover-button: #{c.$light-hover-button};
+  --hover-listitem: #{c.$light-hover-listitem};
   --surface: #{c.$light-surface};
 }
 
