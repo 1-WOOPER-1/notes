@@ -16,16 +16,11 @@ export function Notes() {
   const [archivedNotes, setArchivedNotes] = useState(
     LocalStorageService.getItem("archivedNotes") || ARCHIVED_NOTES
   );
-  const [query, setQuery] = useState("");
 
   const [openedNote, setOpenedNote] = useState(
     LocalStorageService.getItem("openedNote") || null
   );
   const [isEditorOpen, setIsEditorOpen] = useState(false);
-
-  const [listView, setlistView] = useState(
-    LocalStorageService.getItem("listView") || false
-  );
 
   useEffect(() => {
     isEditorOpen
@@ -81,11 +76,7 @@ export function Notes() {
 
   return (
     <div>
-      <Header
-        setQuery={setQuery}
-        listView={listView}
-        setlistView={setlistView}
-      />
+      <Header />
       <Sidebar />
       <main
         className={`${styles.main} ${isEditorOpen ? styles.moveRight : ""}`}
@@ -100,12 +91,7 @@ export function Notes() {
         <NoteActionsContext.Provider
           value={{ openNote, pinNote, deleteNote, archiveNote }}
         >
-          <NotesList
-            allNotes={allNotes}
-            setAllNotes={setAllNotes}
-            query={query}
-            listView={listView}
-          />
+          <NotesList allNotes={allNotes} setAllNotes={setAllNotes} />
         </NoteActionsContext.Provider>
       </main>
     </div>

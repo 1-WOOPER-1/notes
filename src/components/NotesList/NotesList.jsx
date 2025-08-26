@@ -1,7 +1,10 @@
 import { NotesContainer } from "@components/NotesContainer/NotesContainer.jsx";
 import styles from "./NotesList.module.scss";
+import { useUI } from "@/hooks/useUI.js";
 
-export function NotesList({ allNotes, setAllNotes, query, listView }) {
+export function NotesList({ allNotes, setAllNotes }) {
+  const { query, listView } = useUI();
+
   const pinnedNotes = allNotes.filter((note) => note.isPinned);
   const otherNotes = allNotes.filter((note) => !note.isPinned);
   const filteredNotes = allNotes.filter(

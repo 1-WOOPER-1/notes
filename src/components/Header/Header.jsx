@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { PiGearFineBold } from "react-icons/pi";
 import { FaMoon, FaSun } from "react-icons/fa6";
 import { TbLayoutList, TbLayoutGrid } from "react-icons/tb";
@@ -9,11 +9,13 @@ import { DefaultUserIcon } from "@/icons/DefaultUserIcon.jsx";
 import { DropDown } from "@components/DropDown/DropDown.jsx";
 import { UserModal } from "@components/UserModal/UserModal.jsx";
 import { useTheme } from "@/hooks/useTheme.js";
+import { useUI } from "@/hooks/useUI.js";
 import { LocalStorageService } from "@/utils/localStorage.js";
 import { useClickOutside } from "@/hooks/useClickOutside.js";
 
-export function Header({ setQuery, listView, setlistView }) {
+export function Header() {
   const { theme, toggleTheme } = useTheme();
+  const { setQuery, listView, setlistView } = useUI();
 
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
