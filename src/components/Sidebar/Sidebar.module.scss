@@ -18,6 +18,8 @@
     gap: 1.5rem;
     align-items: center;
     border-radius: 0 1.5rem 1.5rem 0;
+    text-decoration: none;
+    color: inherit;
 
     &:hover {
       background-color: var(--hover-listitem);
