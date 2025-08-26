@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "@/App.module.scss";
 import { NOTES } from "@/data/notes.js";
+import { ARCHIVED_NOTES } from "@/data/archivedNotes.js";
 import { Header } from "@components/Header/Header.jsx";
 import { NoteEditor } from "@components/NoteEditor/NoteEditor.jsx";
 import { NoteActionsContext } from "@/context/NoteActionsContext.js";
@@ -11,6 +12,9 @@ import { Sidebar } from "@components/Sidebar/Sidebar.jsx";
 export function Notes() {
   const [allNotes, setAllNotes] = useState(
     LocalStorageService.getItem("allNotes") || NOTES
+  );
+  const [archivedNotes, setArchivedNotes] = useState(
+    LocalStorageService.getItem("archivedNotes") || ARCHIVED_NOTES
   );
   const [query, setQuery] = useState("");
 
@@ -39,6 +43,10 @@ export function Notes() {
     LocalStorageService.setItem("allNotes", allNotes);
   }, [allNotes]);
 
+  useEffect(() => {
+    LocalStorageService.setItem("archivedNotes", archivedNotes);
+  }, [archivedNotes]);
+
   function openNote(note) {
     setOpenedNote(note);
     setIsEditorOpen(true);
@@ -66,6 +74,11 @@ export function Notes() {
     setAllNotes(allNotes.filter((n) => n.id !== note.id));
   }
 
+  function archiveNote(note) {
+    setArchivedNotes([...archivedNotes, { ...note, isPinned: false }]);
+    setAllNotes(allNotes.filter((n) => n.id !== note.id));
+  }
+
   return (
     <div>
       <Header
@@ -84,7 +97,9 @@ export function Notes() {
           closeNote={closeNote}
           saveNote={saveNote}
         />
-        <NoteActionsContext.Provider value={{ openNote, pinNote, deleteNote }}>
+        <NoteActionsContext.Provider
+          value={{ openNote, pinNote, deleteNote, archiveNote }}
+        >
           <NotesList
             allNotes={allNotes}
             setAllNotes={setAllNotes}

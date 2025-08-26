@@ -12,7 +12,7 @@ import { useNoteActions } from "@/hooks/useNoteActions";
 export function NoteCard({ note }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: note.id });
-  const { openNote, pinNote, deleteNote } = useNoteActions();
+  const { openNote, pinNote, deleteNote, archiveNote } = useNoteActions();
 
   const [isDeleting, setIsDeleting] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -62,7 +62,7 @@ export function NoteCard({ note }) {
           >
             <PiTrashBold />
           </Button>
-          <Button>
+          <Button note={note} onClick={archiveNote}>
             <MdOutlineArchive />
           </Button>
           <Button note={note} onClick={pinNote}>
