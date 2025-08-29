@@ -1,21 +1,29 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaRegNoteSticky } from "react-icons/fa6";
 import { MdOutlineArchive } from "react-icons/md";
 import { PiTrashBold } from "react-icons/pi";
 import styles from "./Sidebar.module.scss";
 
 export function Sidebar() {
+  const sidebarItems = [
+    { to: "/notes", icon: FaRegNoteSticky, label: "Notes" },
+    { to: "/archive", icon: MdOutlineArchive, label: "Archive" },
+    { to: "/bin", icon: PiTrashBold, label: "Bin" },
+  ];
+
   return (
     <div className={styles.sidebar}>
-      <Link to="/notes" className={`${styles.sidebarItem} ${styles.active}`}>
-        <FaRegNoteSticky className={styles.icon} /> <span>Notes</span>
-      </Link>
-      <Link to="/archive" className={styles.sidebarItem}>
-        <MdOutlineArchive className={styles.icon} /> <span>Archive</span>
-      </Link>
-      <Link to="/bin" className={styles.sidebarItem}>
-        <PiTrashBold className={styles.icon} /> <span>Bin</span>
-      </Link>
+      {sidebarItems.map(({ to, icon: Icon, label }) => (
+        <NavLink
+          key={to}
+          to={to}
+          className={({ isActive }) =>
+            `${styles.sidebarItem} ${isActive ? styles.active : ""}`
+          }
+        >
+          <Icon className={styles.icon} /> <span>{label}</span>
+        </NavLink>
+      ))}
     </div>
   );
 }
