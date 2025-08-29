@@ -1,26 +1,47 @@
 import { useEffect, useState, useRef } from "react";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import { IoCloseOutline } from "react-icons/io5";
 import { Button } from "@components/Button/Button.jsx";
 import styles from "./NoteEditor.module.scss";
+import { useUI } from "@/hooks/useUI.js";
+import { getBasePath } from "@/utils/routeUtils.js";
 
-export function NoteEditor({ note, isOpen, closeEditor, closeNote, saveNote }) {
+export function NoteEditor({ notes, setNotes }) {
   const [value, setValue] = useState("");
   const editorRef = useRef(null);
 
-  useEffect(() => {
-    if (note) setValue(note.body);
-  }, [note]);
+  const { noteId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const { isEditorOpen, setIsEditorOpen } = useUI();
+  const openedNote = notes.find((n) => n.id === +noteId) || null;
+
+  function closeEditor() {
+    navigate(getBasePath(location.pathname));
+  }
+
+  function saveNote(note) {
+    setNotes((prev) =>
+      prev.map((n) => (n.id === note.id ? { ...note, body: value } : n))
+    );
+  }
 
   useEffect(() => {
-    if (note) saveNote({ ...note, body: value });
-  }, [value]);
+    if (openedNote) {
+      setIsEditorOpen(true);
+      setValue(openedNote.body);
+    } else {
+      setIsEditorOpen(false);
+    }
+  }, [openedNote]);
 
   return (
     <CSSTransition
       nodeRef={editorRef}
-      in={isOpen}
-      timeout={1000}
+      in={isEditorOpen}
+      timeout={500}
       classNames={{
         enter: styles.noteEditorEnter,
         enterActive: styles.noteEditorEnterActive,
@@ -29,14 +50,10 @@ export function NoteEditor({ note, isOpen, closeEditor, closeNote, saveNote }) {
         exitActive: styles.noteEditorExitActive,
         exitDone: styles.noteEditorExitDone,
       }}
-      // unmountOnExit
-      onExited={() => {
-        closeNote();
-      }}
     >
       <div ref={editorRef} className={styles.noteEditor}>
         <h2>
-          {note?.id} {note?.title}
+          {openedNote?.id} {openedNote?.title}
         </h2>
         <textarea
           value={value}
@@ -46,7 +63,8 @@ export function NoteEditor({ note, isOpen, closeEditor, closeNote, saveNote }) {
         <Button
           className={styles.closeBtn}
           onClick={() => {
-            closeEditor(false);
+            saveNote(openedNote);
+            closeEditor();
           }}
         >
           <IoCloseOutline />

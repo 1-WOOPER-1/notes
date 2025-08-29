@@ -12,6 +12,7 @@ export function AppRouter() {
           exact={route.exact}
         />
       ))}
+      <Route path="*" element={<Navigate to="/notes" />} />
     </Routes>
   );
 }

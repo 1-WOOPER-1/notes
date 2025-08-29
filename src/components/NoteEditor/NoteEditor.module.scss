@@ -45,7 +45,7 @@
 .noteEditorEnterActive {
   width: 50%;
   opacity: 1;
-  transition: width 0.65s ease-out, opacity 0.2s ease-in;
+  transition: width 0.55s ease-out, opacity 0.2s ease-in;
 }
 
 .noteEditorEnterDone {
@@ -62,7 +62,7 @@
 .noteEditorExitActive {
   width: 0;
   opacity: 0;
-  transition: width 0.65s ease-in-out, opacity 0.55s ease-in;
+  transition: width 0.55s ease-in-out, opacity 0.4s ease-in;
   h2,
   textarea {
     text-wrap: nowrap;

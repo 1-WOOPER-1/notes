@@ -7,9 +7,19 @@ export function UIProvider({ children }) {
   const [listView, setlistView] = useState(
     LocalStorageService.getItem("listView") || false
   );
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
 
   return (
-    <UIContext.Provider value={{ query, setQuery, listView, setlistView }}>
+    <UIContext.Provider
+      value={{
+        query,
+        setQuery,
+        listView,
+        setlistView,
+        isEditorOpen,
+        setIsEditorOpen,
+      }}
+    >
       {children}
     </UIContext.Provider>
   );

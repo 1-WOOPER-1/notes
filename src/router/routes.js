@@ -8,13 +8,18 @@ export const privateRoutes = [
     exact: true,
   },
   {
+    path: "/notes/:noteId",
+    element: Notes,
+    exact: true,
+  },
+  {
     path: "/archive",
     element: Archive,
     exact: true,
   },
   {
-    path: "*",
-    element: "/notes",
+    path: "/archive/:noteId",
+    element: Archive,
     exact: true,
   },
 ];
