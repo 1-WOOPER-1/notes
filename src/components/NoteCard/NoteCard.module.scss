@@ -1,4 +1,5 @@
 @use "@/styles/colors.scss" as c;
+@use "@/styles/common.scss" as cmn;
 
 .noteCard {
   background-color: var(--surface);
@@ -13,8 +14,42 @@
     line-height: 1.6rem;
   }
 
-  p {
+  .noteBody {
     margin-bottom: auto;
+
+    h1 {
+      @include cmn.h1;
+    }
+    h2 {
+      @include cmn.h2;
+    }
+    h3 {
+      @include cmn.h3;
+    }
+    h4 {
+      @include cmn.h4;
+    }
+    h5 {
+      @include cmn.h5;
+    }
+    h6 {
+      @include cmn.h6;
+    }
+    a {
+      @include cmn.link;
+    }
+    // `text code`
+    p code {
+      @include cmn.textCode;
+    }
+    // ```code block```
+    pre {
+      @include cmn.codePreview;
+    }
+    // > quote
+    blockquote {
+      @include cmn.quotePreview;
+    }
   }
 
   .noteCardToolbar {

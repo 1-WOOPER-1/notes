@@ -1,14 +1,12 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-import { IoCloseOutline } from "react-icons/io5";
-import { Button } from "@components/Button/Button.jsx";
+import { Lexical } from "./Lexical.jsx";
 import styles from "./NoteEditor.module.scss";
 import { useUI } from "@/hooks/useUI.js";
 import { getBasePath } from "@/utils/routeUtils.js";
 
 export function NoteEditor({ notes, setNotes }) {
-  const [value, setValue] = useState("");
   const editorRef = useRef(null);
 
   const { noteId } = useParams();
@@ -23,18 +21,11 @@ export function NoteEditor({ notes, setNotes }) {
   }
 
   function saveNote(note) {
-    setNotes((prev) =>
-      prev.map((n) => (n.id === note.id ? { ...note, body: value } : n))
-    );
+    setNotes((prev) => prev.map((n) => (n.id === note.id ? { ...note } : n)));
   }
 
   useEffect(() => {
-    if (openedNote) {
-      setIsEditorOpen(true);
-      setValue(openedNote.body);
-    } else {
-      setIsEditorOpen(false);
-    }
+    setIsEditorOpen(!!openedNote);
   }, [openedNote]);
 
   return (
@@ -52,23 +43,11 @@ export function NoteEditor({ notes, setNotes }) {
       }}
     >
       <div ref={editorRef} className={styles.noteEditor}>
-        <h2>
-          {openedNote?.id} {openedNote?.title}
-        </h2>
-        <textarea
-          value={value}
-          placeholder="Take a note"
-          onChange={(event) => setValue(event.target.value)}
-        ></textarea>
-        <Button
-          className={styles.closeBtn}
-          onClick={() => {
-            saveNote(openedNote);
-            closeEditor();
-          }}
-        >
-          <IoCloseOutline />
-        </Button>
+        <Lexical
+          note={{ ...openedNote }}
+          closeEditor={closeEditor}
+          saveNote={saveNote}
+        />
       </div>
     </CSSTransition>
   );

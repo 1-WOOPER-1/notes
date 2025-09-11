@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { CSSTransition } from "react-transition-group";
@@ -9,6 +9,27 @@ import { Button } from "@components/Button/Button.jsx";
 import styles from "./NoteCard.module.scss";
 import { useNoteActions } from "@/hooks/useNoteActions";
 
+import { createEditor } from "lexical";
+import { ParagraphNode, TextNode } from "lexical";
+import { CodeNode } from "@lexical/code";
+import { QuoteNode, HeadingNode } from "@lexical/rich-text";
+import { ListNode, ListItemNode } from "@lexical/list";
+import { LinkNode } from "@lexical/link";
+import { $generateHtmlFromNodes } from "@lexical/html";
+
+const editor = createEditor({
+  nodes: [
+    ParagraphNode,
+    TextNode,
+    CodeNode,
+    QuoteNode,
+    HeadingNode,
+    ListNode,
+    ListItemNode,
+    LinkNode,
+  ],
+});
+
 export function NoteCard({ note }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: note.id });
@@ -17,6 +38,18 @@ export function NoteCard({ note }) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [hovered, setHovered] = useState(false);
   const toolbarRef = useRef(null);
+
+  const [bodyHTML, setBodyHTML] = useState("");
+  useEffect(() => {
+    const state = editor.parseEditorState(note.body);
+
+    editor.setEditorState(state);
+
+    editor.update(() => {
+      const htmlString = $generateHtmlFromNodes(editor);
+      setBodyHTML(htmlString);
+    });
+  }, [note.body]);
 
   function handleDelete() {
     setIsDeleting(true);
@@ -41,7 +74,10 @@ export function NoteCard({ note }) {
       }}
     >
       <h2>{note.title}</h2>
-      <p>{note.body}</p>
+      <div
+        className={styles.noteBody}
+        dangerouslySetInnerHTML={{ __html: bodyHTML }}
+      />
       <CSSTransition
         nodeRef={toolbarRef}
         in={hovered}

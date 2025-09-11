@@ -7,6 +7,7 @@ html.dark {
   --hover-button: #{c.$dark-hover-button};
   --hover-listitem: #{c.$dark-hover-listitem};
   --surface: #{c.$dark-surface};
+  --code-background: #{c.$dark-code-background};
 }
 
 html.light {
@@ -15,6 +16,7 @@ html.light {
   --hover-button: #{c.$light-hover-button};
   --hover-listitem: #{c.$light-hover-listitem};
   --surface: #{c.$light-surface};
+  --code-background: #{c.$light-code-background};
 }
 
 * {
@@ -62,6 +64,7 @@ button {
 }
 
 @font-face {
+  font-family: "Ndot-55";
   src: url("./assets/fonts/Ndot-55.woff2") format("woff2"),
     url("./assets/fonts/Ndot-55.woff") format("woff");
   font: {
@@ -75,6 +78,17 @@ button {
 @font-face {
   src: url("./assets/fonts/SpaceGrotesk-Regular.woff2") format("woff2"),
     url("./assets/fonts/SpaceGrotesk-Regular.woff") format("woff");
+  font : {
+    family: "Space Grotesk";
+    weight: 300;
+    style: normal;
+    display: swap;
+  }
+}
+
+@font-face {
+  src: url("./assets/fonts/SpaceGrotesk-Bold.woff2") format("woff2"),
+    url("./assets/fonts/SpaceGrotesk-Bold.woff") format("woff");
   font: {
     family: "Space Grotesk";
     weight: bold;
