@@ -2,6 +2,7 @@
 @use "@/styles/common.scss" as cmn;
 
 .noteCard {
+  max-height: 30rem;
   background-color: var(--surface);
   border-radius: 1rem;
   padding: 1rem 1rem 0.7rem 1rem;
@@ -16,6 +17,7 @@
 
   .noteBody {
     margin-bottom: auto;
+    overflow-y: hidden;
 
     h1 {
       @include cmn.h1;

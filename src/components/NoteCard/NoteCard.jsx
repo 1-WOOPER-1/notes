@@ -38,6 +38,8 @@ export function NoteCard({ note }) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [hovered, setHovered] = useState(false);
   const toolbarRef = useRef(null);
+  const [isOverflow, setIsOverflow] = useState(false);
+  const bodyRef = useRef(null);
 
   const [bodyHTML, setBodyHTML] = useState("");
   useEffect(() => {
@@ -49,6 +51,15 @@ export function NoteCard({ note }) {
       const htmlString = $generateHtmlFromNodes(editor);
       setBodyHTML(htmlString);
     });
+
+    const el = bodyRef.current;
+    if (!el) return;
+    const resizeObserver = new ResizeObserver(() =>
+      setIsOverflow(el.scrollHeight > el.clientHeight)
+    );
+    resizeObserver.observe(el);
+
+    return () => resizeObserver.disconnect();
   }, [note.body]);
 
   function handleDelete() {
@@ -75,9 +86,11 @@ export function NoteCard({ note }) {
     >
       <h2>{note.title}</h2>
       <div
+        ref={bodyRef}
         className={styles.noteBody}
         dangerouslySetInnerHTML={{ __html: bodyHTML }}
       />
+      {isOverflow && <div>. . .</div>}
       <CSSTransition
         nodeRef={toolbarRef}
         in={hovered}
