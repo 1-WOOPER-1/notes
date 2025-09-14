@@ -4,7 +4,7 @@ import { FaMoon, FaSun } from "react-icons/fa6";
 import { TbLayoutList, TbLayoutGrid } from "react-icons/tb";
 import styles from "./Header.module.scss";
 import { SearchInput } from "./SearchInput/SearchInput.jsx";
-import { Button } from "@components/Button/Button.jsx";
+import { Button } from "@components/UI/Button/Button.jsx";
 import { DefaultUserIcon } from "@/icons/DefaultUserIcon.jsx";
 import { DropDown } from "@components/DropDown/DropDown.jsx";
 import { UserModal } from "@components/UserModal/UserModal.jsx";

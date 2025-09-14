@@ -4,7 +4,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
 import styles from "./UserModal.module.scss";
 import { DefaultUserIcon } from "@/icons/DefaultUserIcon.jsx";
-import { Button } from "@components/Button/Button.jsx";
+import { Button } from "@components/UI/Button/Button.jsx";
 
 export function UserModal({ toggleModal }) {
   return (

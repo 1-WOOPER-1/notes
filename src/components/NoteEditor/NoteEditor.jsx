@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-import { Lexical } from "./Lexical.jsx";
+import { Lexical } from "./components/Lexical.jsx";
 import styles from "./NoteEditor.module.scss";
 import { useUI } from "@/hooks/useUI.js";
 import { getBasePath } from "@/utils/routeUtils.js";

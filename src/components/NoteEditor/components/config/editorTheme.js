@@ -1,6 +1,6 @@
-import styles from "./Lexical.module.scss";
+import styles from "../Lexical.module.scss";
 
-export const ExampleTheme = {
+export const editorTheme = {
   code: styles.editorCode,
   heading: {
     h1: styles.editorHeadingH1,

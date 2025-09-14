@@ -5,7 +5,7 @@ import { CSSTransition } from "react-transition-group";
 import { PiTrashBold } from "react-icons/pi";
 import { MdOutlineArchive } from "react-icons/md";
 import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
-import { Button } from "@components/Button/Button.jsx";
+import { Button } from "@components/UI/Button/Button.jsx";
 import styles from "./NoteCard.module.scss";
 import { useNoteActions } from "@/hooks/useNoteActions";
 

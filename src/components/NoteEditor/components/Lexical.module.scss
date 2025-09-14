@@ -1,11 +1,6 @@
 @use "@/styles/colors.scss" as c;
 @use "@/styles/common.scss" as cmn;
 
-.editorContainer {
-  display: flex;
-  margin: auto;
-}
-
 .editorInner {
   width: 100%;
   background: var(--surface);
@@ -15,7 +10,7 @@
   padding: 1.2rem 1rem;
 }
 
-.editorTitle {
+.editorHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
