@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from "react";
 import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
 import { CSSTransition } from "react-transition-group";
 import { PiTrashBold } from "react-icons/pi";
 import { MdOutlineArchive } from "react-icons/md";
@@ -30,9 +29,8 @@ const editor = createEditor({
   ],
 });
 
-export function NoteCard({ note }) {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: note.id });
+export function NoteCard({ note, isOver, isDragging }) {
+  const { attributes, listeners, setNodeRef } = useSortable({ id: note.id });
   const { openNote, pinNote, deleteNote, archiveNote } = useNoteActions();
 
   const [isDeleting, setIsDeleting] = useState(false);
@@ -40,6 +38,12 @@ export function NoteCard({ note }) {
   const toolbarRef = useRef(null);
   const [isOverflow, setIsOverflow] = useState(false);
   const bodyRef = useRef(null);
+  const classNames = [
+    styles.noteCard,
+    isDeleting ? styles.deleting : "",
+    isOver ? styles.over : "",
+    isDragging ? styles.dragging : "",
+  ];
 
   const [bodyHTML, setBodyHTML] = useState("");
   useEffect(() => {
@@ -71,18 +75,13 @@ export function NoteCard({ note }) {
 
   return (
     <div
-      className={`${styles.noteCard} ${isDeleting ? styles.deleting : ""}`}
+      className={classNames.join(" ")}
       onClick={() => openNote(note)}
       onMouseOver={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       ref={setNodeRef}
       {...attributes}
       {...listeners}
-      style={{
-        transform: CSS.Transform.toString(transform),
-        transition,
-        cursor: "pointer",
-      }}
     >
       <h2>{note.title}</h2>
       <div

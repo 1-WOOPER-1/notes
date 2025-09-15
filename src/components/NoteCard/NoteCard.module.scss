@@ -9,6 +9,10 @@
   display: flex;
   flex-direction: column;
   user-select: none;
+  margin-bottom: 1rem;
+  break-inside: avoid;
+  overflow-y: hidden;
+  cursor: pointer;
 
   h2 {
     margin-bottom: 0.6rem;
@@ -89,6 +93,14 @@
     opacity: 0;
     transition: opacity 0.25s ease-out;
   }
+}
+
+.over {
+  outline: 2px solid c.$primary;
+}
+
+.dragging {
+  visibility: hidden;
 }
 
 .deleting {
