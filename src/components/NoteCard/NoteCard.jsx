@@ -7,6 +7,8 @@ import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
 import { Button } from "@components/UI/Button/Button.jsx";
 import styles from "./NoteCard.module.scss";
 import { useNoteActions } from "@/hooks/useNoteActions";
+import { useUI } from "@/hooks/useUI.js";
+import { highlightTextInHTML } from "@/utils/highlightTextInHTML.js";
 
 import { createEditor } from "lexical";
 import { ParagraphNode, TextNode } from "lexical";
@@ -32,6 +34,7 @@ const editor = createEditor({
 export function NoteCard({ note, isOver, isDragging }) {
   const { attributes, listeners, setNodeRef } = useSortable({ id: note.id });
   const { openNote, pinNote, deleteNote, archiveNote } = useNoteActions();
+  const { query } = useUI();
 
   const [isDeleting, setIsDeleting] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -45,16 +48,18 @@ export function NoteCard({ note, isOver, isDragging }) {
     isDragging ? styles.dragging : "",
   ];
 
+  const [titleHTML, setTitleHTML] = useState("");
   const [bodyHTML, setBodyHTML] = useState("");
   useEffect(() => {
     const state = editor.parseEditorState(note.body);
-
     editor.setEditorState(state);
-
     editor.update(() => {
       const htmlString = $generateHtmlFromNodes(editor);
-      setBodyHTML(htmlString);
+      setBodyHTML(highlightTextInHTML(htmlString, query));
     });
+
+    const htmlString = `<h2>${note.title}</h2>`;
+    setTitleHTML(highlightTextInHTML(htmlString, query));
 
     const el = bodyRef.current;
     if (!el) return;
@@ -64,7 +69,7 @@ export function NoteCard({ note, isOver, isDragging }) {
     resizeObserver.observe(el);
 
     return () => resizeObserver.disconnect();
-  }, [note.body]);
+  }, [note.body, query]);
 
   function handleDelete() {
     setIsDeleting(true);
@@ -83,7 +88,7 @@ export function NoteCard({ note, isOver, isDragging }) {
       {...attributes}
       {...listeners}
     >
-      <h2>{note.title}</h2>
+      <div dangerouslySetInnerHTML={{ __html: titleHTML }} />
       <div
         ref={bodyRef}
         className={styles.noteBody}

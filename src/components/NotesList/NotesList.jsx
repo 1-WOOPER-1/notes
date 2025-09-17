@@ -2,6 +2,7 @@ import { NotesContainer } from "@components/NotesContainer/NotesContainer.jsx";
 import styles from "./NotesList.module.scss";
 import { useUI } from "@/hooks/useUI.js";
 import { NoteActionsProvider } from "@/providers/NoteActionsProvider.jsx";
+import { lexicalToPlainText } from "@/utils/lexicalUtils.js";
 
 export function NotesList({ notes, setNotes, setArchivedNotes }) {
   const { query, listView } = useUI();
@@ -11,7 +12,7 @@ export function NotesList({ notes, setNotes, setArchivedNotes }) {
   const filteredNotes = notes.filter(
     (note) =>
       note.title.toLowerCase().includes(query.toLowerCase()) ||
-      note.body.toLowerCase().includes(query.toLowerCase())
+      lexicalToPlainText(note.body).toLowerCase().includes(query.toLowerCase())
   );
 
   return (
