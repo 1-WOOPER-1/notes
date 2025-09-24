@@ -8,6 +8,7 @@ html.dark {
   --hover-listitem: #{c.$dark-hover-listitem};
   --surface: #{c.$dark-surface};
   --code-background: #{c.$dark-code-background};
+  --shadow-background: #{c.$dark-shadow-background};
 }
 
 html.light {
@@ -17,6 +18,7 @@ html.light {
   --hover-listitem: #{c.$light-hover-listitem};
   --surface: #{c.$light-surface};
   --code-background: #{c.$light-code-background};
+  --shadow-background: #{c.$light-shadow-background};
 }
 
 * {

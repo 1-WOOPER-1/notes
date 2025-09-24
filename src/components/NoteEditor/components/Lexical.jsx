@@ -1,17 +1,24 @@
 import { useState, useEffect, useRef } from "react";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
+import { motion } from "framer-motion";
 
 import { editorConfig } from "./config/editorConfig.js";
 import { EditorPlugins } from "./plugins/EditorPlugins.jsx";
-import ToolbarPlugin from "./plugins/ToolbarPlugin.jsx";
+import { ToolbarPlugin } from "./plugins/ToolbarPlugin.jsx";
 import { EditorHeader } from "./EditorHeader.jsx";
 import styles from "./Lexical.module.scss";
+import { useClickOutside } from "@/hooks/useClickOutside.js";
 
-export function Lexical({ note, closeEditor, saveNote }) {
+export function Lexical({ note, editorRef, closeEditor, saveNote }) {
   const [isMarkdownMode, setIsMarkdownMode] = useState(false);
   const [markdownText, setMarkdownText] = useState("");
   const titleRef = useRef();
   const localNoteRef = useRef({ ...note });
+
+  useClickOutside(editorRef, null, () => {
+    saveNote(localNoteRef.current);
+    closeEditor();
+  });
 
   function onChangeTitle(title) {
     localNoteRef.current.title = title;
@@ -35,12 +42,19 @@ export function Lexical({ note, closeEditor, saveNote }) {
         editorState: JSON.stringify(note.body),
       }}
     >
-      <ToolbarPlugin
-        isMarkdownMode={isMarkdownMode}
-        setIsMarkdownMode={setIsMarkdownMode}
-        markdownText={markdownText}
-        setMarkdownText={setMarkdownText}
-      />
+      <motion.div
+        initial={{ x: "3rem" }}
+        animate={{ x: "0rem" }}
+        exit={{ x: "3rem" }}
+        transition={{ type: "tween", ease: "easeOut", delay: 0.5 }}
+      >
+        <ToolbarPlugin
+          isMarkdownMode={isMarkdownMode}
+          setIsMarkdownMode={setIsMarkdownMode}
+          markdownText={markdownText}
+          setMarkdownText={setMarkdownText}
+        />
+      </motion.div>
       <div className={styles.editorInner}>
         <EditorHeader
           titleRef={titleRef}

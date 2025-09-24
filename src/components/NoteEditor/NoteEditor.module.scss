@@ -1,92 +1,25 @@
 @use "@/styles/colors.scss" as c;
 @use "@/styles/mixins.scss" as m;
 
-.noteEditor {
-  width: 0;
-  height: fit-content;
-  position: sticky;
-  top: 7rem;
-  flex: 0 0 auto;
-  opacity: 0;
+.shadow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--shadow-background);
+  z-index: 50;
 }
 
-.noteEditorEnter {
-  width: 0;
-  opacity: 0;
-}
-
-.noteEditorEnterActive {
-  width: 50%;
-  opacity: 1;
-  transition: width 0.55s ease-out, opacity 0.2s ease-in;
-}
-
-.noteEditorEnterDone {
-  width: 50%;
-  opacity: 1;
-  flex: 0 0 50%;
-}
-
-.noteEditorExit {
-  width: 50%;
-  opacity: 1;
-}
-
-.noteEditorExitActive {
-  width: 0;
-  opacity: 0;
-  transition: width 0.55s ease-in-out, opacity 0.4s ease-in;
-  h2,
-  textarea {
-    text-wrap: nowrap;
-    overflow: hidden;
-  }
-}
-
-.noteEditorExitDone {
-  opacity: 0;
-  width: 0;
-}
-
-@include m.tablet {
-  .noteEditor {
-    width: 100vw;
-    height: 0;
-    border-radius: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: none;
-  }
-
-  .noteEditorEnter {
-    height: 0;
-    opacity: 0;
-    display: block;
-  }
-
-  .noteEditorEnterActive {
-    height: 100vh;
-    opacity: 1;
-    transition: height 0.5s ease-out, opacity 0.2s ease-in;
-  }
-
-  .noteEditorEnterDone {
-    height: 100vh;
-    opacity: 1;
-    display: block;
-  }
-
-  .noteEditorExit {
-    height: 100vh;
-    opacity: 1;
-    display: block;
-  }
-
-  .noteEditorExitActive {
-    height: 0;
-    opacity: 0;
-    transition: height 0.5s ease-in-out, opacity 0.55s ease-in;
-  }
+.noteEditor {
+  max-width: 650px;
+  height: fit-content;
+  position: fixed;
+  top: 7rem;
+  left: calc(50% - 650px / 2);
+  z-index: 9999;
+  display: flex;
 }

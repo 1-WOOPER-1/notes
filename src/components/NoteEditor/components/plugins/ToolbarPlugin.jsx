@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import {
   $getRoot,
@@ -35,17 +35,17 @@ import {
   RiAlignRight,
   RiAlignJustify,
 } from "react-icons/ri";
+import { motion } from "framer-motion";
 
-import styles from "../Lexical.module.scss"; // путь к твоему модулю
+import styles from "../Lexical.module.scss";
 
-export default function ToolbarPlugin({
+export function ToolbarPlugin({
   isMarkdownMode,
   setIsMarkdownMode,
   markdownText,
   setMarkdownText,
 }) {
   const [editor] = useLexicalComposerContext();
-  const toolbarRef = useRef(null);
   const [canUndo, setCanUndo] = useState(false);
   const [canRedo, setCanRedo] = useState(false);
   const [isBold, setIsBold] = useState(false);
@@ -120,7 +120,13 @@ export default function ToolbarPlugin({
   }
 
   return (
-    <div className={styles.toolbar} ref={toolbarRef}>
+    <motion.div
+      className={styles.toolbar}
+      initial={{ x: "3rem" }}
+      animate={{ x: "0rem" }}
+      exit={{ x: "3rem" }}
+      transition={{ type: "tween", ease: "easeOut", delay: 0.5 }}
+    >
       <button onClick={toggleMode} className={btnClass(isMarkdownMode)}>
         <RiMarkdownLine />
       </button>
@@ -204,6 +210,6 @@ export default function ToolbarPlugin({
       >
         <RiAlignJustify />
       </button>
-    </div>
+    </motion.div>
   );
 }

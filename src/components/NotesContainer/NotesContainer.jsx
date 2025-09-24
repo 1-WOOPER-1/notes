@@ -62,10 +62,9 @@ export function NotesContainer({ notes, reorderNotes, listView }) {
             {notes.map((note) => (
               <motion.div
                 key={note.id}
-                layout
+                layoutId={note.id}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ type: "tween", duration: 0.4, ease: "easeOut" }}
               >
                 <NoteCard
                   note={note}

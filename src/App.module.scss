@@ -6,17 +6,4 @@
   padding: 2rem 1rem;
   display: flex;
   gap: 1rem;
-  transition: transform 0.8s ease;
-}
-
-.moveRight {
-  transform: translateX(calc(15vw));
-}
-
-@include m.tablet {
-  .main {
-    width: 100%;
-    flex-direction: column;
-    transform: none;
-  }
 }

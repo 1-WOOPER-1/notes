@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styles from "@/App.module.scss";
 import { NOTES } from "@/data/notes.js";
 import { ARCHIVED_NOTES } from "@/data/archivedNotes.js";
@@ -15,13 +16,17 @@ export function Notes() {
     LocalStorageService.getItem("archivedNotes") || ARCHIVED_NOTES
   );
 
-  const { isEditorOpen } = useUI();
+  const { noteId } = useParams();
+  const { setOpenedNote } = useUI();
 
   useEffect(() => {
-    isEditorOpen
-      ? document.body.classList.add("scrollLocked")
-      : document.body.classList.remove("scrollLocked");
-  }, [isEditorOpen]);
+    if (noteId) {
+      const note = allNotes.find((n) => n.id === +noteId);
+      if (note) setOpenedNote(note);
+    } else {
+      setOpenedNote(null);
+    }
+  }, [noteId]);
 
   useEffect(() => {
     LocalStorageService.setItem("allNotes", allNotes);
@@ -33,9 +38,7 @@ export function Notes() {
 
   return (
     <div>
-      <main
-        className={`${styles.main} ${isEditorOpen ? styles.moveRight : ""}`}
-      >
+      <main className={styles.main}>
         <NoteEditor notes={allNotes} setNotes={setAllNotes} />
         <NotesList
           notes={allNotes}

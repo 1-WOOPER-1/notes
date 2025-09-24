@@ -1,54 +1,51 @@
-import { useEffect, useRef } from "react";
-import { useLocation, useParams, useNavigate } from "react-router-dom";
-import { CSSTransition } from "react-transition-group";
+import { useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import { Lexical } from "./components/Lexical.jsx";
 import styles from "./NoteEditor.module.scss";
 import { useUI } from "@/hooks/useUI.js";
 import { getBasePath } from "@/utils/routeUtils.js";
 
-export function NoteEditor({ notes, setNotes }) {
-  const editorRef = useRef(null);
-
-  const { noteId } = useParams();
+export function NoteEditor({ setNotes }) {
   const navigate = useNavigate();
   const location = useLocation();
-
-  const { isEditorOpen, setIsEditorOpen } = useUI();
-  const openedNote = notes.find((n) => n.id === +noteId) || null;
+  const { openedNote, setOpenedNote } = useUI();
+  const editorRef = useRef(null);
+  if (!openedNote) return;
 
   function closeEditor() {
-    navigate(getBasePath(location.pathname));
+    setOpenedNote(null);
+    navigate(getBasePath(location.pathname), { replace: true });
   }
 
   function saveNote(note) {
     setNotes((prev) => prev.map((n) => (n.id === note.id ? { ...note } : n)));
   }
 
-  useEffect(() => {
-    setIsEditorOpen(!!openedNote);
-  }, [openedNote]);
-
   return (
-    <CSSTransition
-      nodeRef={editorRef}
-      in={isEditorOpen}
-      timeout={500}
-      classNames={{
-        enter: styles.noteEditorEnter,
-        enterActive: styles.noteEditorEnterActive,
-        enterDone: styles.noteEditorEnterDone,
-        exit: styles.noteEditorExit,
-        exitActive: styles.noteEditorExitActive,
-        exitDone: styles.noteEditorExitDone,
-      }}
-    >
-      <div ref={editorRef} className={styles.noteEditor}>
-        <Lexical
-          note={{ ...openedNote }}
-          closeEditor={closeEditor}
-          saveNote={saveNote}
-        />
-      </div>
-    </CSSTransition>
+    <AnimatePresence>
+      {openedNote && (
+        <motion.div
+          key="shadow"
+          className={styles.shadow}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <motion.div
+            ref={editorRef}
+            className={styles.noteEditor}
+            layoutId={openedNote.id}
+          >
+            <Lexical
+              note={{ ...openedNote }}
+              editorRef={editorRef}
+              closeEditor={closeEditor}
+              saveNote={saveNote}
+            />
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

@@ -1,12 +1,15 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { NoteActionsContext } from "@/context/NoteActionsContext.js";
 import { getBasePath } from "@/utils/routeUtils.js";
+import { useUI } from "@/hooks/useUI.js";
 
 export function NoteActionsProvider({ setNotes, setArchivedNotes, children }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const { setOpenedNote } = useUI();
 
   function openNote(note) {
+    setOpenedNote(note);
     const basePath = getBasePath(location.pathname);
     if (basePath === "/") {
       navigate(`${location.pathname}/${note.id}`);
