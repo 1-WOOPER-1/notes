@@ -6,7 +6,8 @@
   gap: 0.5rem;
   width: fit-content;
   padding: 0.6rem 1rem;
-  background-color: #1b1b28;
+  background-color: var(--background);
+  color: var(--text);
   border-radius: 2rem;
 
   input {
