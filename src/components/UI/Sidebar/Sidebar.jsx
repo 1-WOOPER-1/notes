@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { FaRegNoteSticky } from "react-icons/fa6";
 import { MdOutlineArchive } from "react-icons/md";
-import { PiTrashBold } from "react-icons/pi";
+import { PiTrashBold, PiNotePencil } from "react-icons/pi";
 import styles from "./Sidebar.module.scss";
 
 export function Sidebar() {
@@ -13,6 +13,9 @@ export function Sidebar() {
 
   return (
     <div className={styles.sidebar}>
+      <button className={styles.newNoteBtn}>
+        <PiNotePencil className={styles.icon} /> <span>New note</span>
+      </button>
       {sidebarItems.map(({ to, icon: Icon, label }) => (
         <NavLink
           key={to}

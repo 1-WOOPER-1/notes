@@ -8,8 +8,29 @@
   height: fit-content;
   display: flex;
   flex-direction: column;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   list-style: none;
+
+  .newNoteBtn {
+    padding: 1rem;
+    font-size: 1.2rem;
+    color: c.$primary;
+    margin: 0.5rem 0 0.5rem 0.5rem;
+    gap: 1rem;
+    border-radius: 2rem;
+    border: 2px solid c.$primary;
+    transition: background-color 0.1s linear;
+
+    &:hover {
+      background-color: c.$primary;
+      color: var(--text-inverted);
+    }
+
+    .icon {
+      font-size: 1.6rem;
+      margin-left: 0.6rem;
+    }
+  }
 
   .sidebarItem {
     padding: 1rem;

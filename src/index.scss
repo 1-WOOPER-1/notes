@@ -3,6 +3,7 @@
 
 html.dark {
   --text: #{c.$dark-text};
+  --text-inverted: #{c.$light-text};
   --background: #{c.$dark-background};
   --hover-button: #{c.$dark-hover-button};
   --hover-listitem: #{c.$dark-hover-listitem};
@@ -13,6 +14,7 @@ html.dark {
 
 html.light {
   --text: #{c.$light-text};
+  --text-inverted: #{c.$dark-text};
   --background: #{c.$light-background};
   --hover-button: #{c.$light-hover-button};
   --hover-listitem: #{c.$light-hover-listitem};
