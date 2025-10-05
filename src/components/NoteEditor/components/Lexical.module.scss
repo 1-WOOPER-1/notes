@@ -7,7 +7,9 @@
   border-radius: 1rem;
   position: relative;
   box-sizing: border-box;
-  padding: 1.2rem 1rem;
+  padding: 1.2rem 0 1rem 1rem;
+  overflow-y: hidden;
+  position: relative;
 }
 
 .editorHeader {
@@ -26,16 +28,20 @@
 
   .closeBtn {
     font-size: 2rem;
+    margin-right: 1rem;
   }
 }
 
 .editorBody {
   min-height: 150px;
+  max-height: 93%;
   resize: none;
   caret-color: c.$primary;
   position: relative;
   tab-size: 1;
   outline: 0;
+  overflow-y: auto;
+  padding-right: 1rem;
 }
 
 .editorPlaceholder {

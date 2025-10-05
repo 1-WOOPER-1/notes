@@ -16,7 +16,7 @@
 
 .noteEditor {
   width: 650px;
-  height: fit-content;
+  max-height: 85vh;
   position: fixed;
   top: 7rem;
   left: calc(50% - 650px / 2);
