@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useMatches } from "react-router-dom";
 import { NoteActionsContext } from "@/context/NoteActionsContext.js";
-import { getBasePath } from "@/utils/routeUtils.js";
+import { joinPaths } from "@/utils/routeUtils";
 import { useUI } from "@/hooks/useUI.js";
 import { useNotes } from "@/hooks/useNotes.js";
 
@@ -68,12 +68,7 @@ export function NoteActionsProvider({ children }) {
 
   function openNote(note) {
     setOpenedNote(note);
-    const basePath = getBasePath(location.pathname);
-    if (basePath === "/") {
-      navigate(`${location.pathname}/${note.id}`);
-    } else {
-      navigate(`${basePath}/${note.id}`);
-    }
+    navigate(joinPaths(location.pathname, note.id.toString()));
   }
 
   function pinNote(note) {

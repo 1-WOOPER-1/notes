@@ -7,7 +7,13 @@ export const routerConfig = [
   {
     path: "/",
     element: <Layout />,
+
     children: [
+      {
+        index: true,
+        element: <Navigate to="notes" replace />,
+        handle: { filter: "notes" },
+      },
       {
         path: "notes",
         element: <Notes />,
@@ -39,7 +45,7 @@ export const routerConfig = [
       },
       {
         path: "*",
-        element: <Navigate to="/notes" replace />,
+        element: <Navigate to="notes" replace />,
       },
     ],
   },
