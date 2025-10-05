@@ -74,31 +74,11 @@
     gap: 0.5rem;
     margin-top: 0.6rem;
 
-    opacity: 0;
-
     .deleteBtn {
       &:hover {
         color: c.$primary;
       }
     }
-  }
-
-  .noteCardToolbarEnter {
-    opacity: 0;
-  }
-  .noteCardToolbarEnterActive {
-    transition: opacity 0.25s ease-in;
-    opacity: 1;
-  }
-  .noteCardToolbarEnterDone {
-    opacity: 1;
-  }
-  .noteCardToolbarExit {
-    opacity: 1;
-  }
-  .noteCardToolbarExitActive {
-    opacity: 0;
-    transition: opacity 0.25s ease-out;
   }
 }
 

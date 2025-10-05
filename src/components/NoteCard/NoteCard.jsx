@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { useSortable } from "@dnd-kit/sortable";
-import { CSSTransition } from "react-transition-group";
+import { motion } from "framer-motion";
 import { PiTrashBold } from "react-icons/pi";
 import { MdOutlineArchive } from "react-icons/md";
 import { RiPushpin2Fill, RiPushpin2Line } from "react-icons/ri";
@@ -38,7 +38,6 @@ export function NoteCard({ note, isOver, isDragging }) {
 
   const [isDeleting, setIsDeleting] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const toolbarRef = useRef(null);
   const [isOverflow, setIsOverflow] = useState(false);
   const bodyRef = useRef(null);
   const classNames = [
@@ -95,34 +94,21 @@ export function NoteCard({ note, isOver, isDragging }) {
         dangerouslySetInnerHTML={{ __html: bodyHTML }}
       />
       {isOverflow && <div>. . .</div>}
-      <CSSTransition
-        nodeRef={toolbarRef}
-        in={hovered}
-        timeout={250}
-        classNames={{
-          enter: styles.noteCardToolbarEnter,
-          enterActive: styles.noteCardToolbarEnterActive,
-          enterDone: styles.noteCardToolbarEnterDone,
-          exit: styles.noteCardToolbarExit,
-          exitActive: styles.noteCardToolbarExitActive,
-        }}
+      <motion.div
+        className={styles.noteCardToolbar}
+        animate={{ opacity: hovered ? 1 : 0 }}
+        transition={{ duration: 0.25 }}
       >
-        <div className={styles.noteCardToolbar} ref={toolbarRef}>
-          <Button
-            note={note}
-            onClick={handleDelete}
-            className={styles.deleteBtn}
-          >
-            <PiTrashBold />
-          </Button>
-          <Button note={note} onClick={archiveNote}>
-            <MdOutlineArchive />
-          </Button>
-          <Button note={note} onClick={pinNote}>
-            {note.isPinned ? <RiPushpin2Fill /> : <RiPushpin2Line />}
-          </Button>
-        </div>
-      </CSSTransition>
+        <Button note={note} onClick={handleDelete} className={styles.deleteBtn}>
+          <PiTrashBold />
+        </Button>
+        <Button note={note} onClick={archiveNote}>
+          <MdOutlineArchive />
+        </Button>
+        <Button note={note} onClick={pinNote}>
+          {note.isPinned ? <RiPushpin2Fill /> : <RiPushpin2Line />}
+        </Button>
+      </motion.div>
     </div>
   );
 }
