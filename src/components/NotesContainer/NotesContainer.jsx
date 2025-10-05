@@ -15,22 +15,24 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { NoteCard } from "@components/NoteCard/NoteCard.jsx";
 import styles from "./NotesContainer.module.scss";
+import { useUI } from "@/hooks/useUI.js";
 
-export function NotesContainer({ notes, reorderNotes, listView }) {
+export function NotesContainer({ notes, setNotes }) {
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 30 } })
   );
 
   const [activeId, setActiveId] = useState(null);
   const [overId, setOverId] = useState(null);
+  const { listView } = useUI();
 
   function handleDragStart({ active }) {
     setActiveId(active.id);
   }
 
   function handleDragEnd({ active, over }) {
-    if (over && active.id !== over.id) {
-      reorderNotes((notes) => {
+    if (over && active.id !== over.id && setNotes) {
+      setNotes((notes) => {
         const oldIndex = notes.findIndex((n) => n.id === active.id);
         const newIndex = notes.findIndex((n) => n.id === over.id);
         return arrayMove(notes, oldIndex, newIndex);
@@ -65,6 +67,11 @@ export function NotesContainer({ notes, reorderNotes, listView }) {
                 layoutId={note.id}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  type: "tween",
+                  duration: 0.35,
+                  ease: "easeInOut",
+                }}
               >
                 <NoteCard
                   note={note}

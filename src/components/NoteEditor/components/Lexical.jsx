@@ -8,12 +8,14 @@ import { ToolbarPlugin } from "./plugins/ToolbarPlugin.jsx";
 import { EditorHeader } from "./EditorHeader.jsx";
 import styles from "./Lexical.module.scss";
 import { useClickOutside } from "@/hooks/useClickOutside.js";
+import { useNoteActions } from "@/hooks/useNoteActions.js";
 
-export function Lexical({ note, editorRef, closeEditor, saveNote }) {
+export function Lexical({ note, editorRef, closeEditor }) {
   const [isMarkdownMode, setIsMarkdownMode] = useState(false);
   const [markdownText, setMarkdownText] = useState("");
   const titleRef = useRef();
   const localNoteRef = useRef({ ...note });
+  const { saveNote } = useNoteActions();
 
   useClickOutside(editorRef, null, () => {
     saveNote(localNoteRef.current);
@@ -55,7 +57,13 @@ export function Lexical({ note, editorRef, closeEditor, saveNote }) {
           setMarkdownText={setMarkdownText}
         />
       </motion.div>
-      <div className={styles.editorInner}>
+      <motion.div
+        className={styles.editorInner}
+        layoutId={note.id}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ type: "tween", duration: 0.35, ease: "easeInOut" }}
+      >
         <EditorHeader
           titleRef={titleRef}
           onChangeTitle={onChangeTitle}
@@ -73,7 +81,7 @@ export function Lexical({ note, editorRef, closeEditor, saveNote }) {
         ) : (
           <EditorPlugins onChangeBody={onChangeBody} />
         )}
-      </div>
+      </motion.div>
     </LexicalComposer>
   );
 }

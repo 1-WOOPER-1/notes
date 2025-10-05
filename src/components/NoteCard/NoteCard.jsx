@@ -69,7 +69,7 @@ export function NoteCard({ note, isOver, isDragging }) {
     resizeObserver.observe(el);
 
     return () => resizeObserver.disconnect();
-  }, [note.body, query]);
+  }, [note.title, note.body, query]);
 
   function handleDelete() {
     setIsDeleting(true);

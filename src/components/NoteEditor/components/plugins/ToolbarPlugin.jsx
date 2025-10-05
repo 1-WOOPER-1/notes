@@ -122,9 +122,9 @@ export function ToolbarPlugin({
   return (
     <motion.div
       className={styles.toolbar}
-      initial={{ x: "3rem" }}
-      animate={{ x: "0rem" }}
-      exit={{ x: "3rem" }}
+      initial={{ x: "3rem", opacity: 0 }}
+      animate={{ x: "0rem", opacity: 1 }}
+      exit={{ x: "3rem", opacity: 0 }}
       transition={{ type: "tween", ease: "easeOut", delay: 0.5 }}
     >
       <button onClick={toggleMode} className={btnClass(isMarkdownMode)}>

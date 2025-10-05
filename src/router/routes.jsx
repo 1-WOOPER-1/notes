@@ -1,0 +1,46 @@
+import { Navigate } from "react-router-dom";
+import { Notes } from "@/pages/Notes.jsx";
+import { Archive } from "@/pages/Archive.jsx";
+import { Layout } from "@/pages/Layout";
+
+export const routerConfig = [
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "notes",
+        element: <Notes />,
+        exact: true,
+        handle: { filter: "notes" },
+
+        children: [
+          {
+            path: ":noteId",
+            element: <Notes />,
+            exact: true,
+            handle: { filter: "notes" },
+          },
+        ],
+      },
+      {
+        path: "archive",
+        element: <Archive />,
+        exact: true,
+        handle: { filter: "archive" },
+        children: [
+          {
+            path: ":noteId",
+            element: <Archive />,
+            exact: true,
+            handle: { filter: "archive" },
+          },
+        ],
+      },
+      {
+        path: "*",
+        element: <Navigate to="/notes" replace />,
+      },
+    ],
+  },
+];

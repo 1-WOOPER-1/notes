@@ -1,17 +1,8 @@
-import { BrowserRouter } from "react-router-dom";
-import { AppRouter } from "./components/AppRouter.jsx";
-import { Sidebar } from "@components/UI/Sidebar/Sidebar.jsx";
-import { Header } from "@components/UI/Header/Header.jsx";
-import { UIProvider } from "@/providers/UIProvider.jsx";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { routerConfig } from "@/router/routes.jsx";
+
+const router = createBrowserRouter(routerConfig);
 
 export function App() {
-  return (
-    <BrowserRouter>
-      <UIProvider>
-        <Header />
-        <Sidebar />
-        <AppRouter />
-      </UIProvider>
-    </BrowserRouter>
-  );
+  return <RouterProvider router={router} />;
 }

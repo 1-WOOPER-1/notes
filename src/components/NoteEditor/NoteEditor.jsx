@@ -6,7 +6,7 @@ import styles from "./NoteEditor.module.scss";
 import { useUI } from "@/hooks/useUI.js";
 import { getBasePath } from "@/utils/routeUtils.js";
 
-export function NoteEditor({ setNotes }) {
+export function NoteEditor() {
   const navigate = useNavigate();
   const location = useLocation();
   const { openedNote, setOpenedNote } = useUI();
@@ -16,10 +16,6 @@ export function NoteEditor({ setNotes }) {
   function closeEditor() {
     setOpenedNote(null);
     navigate(getBasePath(location.pathname), { replace: true });
-  }
-
-  function saveNote(note) {
-    setNotes((prev) => prev.map((n) => (n.id === note.id ? { ...note } : n)));
   }
 
   return (
@@ -35,13 +31,13 @@ export function NoteEditor({ setNotes }) {
           <motion.div
             ref={editorRef}
             className={styles.noteEditor}
-            layoutId={openedNote.id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
           >
             <Lexical
               note={{ ...openedNote }}
               editorRef={editorRef}
               closeEditor={closeEditor}
-              saveNote={saveNote}
             />
           </motion.div>
         </motion.div>
