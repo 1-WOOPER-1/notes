@@ -32,6 +32,8 @@ export const ARCHIVED_NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 22,
@@ -66,6 +68,8 @@ export const ARCHIVED_NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 23,
@@ -100,6 +104,8 @@ export const ARCHIVED_NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 24,
@@ -134,5 +140,7 @@ export const ARCHIVED_NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
 ];

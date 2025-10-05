@@ -32,6 +32,8 @@ export const NOTES = [
       },
     },
     isPinned: true,
+    createdAt: new Date(2024).toISOString(),
+    editedAt: new Date(2024).toISOString(),
   },
   {
     id: 2,
@@ -66,6 +68,8 @@ export const NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 3,
@@ -100,6 +104,8 @@ export const NOTES = [
       },
     },
     isPinned: true,
+    createdAt: new Date(2025, 9).toISOString(),
+    editedAt: new Date(2025, 9).toISOString(),
   },
   {
     id: 4,
@@ -134,6 +140,8 @@ export const NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 5,
@@ -168,6 +176,8 @@ export const NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 6,
@@ -202,6 +212,8 @@ export const NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 7,
@@ -236,6 +248,8 @@ export const NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 8,
@@ -270,6 +284,8 @@ export const NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 9,
@@ -304,6 +320,8 @@ export const NOTES = [
       },
     },
     isPinned: true,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 10,
@@ -338,6 +356,8 @@ export const NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 11,
@@ -372,6 +392,8 @@ export const NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 12,
@@ -406,6 +428,8 @@ export const NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 13,
@@ -440,6 +464,8 @@ export const NOTES = [
       },
     },
     isPinned: true,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 14,
@@ -474,6 +500,8 @@ export const NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 15,
@@ -508,6 +536,8 @@ export const NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 16,
@@ -542,6 +572,8 @@ export const NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 17,
@@ -576,6 +608,8 @@ export const NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 18,
@@ -610,6 +644,8 @@ export const NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 19,
@@ -644,6 +680,8 @@ export const NOTES = [
       },
     },
     isPinned: false,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
   {
     id: 20,
@@ -678,5 +716,7 @@ export const NOTES = [
       },
     },
     isPinned: true,
+    createdAt: new Date().toISOString(),
+    editedAt: new Date().toISOString(),
   },
 ];

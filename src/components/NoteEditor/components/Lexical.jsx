@@ -9,6 +9,7 @@ import { EditorHeader } from "./EditorHeader.jsx";
 import styles from "./Lexical.module.scss";
 import { useClickOutside } from "@/hooks/useClickOutside.js";
 import { useNoteActions } from "@/hooks/useNoteActions.js";
+import { formatEditedAt } from "./formatDate.js";
 
 export function Lexical({ note, editorRef, closeEditor }) {
   const [isMarkdownMode, setIsMarkdownMode] = useState(false);
@@ -18,6 +19,7 @@ export function Lexical({ note, editorRef, closeEditor }) {
   const { saveNote } = useNoteActions();
 
   useClickOutside(editorRef, null, () => {
+    localNoteRef.current.editedAt = new Date().toISOString();
     saveNote(localNoteRef.current);
     closeEditor();
   });
@@ -68,6 +70,7 @@ export function Lexical({ note, editorRef, closeEditor }) {
           titleRef={titleRef}
           onChangeTitle={onChangeTitle}
           onSaveAndClose={() => {
+            localNoteRef.current.editedAt = new Date().toISOString();
             saveNote(localNoteRef.current);
             closeEditor();
           }}
@@ -81,6 +84,9 @@ export function Lexical({ note, editorRef, closeEditor }) {
         ) : (
           <EditorPlugins onChangeBody={onChangeBody} />
         )}
+        <span className={styles.editInfo}>
+          Edited at {formatEditedAt(note.editedAt)}
+        </span>
       </motion.div>
     </LexicalComposer>
   );
