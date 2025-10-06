@@ -1,0 +1,18 @@
+.tooltip {
+  position: relative;
+  .tooltipText {
+    font-size: 0.8rem;
+    color: var(--text);
+    text-align: center;
+    opacity: 0;
+    position: fixed;
+    background-color: var(--surface);
+    border-radius: 0.3rem;
+    padding: 0.3rem 0.4rem;
+    color: var(--text);
+    white-space: nowrap;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 9999;
+  }
+}

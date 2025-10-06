@@ -10,6 +10,7 @@ import styles from "./Lexical.module.scss";
 import { useClickOutside } from "@/hooks/useClickOutside.js";
 import { useNoteActions } from "@/hooks/useNoteActions.js";
 import { formatEditedAt } from "./formatDate.js";
+import { Tooltip } from "@components/UI/Tooltip/Tooltip.jsx";
 
 export function Lexical({ note, editorRef, closeEditor }) {
   const [isMarkdownMode, setIsMarkdownMode] = useState(false);
@@ -93,7 +94,9 @@ export function Lexical({ note, editorRef, closeEditor }) {
           <EditorPlugins onChangeBody={onChangeBody} />
         )}
         <span className={styles.editInfo}>
-          Edited at {formatEditedAt(note.editedAt)}
+          <Tooltip text={`Created ${formatEditedAt(note.createdAt)}`}>
+            <span>Edited at {formatEditedAt(note.editedAt)}</span>
+          </Tooltip>
         </span>
       </motion.div>
     </LexicalComposer>

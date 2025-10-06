@@ -38,6 +38,7 @@ import {
 import { motion } from "framer-motion";
 
 import styles from "../Lexical.module.scss";
+import { Tooltip } from "@components/UI/Tooltip/Tooltip";
 
 export function ToolbarPlugin({
   isMarkdownMode,
@@ -127,89 +128,117 @@ export function ToolbarPlugin({
       exit={{ x: "3rem", opacity: 0 }}
       transition={{ type: "tween", ease: "easeOut", delay: 0.5 }}
     >
-      <button onClick={toggleMode} className={btnClass(isMarkdownMode)}>
-        <RiMarkdownLine />
-      </button>
+      <Tooltip text="Markdown mode">
+        <button onClick={toggleMode} className={btnClass(isMarkdownMode)}>
+          <RiMarkdownLine />
+        </button>
+      </Tooltip>
 
-      <button
-        disabled={!canUndo}
-        onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)}
-        className={styles.toolbarItem}
-      >
-        <IoMdUndo />
-      </button>
+      <Tooltip text="Undo">
+        <button
+          disabled={!canUndo}
+          onClick={() => editor.dispatchCommand(UNDO_COMMAND, undefined)}
+          className={styles.toolbarItem}
+        >
+          <IoMdUndo />
+        </button>
+      </Tooltip>
 
-      <button
-        disabled={!canRedo}
-        onClick={() => editor.dispatchCommand(REDO_COMMAND, undefined)}
-        className={styles.toolbarItem}
-      >
-        <IoMdRedo />
-      </button>
-
-      <hr />
-
-      <button
-        onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold")}
-        className={btnClass(isBold)}
-      >
-        <RiBold />
-      </button>
-
-      <button
-        onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic")}
-        className={btnClass(isItalic)}
-      >
-        <RiItalic />
-      </button>
-
-      <button
-        onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline")}
-        className={btnClass(isUnderline)}
-      >
-        <RiUnderline />
-      </button>
-
-      <button
-        onClick={() =>
-          editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough")
-        }
-        className={btnClass(isStrikethrough)}
-      >
-        <RiStrikethrough />
-      </button>
+      <Tooltip text="Redo">
+        <button
+          disabled={!canRedo}
+          onClick={() => editor.dispatchCommand(REDO_COMMAND, undefined)}
+          className={styles.toolbarItem}
+        >
+          <IoMdRedo />
+        </button>
+      </Tooltip>
 
       <hr />
 
-      <button
-        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left")}
-        className={styles.toolbarItem}
-      >
-        <RiAlignLeft />
-      </button>
+      <Tooltip text="Bold">
+        <button
+          onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold")}
+          className={btnClass(isBold)}
+        >
+          <RiBold />
+        </button>
+      </Tooltip>
 
-      <button
-        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center")}
-        className={styles.toolbarItem}
-      >
-        <RiAlignCenter />
-      </button>
+      <Tooltip text="Italic">
+        <button
+          onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic")}
+          className={btnClass(isItalic)}
+        >
+          <RiItalic />
+        </button>
+      </Tooltip>
 
-      <button
-        onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right")}
-        className={styles.toolbarItem}
-      >
-        <RiAlignRight />
-      </button>
+      <Tooltip text="Underline">
+        <button
+          onClick={() =>
+            editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline")
+          }
+          className={btnClass(isUnderline)}
+        >
+          <RiUnderline />
+        </button>
+      </Tooltip>
 
-      <button
-        onClick={() =>
-          editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify")
-        }
-        className={styles.toolbarItem}
-      >
-        <RiAlignJustify />
-      </button>
+      <Tooltip text="Strikethrough">
+        <button
+          onClick={() =>
+            editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough")
+          }
+          className={btnClass(isStrikethrough)}
+        >
+          <RiStrikethrough />
+        </button>
+      </Tooltip>
+
+      <hr />
+
+      <Tooltip text="Left">
+        <button
+          onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left")}
+          className={styles.toolbarItem}
+        >
+          <RiAlignLeft />
+        </button>
+      </Tooltip>
+
+      <Tooltip text="Center">
+        <button
+          onClick={() =>
+            editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center")
+          }
+          className={styles.toolbarItem}
+        >
+          <RiAlignCenter />
+        </button>
+      </Tooltip>
+
+      <Tooltip text="Right">
+        <button
+          onClick={() =>
+            editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right")
+          }
+          className={styles.toolbarItem}
+        >
+          <RiAlignRight />
+        </button>
+      </Tooltip>
+
+      <Tooltip text="Justify">
+        <button
+          onClick={() =>
+            editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify")
+          }
+          className={styles.toolbarItem}
+        >
+          <RiAlignJustify />
+        </button>
+      </Tooltip>
     </motion.div>
   );
 }

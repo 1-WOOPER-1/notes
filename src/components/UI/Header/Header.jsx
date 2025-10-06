@@ -12,6 +12,7 @@ import { useTheme } from "@/hooks/useTheme.js";
 import { useUI } from "@/hooks/useUI.js";
 import { LocalStorageService } from "@/utils/localStorage.js";
 import { useClickOutside } from "@/hooks/useClickOutside.js";
+import { Tooltip } from "@components/UI/Tooltip/Tooltip.jsx";
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();
@@ -50,13 +51,16 @@ export function Header() {
         <h1 className={styles.logo}>NOTES</h1>
         <div className={styles.headerSecondary}>
           <SearchInput setQuery={setQuery} />
-          <Button className={styles.headerBtn} onClick={toggleView}>
-            {!listView ? <TbLayoutList /> : <TbLayoutGrid />}
-          </Button>
+          <Tooltip text={listView ? "Grid view" : "List view"}>
+            <Button className={styles.headerBtn} onClick={toggleView}>
+              {!listView ? <TbLayoutList /> : <TbLayoutGrid />}
+            </Button>
+          </Tooltip>
           <div ref={settingsBtnRef}>
             <Button
               className={`${styles.headerBtn} ${styles.settingsBtn}`}
               onClick={toggleDropDown}
+              toolTipText="Settings"
             >
               <PiGearFineBold />
             </Button>
@@ -72,7 +76,11 @@ export function Header() {
             )}
           </div>
           <div ref={userModalBtnRef}>
-            <Button className={styles.userModalBtn} onClick={toggleModal}>
+            <Button
+              className={styles.userModalBtn}
+              onClick={toggleModal}
+              toolTipText="Account"
+            >
               <DefaultUserIcon style={{ fontSize: "1.8rem" }} />
             </Button>
             {isModalOpen && (

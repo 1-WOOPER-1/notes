@@ -22,13 +22,18 @@ export function Toolbar({ note, hovered, setIsDeleting }) {
       animate={{ opacity: hovered ? 1 : 0 }}
       transition={{ duration: 0.25 }}
     >
-      <Button note={note} onClick={handleDelete} className={styles.deleteBtn}>
+      <Button
+        note={note}
+        onClick={handleDelete}
+        className={styles.deleteBtn}
+        toolTipText="Delete note"
+      >
         <PiTrashBold />
       </Button>
-      <Button onClick={() => archiveNote(note)}>
+      <Button onClick={() => archiveNote(note)} toolTipText="Arhive">
         <MdOutlineArchive />
       </Button>
-      <Button onClick={() => pinNote(note)}>
+      <Button onClick={() => pinNote(note)} toolTipText="Pin note">
         {note.isPinned ? <RiPushpin2Fill /> : <RiPushpin2Line />}
       </Button>
     </motion.div>
