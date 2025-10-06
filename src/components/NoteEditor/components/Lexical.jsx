@@ -20,8 +20,10 @@ export function Lexical({ note, editorRef, closeEditor }) {
   const { saveNote } = useNoteActions();
 
   useClickOutside(editorRef, null, () => {
-    localNoteRef.current.editedAt = new Date().toISOString();
-    saveNote(localNoteRef.current);
+    if (!checkIsEdited) {
+      localNoteRef.current.editedAt = new Date().toISOString();
+      saveNote(localNoteRef.current);
+    }
     closeEditor();
   });
 

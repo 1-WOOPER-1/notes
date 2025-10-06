@@ -34,7 +34,8 @@
 
 .editorBody {
   min-height: 150px;
-  max-height: 93%;
+  max-height: 92%;
+  height: 100%;
   resize: none;
   caret-color: c.$primary;
   position: relative;
@@ -45,7 +46,6 @@
 }
 
 .editInfo {
-  width: 100%;
   text-align: right;
   padding: 0.45rem;
   position: absolute;
@@ -54,6 +54,7 @@
   background-color: var(--surface);
   font-size: 0.7rem;
   border-radius: 0.7rem 0 0 0;
+  cursor: default;
 }
 
 .editorPlaceholder {
