@@ -9,6 +9,11 @@ import { Button } from "@components/UI/Button/Button.jsx";
 export function UserModal({ toggleModal }) {
   return (
     <div className={styles.userModal}>
+      <div className={styles.closeBtn}>
+        <Button onClick={() => toggleModal()}>
+          <IoCloseOutline style={{ fontSize: "2rem" }} />
+        </Button>
+      </div>
       <DefaultUserIcon className={styles.avatar} />
       <div className={`${styles.listItem} ${styles.listItemTop}`}>
         <FiAtSign style={{ fontSize: "1.3rem" }} />
@@ -34,9 +39,6 @@ export function UserModal({ toggleModal }) {
         <FaRegTrashAlt style={{ fontSize: "1rem" }} />
         <p>Delete account</p>
       </button>
-      <Button className={styles.closeBtn} onClick={() => toggleModal()}>
-        <IoCloseOutline />
-      </Button>
     </div>
   );
 }
