@@ -61,6 +61,8 @@ export function NoteActionsProvider({ children }) {
         },
       },
       isPinned: false,
+      createdAt: new Date().toISOString(),
+      editedAt: new Date().toISOString(),
     };
     setPendingNote(newNote);
     setLocalNotes((prev) => [{ ...newNote }, ...prev]);
