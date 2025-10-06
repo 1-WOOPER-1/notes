@@ -33,6 +33,12 @@ export function Lexical({ note, editorRef, closeEditor }) {
     localNoteRef.current.body = editorStateJSON;
   }
 
+  function checkIsEdited() {
+    const original = JSON.stringify(note);
+    const current = JSON.stringify(localNoteRef.current);
+    return original === current;
+  }
+
   useEffect(() => {
     localNoteRef.current = { ...note };
     titleRef.current.innerText = note.title ? note.title : "";
@@ -70,8 +76,10 @@ export function Lexical({ note, editorRef, closeEditor }) {
           titleRef={titleRef}
           onChangeTitle={onChangeTitle}
           onSaveAndClose={() => {
-            localNoteRef.current.editedAt = new Date().toISOString();
-            saveNote(localNoteRef.current);
+            if (!checkIsEdited()) {
+              localNoteRef.current.editedAt = new Date().toISOString();
+              saveNote(localNoteRef.current);
+            }
             closeEditor();
           }}
         />
