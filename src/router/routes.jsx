@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { Notes } from "@/pages/Notes.jsx";
 import { Archive } from "@/pages/Archive.jsx";
+import { Bin } from "@/pages/Bin.jsx";
 import { Layout } from "@/pages/Layout";
 
 export const routerConfig = [
@@ -40,6 +41,20 @@ export const routerConfig = [
             element: <Archive />,
             exact: true,
             handle: { filter: "archive" },
+          },
+        ],
+      },
+      {
+        path: "bin",
+        element: <Bin />,
+        exact: true,
+        handle: { filter: "bin" },
+        children: [
+          {
+            path: ":noteId",
+            element: <Bin />,
+            exact: true,
+            handle: { filter: "bin" },
           },
         ],
       },

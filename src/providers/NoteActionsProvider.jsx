@@ -13,10 +13,18 @@ export function NoteActionsProvider({ children }) {
   const matches = useMatches();
 
   const notesType = matches.at(-1).handle.filter;
-  const { notes, setNotes, archivedNotes, setArchivedNotes } = useNotes();
+  const {
+    notes,
+    setNotes,
+    archivedNotes,
+    setArchivedNotes,
+    binNotes,
+    setBinNotes,
+  } = useNotes();
   const typeMap = {
     notes: [notes, setNotes],
     archive: [archivedNotes, setArchivedNotes],
+    bin: [binNotes, setBinNotes],
   };
   const [localNotes, setLocalNotes] = typeMap[notesType];
 
@@ -88,6 +96,14 @@ export function NoteActionsProvider({ children }) {
   }
 
   function deleteNote(note) {
+    const now = new Date();
+    const plus30Days = new Date(now);
+    plus30Days.setDate(now.getDate() + 30);
+    const deleteDate = plus30Days.toISOString();
+    setBinNotes((prev) => [
+      ...prev,
+      { ...note, isPinned: false, deleteDate: deleteDate },
+    ]);
     setLocalNotes((prev) => prev.filter((n) => n.id !== note.id));
   }
 
