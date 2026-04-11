@@ -1,0 +1,38 @@
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { FaMagnifyingGlass } from "react-icons/fa6";
+import styles from "./SearchInput.module.scss";
+import { useDebounce } from "@/hooks/useDebounce";
+import { LocalStorageService } from "@/utils/localStorage";
+
+interface SearchInputType {
+  setQuery: Dispatch<SetStateAction<string>>;
+}
+
+export function SearchInput({ setQuery }: SearchInputType) {
+  const [focused, setFocused] = useState(false);
+  const [value, setValue] = useState(
+    LocalStorageService.getItem("query") || "",
+  );
+
+  const debouncedValue = useDebounce(value, 500);
+
+  useEffect(() => {
+    setQuery(debouncedValue);
+    LocalStorageService.setItem("query", debouncedValue);
+  }, [debouncedValue, setQuery]);
+
+  return (
+    <div className={styles.inputWrapper}>
+      <FaMagnifyingGlass />
+      <input
+        className={focused ? styles.stretch : ""}
+        type="text"
+        placeholder="Search"
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+      ></input>
+    </div>
+  );
+}
