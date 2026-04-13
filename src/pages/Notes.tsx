@@ -13,7 +13,7 @@ export function Notes() {
 
   useEffect(() => {
     if (noteId) {
-      const note = notes.find((n) => n.id === +noteId);
+      const note = notes.find((n) => n.id === noteId);
       if (note) setOpenedNote(note);
     } else {
       setOpenedNote(null);

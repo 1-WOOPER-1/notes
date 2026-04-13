@@ -80,9 +80,7 @@ export function Lexical({ note, editorRef, closeEditor }: LexicalType) {
       </motion.div>
       <motion.div
         className={styles.editorInner}
-        layoutId={note.id.toString()}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        layoutId={String(note.id)}
         transition={{ type: "tween", duration: 0.35, ease: "easeInOut" }}
       >
         <EditorHeader

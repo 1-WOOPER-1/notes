@@ -6,6 +6,8 @@ import {
   createContext,
   Dispatch,
   SetStateAction,
+  useCallback,
+  useMemo,
 } from "react";
 import { useLocation, useNavigate, useMatches } from "react-router-dom";
 import { SerializedEditorState, SerializedLexicalNode } from "lexical";
@@ -103,9 +105,9 @@ export function NoteActionsProvider({ children }: { children: ReactNode }) {
     }
   }, [localNotes, pendingNote]);
 
-  function createNewNote() {
+  const createNewNote = useCallback(() => {
     const newNote: Note = {
-      id: Date.now(),
+      id: String(Date.now()),
       title: "",
       body: createEmptyBody(),
       isPinned: false,
@@ -113,56 +115,74 @@ export function NoteActionsProvider({ children }: { children: ReactNode }) {
       editedAt: new Date().toISOString(),
     };
     setPendingNote(newNote);
-    setLocalNotes((prev: Note[]) => [{ ...newNote }, ...prev]);
-  }
+    setLocalNotes((prev) => [{ ...newNote }, ...prev]);
+  }, [setLocalNotes]);
 
-  function openNote(note: Note) {
-    setOpenedNote(note);
-    navigate(joinPaths(location.pathname, note.id.toString()));
-  }
+  const openNote = useCallback(
+    (note: Note) => {
+      setOpenedNote(note);
+      navigate(joinPaths(location.pathname, note.id));
+    },
+    [location.pathname, setOpenedNote, navigation],
+  );
 
-  function pinNote(note: Note) {
-    setLocalNotes((prev: Note[]) =>
-      prev.map((n) =>
-        n.id === note.id ? { ...n, isPinned: !note.isPinned } : n,
-      ),
-    );
-  }
+  const pinNote = useCallback(
+    (note: Note) => {
+      setLocalNotes((prev) =>
+        prev.map((n) =>
+          n.id === note.id ? { ...n, isPinned: !note.isPinned } : n,
+        ),
+      );
+    },
+    [setLocalNotes],
+  );
 
-  function saveNote(note: Note) {
-    setLocalNotes((prev: Note[]) =>
-      prev.map((n) => (n.id === note.id ? { ...note } : n)),
-    );
-  }
+  const saveNote = useCallback(
+    (note: Note) => {
+      setLocalNotes((prev) =>
+        prev.map((n) => (n.id === note.id ? { ...note } : n)),
+      );
+    },
+    [setLocalNotes],
+  );
 
-  function deleteNote(note: Note) {
-    const now = new Date();
-    const plus30Days = new Date(now);
-    plus30Days.setDate(now.getDate() + 30);
-    const deleteDate = plus30Days.toISOString();
-    setBinNotes((prev) => [
-      ...prev,
-      { ...note, isPinned: false, deleteDate: deleteDate },
-    ]);
-    setLocalNotes((prev: Note[]) => prev.filter((n) => n.id !== note.id));
-  }
+  const deleteNote = useCallback(
+    (note: Note) => {
+      const now = new Date();
+      const plus30Days = new Date(now);
+      plus30Days.setDate(now.getDate() + 30);
+      const deleteDate = plus30Days.toISOString();
+      setBinNotes((prev) => [
+        ...prev,
+        { ...note, isPinned: false, deleteDate: deleteDate },
+      ]);
+      setLocalNotes((prev: Note[]) => prev.filter((n) => n.id !== note.id));
+    },
+    [setLocalNotes, setBinNotes],
+  );
 
-  function archiveNote(note: Note) {
-    setArchivedNotes((prev) => [...prev, { ...note, isPinned: false }]);
-    setLocalNotes((prev: Note[]) => prev.filter((n) => n.id !== note.id));
-  }
+  const archiveNote = useCallback(
+    (note: Note) => {
+      setArchivedNotes((prev) => [...prev, { ...note, isPinned: false }]);
+      setLocalNotes((prev: Note[]) => prev.filter((n) => n.id !== note.id));
+    },
+    [setLocalNotes, setArchivedNotes],
+  );
+
+  const value = useMemo(
+    () => ({
+      createNewNote,
+      openNote,
+      pinNote,
+      saveNote,
+      deleteNote,
+      archiveNote,
+    }),
+    [createNewNote, openNote, pinNote, saveNote, deleteNote, archiveNote],
+  );
 
   return (
-    <NoteActionsContext.Provider
-      value={{
-        createNewNote,
-        openNote,
-        pinNote,
-        saveNote,
-        deleteNote,
-        archiveNote,
-      }}
-    >
+    <NoteActionsContext.Provider value={value}>
       {children}
     </NoteActionsContext.Provider>
   );

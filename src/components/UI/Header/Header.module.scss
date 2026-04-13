@@ -42,23 +42,6 @@
     .settingsBtn {
       transform: rotate(180deg);
     }
-
-    .userModalBtn {
-      color: c.$dark-text;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.6rem;
-      border-radius: 2rem;
-      width: 2.8rem;
-      height: 2.8rem;
-      background-color: c.$dark-hover-button;
-      cursor: pointer;
-      &:hover {
-        color: c.$primary;
-        background-color: c.$dark-hover-button;
-      }
-    }
   }
 }
 

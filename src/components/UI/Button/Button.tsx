@@ -15,17 +15,21 @@ export function Button({
   onClick,
   toolTipText,
 }: ButtonProps) {
-  return (
-    <Tooltip text={toolTipText}>
-      <button
-        className={`${styles.button} ${className || ""}`}
-        onClick={(event) => {
-          event.stopPropagation();
-          onClick();
-        }}
-      >
-        {children}
-      </button>
-    </Tooltip>
+  function handleClick(event: React.MouseEvent) {
+    event.stopPropagation();
+    onClick();
+  }
+
+  const button = (
+    <button
+      className={`${styles.button} ${className || ""}`}
+      onClick={handleClick}
+    >
+      {children}
+    </button>
   );
+
+  if (!toolTipText) return button;
+
+  return <Tooltip text={toolTipText}>{button}</Tooltip>;
 }

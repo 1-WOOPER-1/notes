@@ -6,7 +6,10 @@ import {
   ReactNode,
   Dispatch,
   SetStateAction,
+  useCallback,
+  useMemo,
 } from "react";
+import { arrayMove } from "@dnd-kit/sortable";
 import { NOTES } from "@/data/notes";
 import { ARCHIVED_NOTES } from "@/data/archivedNotes";
 import { BIN_NOTES } from "@/data/binNotes";
@@ -20,12 +23,17 @@ interface NotesContextType {
   setArchivedNotes: Dispatch<SetStateAction<Note[]>>;
   binNotes: Note[];
   setBinNotes: Dispatch<SetStateAction<Note[]>>;
+  reorderNotes: (
+    callback: Dispatch<SetStateAction<Note[]>>,
+    activeId: string,
+    overId: string,
+  ) => void;
 }
 
 const NotesContext = createContext<NotesContextType | undefined>(undefined);
 
 export function NotesProvider({ children }: { children: ReactNode }) {
-  const [notes, setNotes] = useState(
+  const [notes, setNotes] = useState<Note[]>(
     LocalStorageService.getItem("notes") || NOTES,
   );
   const [archivedNotes, setArchivedNotes] = useState(
@@ -48,6 +56,20 @@ export function NotesProvider({ children }: { children: ReactNode }) {
     });
   }
 
+  const reorderNotes = useCallback(
+    (
+      callback: Dispatch<SetStateAction<Note[]>>,
+      activeId: string,
+      overId: string,
+    ) =>
+      callback((prev) => {
+        const oldIndex = prev.findIndex((n) => n.id === activeId);
+        const newIndex = prev.findIndex((n) => n.id === overId);
+        return arrayMove(prev, oldIndex, newIndex);
+      }),
+    [],
+  );
+
   useEffect(() => {
     LocalStorageService.setItem("notes", notes);
   }, [notes]);
@@ -60,19 +82,21 @@ export function NotesProvider({ children }: { children: ReactNode }) {
     LocalStorageService.setItem("binNotes", binNotes);
   }, [binNotes]);
 
+  const value = useMemo(
+    () => ({
+      notes,
+      setNotes,
+      archivedNotes,
+      setArchivedNotes,
+      binNotes,
+      setBinNotes,
+      reorderNotes,
+    }),
+    [notes, archivedNotes, binNotes, reorderNotes],
+  );
+
   return (
-    <NotesContext.Provider
-      value={{
-        notes,
-        setNotes,
-        archivedNotes,
-        setArchivedNotes,
-        binNotes,
-        setBinNotes,
-      }}
-    >
-      {children}
-    </NotesContext.Provider>
+    <NotesContext.Provider value={value}>{children}</NotesContext.Provider>
   );
 }
 

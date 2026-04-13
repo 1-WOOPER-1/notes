@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, ReactNode } from "react";
+import { useRef, useState, ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Tooltip.module.scss";
 
@@ -8,45 +8,47 @@ interface TooltipType {
 }
 
 export function Tooltip({ children, text }: TooltipType) {
-  const [hovered, setHovered] = useState(false);
-  const [startAnimation, setStartAnimation] = useState(false);
+  const hoveredRef = useRef(false);
+  const [tooltip, setTooltip] = useState<{ top: number; left: number } | null>(
+    null,
+  );
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [coords, setCoords] = useState({ top: 0, left: 0 });
+  const timerRef = useRef<number | undefined>(undefined);
 
-  useEffect(() => {
-    let show: number;
-    if (hovered && wrapperRef.current) {
-      const el = wrapperRef.current;
-      show = setTimeout(() => {
-        const rect = el.getBoundingClientRect();
-        setCoords({ top: rect.bottom + 8, left: rect.left + rect.width / 2 });
-        setStartAnimation(true);
-      }, 400);
-    } else {
-      setStartAnimation(false);
-    }
-    return () => clearTimeout(show);
-  }, [hovered]);
+  function handleMouseEnter() {
+    hoveredRef.current = true;
+    timerRef.current = setTimeout(() => {
+      if (!hoveredRef.current || !wrapperRef.current) return;
+      const rect = wrapperRef.current.getBoundingClientRect();
+      setTooltip({ top: rect.bottom + 8, left: rect.left + rect.width / 2 });
+    }, 400);
+  }
+
+  function handleMouseLeave() {
+    hoveredRef.current = false;
+    clearTimeout(timerRef.current);
+    setTooltip(null);
+  }
 
   return (
     <div
       ref={wrapperRef}
       className={styles.tooltip}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onMouseDown={() => setHovered(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onMouseDown={handleMouseLeave}
     >
       {children}
       <AnimatePresence>
-        {startAnimation && text && (
+        {tooltip && text && (
           <motion.div
             className={styles.tooltipText}
-            animate={{ opacity: startAnimation ? 1 : 0 }}
+            animate={{ opacity: tooltip ? 1 : 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             style={{
-              top: coords.top,
-              left: coords.left,
+              top: tooltip.top,
+              left: tooltip.left,
             }}
           >
             {text}

@@ -7,14 +7,14 @@ import { DefaultUserIcon } from "@/icons/DefaultUserIcon";
 import { Button } from "@components/UI/Button/Button";
 
 interface UserModalProps {
-  toggleModal: () => void;
+  onClose: () => void;
 }
 
-export function UserModal({ toggleModal }: UserModalProps) {
+export function UserModal({ onClose }: UserModalProps) {
   return (
     <div className={styles.userModal}>
       <div className={styles.closeBtn}>
-        <Button onClick={() => toggleModal()}>
+        <Button onClick={onClose}>
           <IoCloseOutline style={{ fontSize: "2rem" }} />
         </Button>
       </div>

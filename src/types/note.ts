@@ -1,7 +1,7 @@
 import { SerializedEditorState } from "lexical";
 
 interface BaseNote {
-  id: number;
+  id: string;
   title: string;
   body: SerializedEditorState;
   isPinned: boolean;

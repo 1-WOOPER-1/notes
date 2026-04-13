@@ -11,7 +11,6 @@ export function NoteEditor() {
   const location = useLocation();
   const { openedNote, setOpenedNote } = useUI();
   const editorRef = useRef(null);
-  if (!openedNote) return;
 
   function closeEditor() {
     setOpenedNote(null);

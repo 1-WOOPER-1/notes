@@ -35,7 +35,7 @@ function createBody(text: string): SerializedEditorState {
 
 export const ARCHIVED_NOTES: Note[] = [
   {
-    id: 21,
+    id: "21",
     title: "Фильмы к просмотру",
     body: createBody(
       "Посмотреть новые фильмы: 'Оппенгеймер', 'Дюна 2', 'Киллеры цветочной луны'. Добавить классические — 'Интерстеллар', 'Начало'.",
@@ -45,7 +45,7 @@ export const ARCHIVED_NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 22,
+    id: "22",
     title: "Тренировки на неделю",
     body: createBody(
       "Понедельник — бег 5 км, среда — силовые упражнения, пятница — йога, воскресенье — плавание.",
@@ -55,7 +55,7 @@ export const ARCHIVED_NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 23,
+    id: "23",
     title: "Учебный план",
     body: createBody(
       "Прочитать главы по React и TypeScript, пройти курс по алгоритмам, закрепить основы Docker.",
@@ -65,7 +65,7 @@ export const ARCHIVED_NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 24,
+    id: "24",
     title: "Список подарков",
     body: createBody(
       "Купить книгу для Анны, наушники для Ивана, настольную игру для друзей.",

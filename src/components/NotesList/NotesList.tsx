@@ -1,23 +1,39 @@
 import { NotesContainer } from "@components/NotesContainer/NotesContainer";
 import styles from "./NotesList.module.scss";
-import { useUI } from "@/context/UIContext";
+import { useSearch, useUI } from "@/context/UIContext";
 import { lexicalToPlainText } from "@/utils/lexicalUtils";
 import { Note } from "@/types/note";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, memo, SetStateAction, useMemo } from "react";
 
 interface NotesListType {
   notes: Note[];
   setNotes: Dispatch<SetStateAction<Note[]>>;
 }
 
-export function NotesList({ notes, setNotes }: NotesListType) {
-  const { query, listView } = useUI();
-  const pinnedNotes = notes.filter((note) => note.isPinned);
-  const otherNotes = notes.filter((note) => !note.isPinned);
-  const filteredNotes = notes.filter(
-    (note) =>
-      note.title.toLowerCase().includes(query.toLowerCase()) ||
-      lexicalToPlainText(note.body).toLowerCase().includes(query.toLowerCase()),
+export const NotesList = memo(function NotesList({
+  notes,
+  setNotes,
+}: NotesListType) {
+  const { query } = useSearch();
+  const { listView } = useUI();
+  const pinnedNotes = useMemo(
+    () => notes.filter((note) => note.isPinned),
+    [notes],
+  );
+  const otherNotes = useMemo(
+    () => notes.filter((note) => !note.isPinned),
+    [notes],
+  );
+  const filteredNotes = useMemo(
+    () =>
+      notes.filter(
+        (note) =>
+          note.title.toLowerCase().includes(query.toLowerCase()) ||
+          lexicalToPlainText(note.body)
+            .toLowerCase()
+            .includes(query.toLowerCase()),
+      ),
+    [notes, query],
   );
 
   return (
@@ -38,4 +54,4 @@ export function NotesList({ notes, setNotes }: NotesListType) {
       )}
     </div>
   );
-}
+});

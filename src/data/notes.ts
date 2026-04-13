@@ -35,7 +35,7 @@ function createBody(text: string): SerializedEditorState {
 
 export const NOTES: Note[] = [
   {
-    id: 1,
+    id: "1",
     title: "Список покупок",
     body: createBody(
       "Купить молоко, яйца, хлеб, сыр и фрукты. Проверить акции в магазине возле дома.",
@@ -45,7 +45,7 @@ export const NOTES: Note[] = [
     editedAt: new Date(2024).toISOString(),
   },
   {
-    id: 2,
+    id: "2",
     title: "Идеи для проекта",
     body: createBody(
       "Создать веб-приложение для планирования задач с таймером Помодоро и аналитикой продуктивности.",
@@ -55,7 +55,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 3,
+    id: "3",
     title: "Планы на отпуск",
     body: createBody(
       "Забронировать билеты в Санкт-Петербург, найти жильё возле центра, составить список музеев и ресторанов.",
@@ -65,7 +65,7 @@ export const NOTES: Note[] = [
     editedAt: new Date(2025, 9).toISOString(),
   },
   {
-    id: 4,
+    id: "4",
     title: "Книга к прочтению",
     body: createBody(
       "«Чайка по имени Джонатан Ливингстон» — история о свободе, мечтах и поиске смысла жизни.",
@@ -75,7 +75,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 5,
+    id: "5",
     title: "Тренировка",
     body: createBody(
       "Понедельник — бег 5 км, среда — силовая тренировка, пятница — йога и растяжка.",
@@ -85,7 +85,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 6,
+    id: "6",
     title: "Кулинарный эксперимент",
     body: createBody(
       "Попробовать приготовить пасту с соусом песто из шпината и кешью вместо базилика и кедровых орехов.",
@@ -95,7 +95,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 7,
+    id: "7",
     title: "Список фильмов",
     body: createBody(
       "«Интерстеллар», «Начало», «Паразиты», «Остров проклятых» и «Грань будущего».",
@@ -105,7 +105,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 8,
+    id: "8",
     title: "Рецепт смузи",
     body: createBody(
       "Банан, клубника, овсяное молоко, семена чиа и ложка мёда. Взбить в блендере до однородности.",
@@ -115,7 +115,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 9,
+    id: "9",
     title: "Учебные планы",
     body: createBody(
       "Изучить основы TypeScript, пройти курс по React Hooks, попробовать написать небольшое приложение на Next.js.",
@@ -125,7 +125,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 10,
+    id: "10",
     title: "День рождения друга",
     body: createBody(
       "Купить подарок — книга по фотографии. Забронировать столик в ресторане на 19:00.",
@@ -135,7 +135,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 11,
+    id: "11",
     title: "Погода на неделю",
     body: createBody(
       "Понедельник: дождь, вторник: солнечно, среда: облачно, четверг: гроза, пятница: ясно.",
@@ -145,7 +145,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 12,
+    id: "12",
     title: "Список дел на выходные",
     body: createBody(
       "Убраться дома, вымыть окна, сходить в парк, встретиться с друзьями, приготовить что-то новое.",
@@ -155,7 +155,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 13,
+    id: "13",
     title: "Цели на месяц",
     body: createBody(
       "Прочитать 2 книги, пробежать 50 км, изучить базовую анимацию в CSS, улучшить навыки в английском.",
@@ -165,7 +165,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 14,
+    id: "14",
     title: "Музыкальные треки",
     body: createBody(
       "Найти новые песни для плейлиста: лоу-фай для работы, джаз для вечера, электроника для бега.",
@@ -175,7 +175,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 15,
+    id: "15",
     title: "Покупка техники",
     body: createBody(
       "Выбрать новый монитор 27'' с 144 Гц, изучить обзоры и сравнить цены.",
@@ -185,7 +185,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 16,
+    id: "16",
     title: "Планы по ремонту",
     body: createBody(
       "Перекрасить стены в спальне, купить новую лампу, заменить шторы.",
@@ -195,7 +195,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 17,
+    id: "17",
     title: "Заметки по книге",
     body: createBody(
       "Основная мысль: важно фокусироваться на процессе, а не только на результате. Ценить путь.",
@@ -205,7 +205,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 18,
+    id: "18",
     title: "Идеи для блога",
     body: createBody(
       "Написать статью о продуктивности, сделать обзор любимых приложений, поделиться рецептом завтрака.",
@@ -215,7 +215,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 19,
+    id: "19",
     title: "Садовые работы",
     body: createBody(
       "Посадить розы и лаванду, прополоть грядки, установить капельный полив.",
@@ -225,7 +225,7 @@ export const NOTES: Note[] = [
     editedAt: new Date().toISOString(),
   },
   {
-    id: 20,
+    id: "20",
     title: "Финансовые цели",
     body: createBody(
       "Отложить 10% от дохода, инвестировать в ETF, изучить криптовалюты.",

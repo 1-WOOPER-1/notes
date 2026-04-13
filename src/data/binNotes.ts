@@ -41,7 +41,7 @@ function addMinutes(date: Date, minutes = 1) {
 
 export const BIN_NOTES: Note[] = [
   {
-    id: 101,
+    id: "101",
     title: "Список покупок",
     body: createBody(
       "Купить продукты: молоко, хлеб, яйца, сыр. Заодно взять кофе и овощи для салата.",
@@ -52,7 +52,7 @@ export const BIN_NOTES: Note[] = [
     deleteDate: addMinutes(new Date()).toISOString(),
   },
   {
-    id: 102,
+    id: "102",
     title: "Идеи для путешествий",
     body: createBody(
       "Хочу посетить: Тбилиси, Рим, Токио. Рассмотреть поездку на Байкал летом.",
@@ -63,7 +63,7 @@ export const BIN_NOTES: Note[] = [
     deleteDate: addMinutes(new Date()).toISOString(),
   },
   {
-    id: 103,
+    id: "103",
     title: "Идеи для статей",
     body: createBody(
       "Темы: искусственный интеллект в образовании, минимализм в быту, заметки о продуктивности.",

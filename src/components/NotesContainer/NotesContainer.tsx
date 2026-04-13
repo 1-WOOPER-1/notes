@@ -1,4 +1,11 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import {
+  useState,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useMemo,
+  memo,
+} from "react";
 import {
   DndContext,
   PointerSensor,
@@ -10,52 +17,55 @@ import {
   DragEndEvent,
   DragOverEvent,
 } from "@dnd-kit/core";
-import {
-  arrayMove,
-  SortableContext,
-  rectSortingStrategy,
-} from "@dnd-kit/sortable";
-import { motion, AnimatePresence } from "framer-motion";
+import { SortableContext, rectSortingStrategy } from "@dnd-kit/sortable";
+import { AnimatePresence } from "framer-motion";
 import { NoteCard } from "@components/NoteCard/NoteCard";
 import styles from "./NotesContainer.module.scss";
 import { useUI } from "@/context/UIContext";
+import { useNotes } from "@/context/NotesContext";
 import { Note } from "@/types/note";
+import { SortableNoteCard } from "../NoteCard/SortableNoteCard";
 
 interface NotesContainerType {
   notes: Note[];
   setNotes?: Dispatch<SetStateAction<Note[]>>;
 }
 
-export function NotesContainer({ notes, setNotes }: NotesContainerType) {
+export const NotesContainer = memo(function NotesContainer({
+  notes,
+  setNotes,
+}: NotesContainerType) {
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 30 } }),
   );
 
-  const [activeId, setActiveId] = useState<string | number | null>(null);
-  const [overId, setOverId] = useState<string | number | null>(null);
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const [overId, setOverId] = useState<string | null>(null);
   const { listView } = useUI();
-  const activeNote = notes.find((n) => n.id === activeId);
+  const { reorderNotes } = useNotes();
+  const activeNote = useMemo(
+    () => notes.find((n) => n.id === activeId),
+    [notes, activeId],
+  );
 
-  function handleDragStart({ active }: DragStartEvent) {
-    console.log("Drag started:", active);
-    setActiveId(active.id);
-  }
+  const handleDragStart = useCallback(({ active }: DragStartEvent) => {
+    setActiveId(String(active.id));
+  }, []);
 
-  function handleDragEnd({ active, over }: DragEndEvent) {
-    if (over && active.id !== over.id && setNotes) {
-      setNotes((notes) => {
-        const oldIndex = notes.findIndex((n) => n.id === active.id);
-        const newIndex = notes.findIndex((n) => n.id === over.id);
-        return arrayMove(notes, oldIndex, newIndex);
-      });
-    }
-    setActiveId(null);
-    setOverId(null);
-  }
+  const handleDragEnd = useCallback(
+    ({ active, over }: DragEndEvent) => {
+      if (over && active.id !== over.id && setNotes) {
+        reorderNotes(setNotes, String(active.id), String(over.id));
+      }
+      setActiveId(null);
+      setOverId(null);
+    },
+    [setNotes],
+  );
 
-  function handleDragOver({ active, over }: DragOverEvent) {
-    setOverId(over && over.id !== active.id ? over.id : null);
-  }
+  const handleDragOver = useCallback(({ active, over }: DragOverEvent) => {
+    setOverId(over && over.id !== active.id ? String(over.id) : null);
+  }, []);
 
   return (
     <DndContext
@@ -73,23 +83,12 @@ export function NotesContainer({ notes, setNotes }: NotesContainerType) {
         >
           <AnimatePresence>
             {notes.map((note) => (
-              <motion.div
+              <SortableNoteCard
                 key={note.id}
-                layoutId={String(note.id)}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{
-                  type: "tween",
-                  duration: 0.35,
-                  ease: "easeInOut",
-                }}
-              >
-                <NoteCard
-                  note={note}
-                  isOver={note.id === overId}
-                  isDragging={note.id === activeId}
-                />
-              </motion.div>
+                note={note}
+                isOver={note.id === overId}
+                isDragging={note.id === activeId}
+              />
             ))}
           </AnimatePresence>
         </div>
@@ -99,4 +98,4 @@ export function NotesContainer({ notes, setNotes }: NotesContainerType) {
       </DragOverlay>
     </DndContext>
   );
-}
+});

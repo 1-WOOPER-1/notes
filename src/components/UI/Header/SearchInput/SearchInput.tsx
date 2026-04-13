@@ -1,18 +1,16 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import styles from "./SearchInput.module.scss";
 import { useDebounce } from "@/hooks/useDebounce";
 import { LocalStorageService } from "@/utils/localStorage";
+import { useSearch } from "@/context/UIContext";
 
-interface SearchInputType {
-  setQuery: Dispatch<SetStateAction<string>>;
-}
-
-export function SearchInput({ setQuery }: SearchInputType) {
+export function SearchInput() {
   const [focused, setFocused] = useState(false);
   const [value, setValue] = useState(
     LocalStorageService.getItem("query") || "",
   );
+  const { setQuery } = useSearch();
 
   const debouncedValue = useDebounce(value, 500);
 
