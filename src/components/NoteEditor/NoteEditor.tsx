@@ -1,15 +1,21 @@
 import { useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion } from "motion/react";
+import { useShallow } from "zustand/shallow";
 import { Lexical } from "./components/Lexical";
 import styles from "./NoteEditor.module.scss";
-import { useUI } from "@/context/UIContext";
 import { getBasePath } from "@/utils/routeUtils";
+import { useUIStore } from "@/stores/useUIStore";
 
 export function NoteEditor() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { openedNote, setOpenedNote } = useUI();
+  const { openedNote, setOpenedNote } = useUIStore(
+    useShallow((state) => ({
+      openedNote: state.openedNote,
+      setOpenedNote: state.setOpenedNote,
+    })),
+  );
   const editorRef = useRef(null);
 
   function closeEditor() {

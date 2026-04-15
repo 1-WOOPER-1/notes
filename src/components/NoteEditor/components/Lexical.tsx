@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, RefObject } from "react";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 import { editorConfig } from "./config/editorConfig";
 import { EditorPlugins } from "./plugins/EditorPlugins";
@@ -8,7 +8,7 @@ import { ToolbarPlugin } from "./plugins/ToolbarPlugin";
 import { EditorHeader } from "./EditorHeader";
 import styles from "./Lexical.module.scss";
 import { useClickOutside } from "@/hooks/useClickOutside";
-import { useNoteActions } from "@/context/NoteActionsContext";
+import { useNotesStore } from "@/stores/useNotesStore";
 import { formatEditedAt } from "./formatDate";
 import { Tooltip } from "@components/UI/Tooltip/Tooltip";
 import { Note } from "@/types/note";
@@ -25,7 +25,7 @@ export function Lexical({ note, editorRef, closeEditor }: LexicalType) {
   const [markdownText, setMarkdownText] = useState("");
   const titleRef = useRef<HTMLDivElement>(null);
   const localNoteRef = useRef({ ...note });
-  const { saveNote } = useNoteActions();
+  const saveNote = useNotesStore((state) => state.saveNote);
 
   useClickOutside(editorRef, null, () => {
     if (!checkIsEdited) {

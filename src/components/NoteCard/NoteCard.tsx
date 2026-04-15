@@ -1,13 +1,15 @@
-import { useRef, useState, useEffect, useMemo, memo } from "react";
-import { motion } from "framer-motion";
+import { useRef, useState, useEffect, useMemo, memo, useCallback } from "react";
+import { motion } from "motion/react";
+import { useShallow } from "zustand/shallow";
 import styles from "./NoteCard.module.scss";
-import { useNoteActions } from "@/context/NoteActionsContext";
-import { useSearch } from "@/context/UIContext";
 import { highlightTextInHTML } from "@/utils/highlightTextInHTML";
 
 import { Toolbar } from "./Toolbar";
 import { getHTMLFromBody } from "./editor";
 import { Note } from "@/types/note";
+import { useUIStore } from "@/stores/useUIStore";
+
+import { useOpenNote } from "@/hooks/useOpenNote";
 
 interface NoteCardType {
   note: Note;
@@ -20,8 +22,13 @@ export const NoteCard = memo(function NoteCard({
   isOver,
   isDragging,
 }: NoteCardType) {
-  const { openNote } = useNoteActions();
-  const { query } = useSearch();
+  const { query, pendingOpenNoteId, setPendingOpenNoteId } = useUIStore(
+    useShallow((state) => ({
+      query: state.query,
+      pendingOpenNoteId: state.pendingOpenNoteId,
+      setPendingOpenNoteId: state.setPendingOpenNoteId,
+    })),
+  );
 
   const [isOverflow, setIsOverflow] = useState(false);
   const bodyRef = useRef<HTMLDivElement | null>(null);
@@ -35,14 +42,24 @@ export const NoteCard = memo(function NoteCard({
   );
 
   const HTMLFromBody = useMemo(() => getHTMLFromBody(note.body), [note.body]);
-  const [html, setHtml] = useState({ title: "", body: "" });
-
-  useEffect(() => {
-    setHtml({
+  const html = useMemo(() => {
+    return {
       title: highlightTextInHTML(`<h2>${note.title}</h2>`, query),
       body: highlightTextInHTML(HTMLFromBody, query),
-    });
-  }, [note.title, HTMLFromBody, query]);
+    };
+  }, [note.title, note.id, HTMLFromBody, query]);
+
+  const openNote = useOpenNote();
+  const handleOpenNote = useCallback(() => {
+    openNote(note);
+  }, [note, openNote]);
+
+  useEffect(() => {
+    if (pendingOpenNoteId === note.id) {
+      setPendingOpenNoteId(null);
+      openNote(note);
+    }
+  }, [pendingOpenNoteId]);
 
   useEffect(() => {
     const el = bodyRef.current;
@@ -58,7 +75,7 @@ export const NoteCard = memo(function NoteCard({
   return (
     <motion.div
       className={classNames.join(" ")}
-      onClick={() => openNote(note)}
+      onClick={handleOpenNote}
       layoutId={String(note.id)}
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}

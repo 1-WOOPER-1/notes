@@ -12,11 +12,11 @@ export const routerConfig = [
     children: [
       {
         index: true,
-        element: <Navigate to="notes" replace />,
+        element: <Navigate to="/main" replace />,
         handle: { filter: "notes" },
       },
       {
-        path: "notes",
+        path: "main",
         element: <Notes />,
         exact: true,
         handle: { filter: "notes" },
@@ -60,7 +60,7 @@ export const routerConfig = [
       },
       {
         path: "*",
-        element: <Navigate to="notes" replace />,
+        element: <Navigate to="/main" replace />,
       },
     ],
   },

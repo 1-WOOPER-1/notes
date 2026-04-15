@@ -41,7 +41,7 @@ import {
   RiAlignRight,
   RiAlignJustify,
 } from "react-icons/ri";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 import styles from "../Lexical.module.scss";
 import { Tooltip } from "@components/UI/Tooltip/Tooltip";
