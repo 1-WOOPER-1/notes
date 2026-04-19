@@ -1,8 +1,7 @@
 @use "@/styles/colors.scss" as c;
 
 .sidebar {
-  position: fixed;
-  left: 0;
+  position: sticky;
   top: 5rem;
   width: 18rem;
   height: fit-content;
@@ -12,23 +11,30 @@
   list-style: none;
 
   .newNoteBtn {
-    padding: 1rem;
+    padding: 0.4rem;
     font-size: 1.2rem;
-    color: c.$primary;
     margin: 0.5rem 0 0.5rem 0.5rem;
     gap: 1rem;
-    border-radius: 2rem;
-    border: 2px solid c.$primary;
-    transition: background-color 0.1s linear;
+    border-radius: 3rem;
+    background-color: var(--color-accent-secondary);
+    color: c.$neutral-800;
 
-    &:hover {
-      background-color: c.$primary;
-      color: var(--text-inverted);
+    & .icon {
+      transition: background-color 0.1s linear;
+    }
+
+    &:hover .icon {
+      background-color: c.$neutral-800;
+      color: var(--color-accent-secondary);
     }
 
     .icon {
       font-size: 1.6rem;
-      margin-left: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      padding: 0.6rem;
     }
   }
 
@@ -40,10 +46,10 @@
     align-items: center;
     border-radius: 0 1.5rem 1.5rem 0;
     text-decoration: none;
-    color: inherit;
+    color: var(--color-text-primary);
 
     &:hover {
-      background-color: var(--hover-listitem);
+      background-color: var(--color-hover);
     }
 
     .icon {
@@ -52,11 +58,15 @@
     }
   }
 
+  .text {
+    transform: translateY(0.1rem);
+  }
+
   .active {
-    color: c.$primary;
-    background-color: var(--hover-button);
+    color: var(--color-accent-tertiary);
+    background-color: var(--color-hover);
     &:hover {
-      background-color: var(--hover-button);
+      background-color: var(--color-hover);
     }
   }
 }

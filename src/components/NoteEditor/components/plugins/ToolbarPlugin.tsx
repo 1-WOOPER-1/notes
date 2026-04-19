@@ -138,7 +138,16 @@ export function ToolbarPlugin({
       className={styles.toolbar}
       initial={{ x: "3rem", opacity: 0 }}
       animate={{ x: "0rem", opacity: 1 }}
-      exit={{ x: "3rem", opacity: 0 }}
+      exit={{
+        x: "3rem",
+        opacity: 0,
+        transition: {
+          type: "tween",
+          ease: "easeOut",
+          delay: 0,
+          duration: 0.08,
+        },
+      }}
       transition={{ type: "tween", ease: "easeOut", delay: 0.5 }}
     >
       <Tooltip text="Markdown mode">

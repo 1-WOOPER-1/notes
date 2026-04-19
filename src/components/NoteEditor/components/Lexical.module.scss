@@ -1,9 +1,8 @@
-@use "@/styles/colors.scss" as c;
 @use "@/styles/common.scss" as cmn;
 
 .editorInner {
   width: 100%;
-  background: var(--surface);
+  background: var(--color-bg-surface);
   border-radius: 1rem;
   position: relative;
   box-sizing: border-box;
@@ -37,7 +36,7 @@
   max-height: 92%;
   height: 100%;
   resize: none;
-  caret-color: c.$primary;
+  caret-color: var(--color-accent-primary);
   position: relative;
   tab-size: 1;
   outline: 0;
@@ -51,16 +50,16 @@
   position: absolute;
   right: 1rem;
   bottom: 0;
-  background-color: var(--surface);
+  background-color: var(--color-bg-surface);
   font-size: 0.7rem;
   border-radius: 0.7rem 0 0 0;
   cursor: default;
 }
 
 .editorPlaceholder {
-  color: #999;
+  color: var(--color-text-secondary);
   position: absolute;
-  top: 4.7rem;
+  top: 4.4rem;
   left: 0.7rem;
   user-select: none;
   pointer-events: none;
@@ -69,7 +68,7 @@
 .editorMarkdown {
   box-sizing: border-box;
   background-color: transparent;
-  color: var(--text);
+  color: var(--color-text-primary);
   font-family: "Space Grotesk";
   line-height: 1.4rem;
   width: 100%;
@@ -151,7 +150,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--surface);
+  background: var(--color-bg-surface);
   padding: 0.4rem;
   margin-right: 0.5rem;
   border-radius: 0.7rem;
@@ -173,11 +172,11 @@
 }
 
 .toolbarItemActive {
-  background-color: var(--hover-button);
+  background-color: var(--color-hover);
 }
 
 .toolbarItem:hover {
-  background-color: var(--hover-button);
+  background-color: var(--color-hover);
 }
 
 .toolbar hr {
@@ -185,5 +184,5 @@
   height: 2px;
   border: 0;
   margin: 0.25rem 0;
-  background-color: var(--background);
+  background-color: var(--color-bg-base);
 }

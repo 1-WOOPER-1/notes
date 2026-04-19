@@ -4,11 +4,9 @@ import { NotesList } from "@components/NotesList/NotesList";
 
 export function Archive() {
   return (
-    <div>
-      <main className={styles.main}>
-        <NoteEditor />
-        <NotesList category="archivedNotes" />
-      </main>
-    </div>
+    <main className={styles.main}>
+      <NoteEditor />
+      <NotesList category="archivedNotes" />
+    </main>
   );
 }

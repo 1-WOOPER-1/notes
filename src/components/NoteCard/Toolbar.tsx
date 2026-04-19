@@ -35,7 +35,7 @@ export const Toolbar = memo(function Toolbar({ note, category }: ToolbarType) {
         <Button
           onClick={() => deleteNote(note)}
           className={styles.deleteBtn}
-          toolTipText="Delete note"
+          toolTipText="Delete"
         >
           <PiTrashBold />
         </Button>
@@ -54,7 +54,11 @@ export const Toolbar = memo(function Toolbar({ note, category }: ToolbarType) {
       )}
 
       {category === "notes" && (
-        <Button onClick={() => pinNote(note)} toolTipText="Pin">
+        <Button
+          onClick={() => pinNote(note)}
+          className={styles.pinBtn}
+          toolTipText="Pin"
+        >
           {note.isPinned ? <RiPushpin2Fill /> : <RiPushpin2Line />}
         </Button>
       )}

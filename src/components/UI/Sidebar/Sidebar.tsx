@@ -9,7 +9,7 @@ import { useUIStore } from "@/stores/useUIStore";
 
 export function Sidebar() {
   const sidebarItems = [
-    { to: "/notes", icon: FaRegNoteSticky, label: "Notes" },
+    { to: "/main", icon: FaRegNoteSticky, label: "Notes" },
     { to: "/archive", icon: MdOutlineArchive, label: "Archive" },
     { to: "/bin", icon: PiTrashBold, label: "Bin" },
   ];
@@ -27,7 +27,9 @@ export function Sidebar() {
   return (
     <div className={styles.sidebar}>
       <button className={styles.newNoteBtn} onClick={handleCreateNewNote}>
-        <PiNotePencil className={styles.icon} />
+        <div className={styles.icon}>
+          <PiNotePencil />
+        </div>
         <span>New note</span>
       </button>
       {sidebarItems.map(({ to, icon: Icon, label }) => (
@@ -38,7 +40,8 @@ export function Sidebar() {
             `${styles.sidebarItem} ${isActive ? styles.active : ""}`
           }
         >
-          <Icon className={styles.icon} /> <span>{label}</span>
+          <Icon className={styles.icon} />{" "}
+          <span className={styles.text}>{label}</span>
         </NavLink>
       ))}
     </div>

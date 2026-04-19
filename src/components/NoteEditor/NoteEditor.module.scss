@@ -1,4 +1,3 @@
-@use "@/styles/colors.scss" as c;
 @use "@/styles/mixins.scss" as m;
 
 .shadow {
@@ -10,7 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--shadow-background);
+  background: var(--color-bg-overlay);
   z-index: 50;
 }
 
@@ -20,6 +19,6 @@
   position: fixed;
   top: 7rem;
   left: calc(50% - 650px / 2);
-  z-index: 9999;
+  z-index: 10000;
   display: flex;
 }

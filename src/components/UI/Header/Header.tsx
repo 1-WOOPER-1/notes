@@ -1,18 +1,21 @@
 import styles from "./Header.module.scss";
 import { SearchInput } from "./SearchInput/SearchInput";
 import { UserModalButton } from "@/components/UserModal/UserModalButton";
-import { SettingsButton } from "./SettingsButton";
+import { MenuButton } from "./MenuButton";
 import { ToggleViewButton } from "./ToggleViewButton";
+import { useScrolled } from "@/hooks/useScrolled";
 
 export function Header() {
+  const scrolled = useScrolled();
+
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
       <div className={styles.headerContainer}>
         <h1 className={styles.logo}>NOTES</h1>
         <div className={styles.headerSecondary}>
           <SearchInput />
           <ToggleViewButton />
-          <SettingsButton />
+          <MenuButton />
           <UserModalButton />
         </div>
       </div>

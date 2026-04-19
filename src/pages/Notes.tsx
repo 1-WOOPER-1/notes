@@ -4,11 +4,9 @@ import { NotesList } from "@components/NotesList/NotesList";
 
 export function Notes() {
   return (
-    <div>
-      <main className={styles.main}>
-        <NoteEditor />
-        <NotesList category="notes" />
-      </main>
-    </div>
+    <main className={styles.main}>
+      <NoteEditor />
+      <NotesList category="notes" />
+    </main>
   );
 }

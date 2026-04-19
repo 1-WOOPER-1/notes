@@ -86,7 +86,7 @@ export const NoteCard = memo(function NoteCard({
         duration: 0.35,
         ease: "easeInOut",
       }}
-      exit={{ opacity: 0, scale: 0.9, backgroundColor: "red" }}
+      exit={{ opacity: 0, scale: 0.9 }}
     >
       <div dangerouslySetInnerHTML={{ __html: html.title }} />
       <div
