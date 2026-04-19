@@ -1,6 +1,7 @@
 import { useRef, useState, ReactNode } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import styles from "./Tooltip.module.scss";
+import { createPortal } from "react-dom";
 
 interface TooltipType {
   children: ReactNode;
@@ -20,7 +21,10 @@ export function Tooltip({ children, text }: TooltipType) {
     timerRef.current = setTimeout(() => {
       if (!hoveredRef.current || !wrapperRef.current) return;
       const rect = wrapperRef.current.getBoundingClientRect();
-      setTooltip({ top: rect.bottom + 8, left: rect.left + rect.width / 2 });
+      setTooltip({
+        top: rect.bottom + 8 + window.scrollY,
+        left: rect.left + rect.width / 2 + window.scrollX,
+      });
     }, 400);
   }
 
@@ -33,28 +37,30 @@ export function Tooltip({ children, text }: TooltipType) {
   return (
     <div
       ref={wrapperRef}
-      className={styles.tooltip}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseDown={handleMouseLeave}
     >
       {children}
-      <AnimatePresence>
-        {tooltip && text && (
-          <motion.div
-            className={styles.tooltipText}
-            animate={{ opacity: tooltip ? 1 : 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            style={{
-              top: tooltip.top,
-              left: tooltip.left,
-            }}
-          >
-            {text}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {createPortal(
+        <AnimatePresence>
+          {tooltip && text && (
+            <motion.div
+              className={styles.tooltipText}
+              animate={{ opacity: tooltip ? 1 : 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              style={{
+                top: tooltip.top,
+                left: tooltip.left,
+              }}
+            >
+              {text}
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body,
+      )}
     </div>
   );
 }
