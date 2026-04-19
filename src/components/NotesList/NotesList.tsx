@@ -4,9 +4,10 @@ import { useUIStore } from "@/stores/useUIStore";
 import { lexicalToPlainText } from "@/utils/lexicalUtils";
 import { memo, useMemo } from "react";
 import { useNotesStore } from "@/stores/useNotesStore";
+import { NoteCategory } from "@/types/note";
 
 interface NotesListType {
-  category: "notes" | "archivedNotes" | "binNotes";
+  category: NoteCategory;
 }
 
 export const NotesList = memo(function NotesList({ category }: NotesListType) {
@@ -36,7 +37,7 @@ export const NotesList = memo(function NotesList({ category }: NotesListType) {
   return (
     <div className={`${styles.notesList} ${listView ? styles.listView : ""}`}>
       {!!query.trim().length ? (
-        <NotesContainer notes={filteredNotes} />
+        <NotesContainer notes={filteredNotes} category={category} />
       ) : (
         <>
           {!!pinnedNotes.length && (

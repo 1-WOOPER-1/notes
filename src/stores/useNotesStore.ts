@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { arrayMove } from "@dnd-kit/sortable";
-import { Note } from "@/types/note";
+import { BinNote, Note } from "@/types/note";
 import { SerializedEditorState, SerializedLexicalNode } from "lexical";
 import { NOTES } from "@/data/notes";
 import { ARCHIVED_NOTES } from "@/data/archivedNotes";
@@ -23,6 +23,8 @@ interface NotesState {
   saveNote: (note: Note) => void;
   deleteNote: (note: Note) => void;
   archiveNote: (note: Note) => void;
+  unArchiveNote: (note: Note) => void;
+  restoreNote: (note: BinNote) => void;
 }
 
 function createEmptyBody(): SerializedEditorState {
@@ -109,6 +111,12 @@ export const useNotesStore = create<NotesState>()(
           archivedNotes: [...state.archivedNotes, { ...note, isPinned: false }],
         })),
 
+      unArchiveNote: (note) =>
+        set((state) => ({
+          archivedNotes: state.archivedNotes.filter((n) => n.id !== note.id),
+          notes: [...state.notes, { ...note, isPinned: false }],
+        })),
+
       deleteNote: (note) => {
         const now = new Date();
         const plus30Days = new Date(now);
@@ -121,6 +129,15 @@ export const useNotesStore = create<NotesState>()(
             ...state.binNotes,
             { ...note, isPinned: false, deleteDate },
           ],
+        }));
+      },
+
+      restoreNote: (note: BinNote) => {
+        const { deleteDate, ...restoreNote } = note;
+
+        return set((state) => ({
+          binNotes: state.binNotes.filter((n) => n.id !== note.id),
+          notes: [...state.notes, { ...restoreNote, isPinned: false }],
         }));
       },
     }),

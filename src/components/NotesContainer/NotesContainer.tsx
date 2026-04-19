@@ -14,14 +14,14 @@ import { SortableContext, rectSortingStrategy } from "@dnd-kit/sortable";
 import { AnimatePresence } from "motion/react";
 import { NoteCard } from "@components/NoteCard/NoteCard";
 import styles from "./NotesContainer.module.scss";
-import { Note } from "@/types/note";
+import { Note, NoteCategory } from "@/types/note";
 import { SortableNoteCard } from "../NoteCard/SortableNoteCard";
 import { useUIStore } from "@/stores/useUIStore";
 import { useNotesStore } from "@/stores/useNotesStore";
 
 interface NotesContainerType {
   notes: Note[];
-  category?: "notes" | "archivedNotes" | "binNotes" | null;
+  category: NoteCategory;
 }
 
 export const NotesContainer = memo(function NotesContainer({
@@ -35,6 +35,7 @@ export const NotesContainer = memo(function NotesContainer({
   const [activeId, setActiveId] = useState<string | null>(null);
   const [overId, setOverId] = useState<string | null>(null);
   const listView = useUIStore((state) => state.listView);
+  const query = useUIStore((state) => state.query);
   const reorderNotes = useNotesStore((state) => state.reorderNotes);
   const activeNote = useMemo(
     () => notes.find((n) => n.id === activeId),
@@ -47,7 +48,7 @@ export const NotesContainer = memo(function NotesContainer({
 
   const handleDragEnd = useCallback(
     ({ active, over }: DragEndEvent) => {
-      if (over && active.id !== over.id && category) {
+      if (over && active.id !== over.id) {
         reorderNotes(category, String(active.id), String(over.id));
       }
       setActiveId(null);
@@ -68,7 +69,11 @@ export const NotesContainer = memo(function NotesContainer({
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      <SortableContext items={notes} strategy={rectSortingStrategy}>
+      <SortableContext
+        items={notes}
+        strategy={rectSortingStrategy}
+        disabled={!!query}
+      >
         <div
           className={`${styles.notesContainer} ${
             listView ? styles.listView : ""
@@ -81,13 +86,14 @@ export const NotesContainer = memo(function NotesContainer({
                 note={note}
                 isOver={note.id === overId}
                 isDragging={note.id === activeId}
+                category={category}
               />
             ))}
           </AnimatePresence>
         </div>
       </SortableContext>
       <DragOverlay dropAnimation={null}>
-        {activeNote ? <NoteCard note={activeNote} /> : null}
+        {activeNote ? <NoteCard note={activeNote} category={category} /> : null}
       </DragOverlay>
     </DndContext>
   );

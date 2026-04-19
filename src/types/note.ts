@@ -13,8 +13,13 @@ interface ActiveNote extends BaseNote {
   isPinned: boolean;
 }
 
-interface BinNote extends BaseNote {
+export interface BinNote extends BaseNote {
   deleteDate: string;
 }
 
 export type Note = ActiveNote | BinNote;
+export type NoteCategory = "notes" | "archivedNotes" | "binNotes";
+
+export function isBinNote(note: Note): note is BinNote {
+  return "deleteDate" in note;
+}

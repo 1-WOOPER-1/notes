@@ -6,7 +6,7 @@ import { highlightTextInHTML } from "@/utils/highlightTextInHTML";
 
 import { Toolbar } from "./Toolbar";
 import { getHTMLFromBody } from "./editor";
-import { Note } from "@/types/note";
+import { Note, NoteCategory } from "@/types/note";
 import { useUIStore } from "@/stores/useUIStore";
 
 import { useOpenNote } from "@/hooks/useOpenNote";
@@ -15,12 +15,14 @@ interface NoteCardType {
   note: Note;
   isOver?: boolean;
   isDragging?: boolean;
+  category: NoteCategory;
 }
 
 export const NoteCard = memo(function NoteCard({
   note,
   isOver,
   isDragging,
+  category,
 }: NoteCardType) {
   const { query, pendingOpenNoteId, setPendingOpenNoteId } = useUIStore(
     useShallow((state) => ({
@@ -93,7 +95,7 @@ export const NoteCard = memo(function NoteCard({
         dangerouslySetInnerHTML={{ __html: html.body }}
       />
       {isOverflow && <div>. . .</div>}
-      <Toolbar note={note} />
+      <Toolbar note={note} category={category} />
     </motion.div>
   );
 });
