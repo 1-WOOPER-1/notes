@@ -17,14 +17,16 @@
   }
 
   .stretch {
-    width: 20rem;
-  }
-}
+    @include m.desktop {
+      width: 20rem;
+    }
 
-@include m.tablet {
-  .inputWrapper {
-    .stretch {
-      width: calc(100vw - 9.5rem);
+    @include m.laptop {
+      width: 15rem;
+    }
+
+    @include m.tablet {
+      width: 10rem;
     }
   }
 }

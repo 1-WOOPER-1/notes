@@ -1,27 +1,28 @@
 @use "@/styles/colors.scss" as c;
+@use "@/styles/mixins.scss" as m;
 
 .dropDown {
   position: absolute;
-  min-width: 8rem;
+  min-width: 9rem;
   left: 50%;
   transform: translateX(-50%);
   list-style: none;
 
-  .dropDownItem {
-    button {
-      width: 100%;
-      padding: 0.6rem;
-      margin-top: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      background-color: var(--color-text-inverted);
-      border-radius: 3rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  @include m.tablet {
+    left: auto;
+    right: 0;
+    transform: translateX(0);
+  }
 
-      &:hover {
-        filter: brightness(110%);
-      }
+  .dropDownItem {
+    width: 100%;
+    margin-top: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      filter: brightness(110%);
     }
   }
 }

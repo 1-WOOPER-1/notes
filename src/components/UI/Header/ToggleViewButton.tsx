@@ -1,19 +1,27 @@
 import { TbLayoutList, TbLayoutGrid } from "react-icons/tb";
 import { Button } from "@components/UI/Button/Button";
-import styles from "./Header.module.scss";
 import { useUIStore } from "@/stores/useUIStore";
 
-export function ToggleViewButton() {
+interface ToggleViewButtonProps {
+  className?: string;
+  showLabel?: boolean;
+}
+
+export function ToggleViewButton({
+  className,
+  showLabel,
+}: ToggleViewButtonProps) {
   const listView = useUIStore((state) => state.listView);
   const toggleView = useUIStore((state) => state.toggleView);
 
   return (
     <Button
-      className={styles.headerBtn}
+      className={className}
       onClick={toggleView}
-      toolTipText={listView ? "Grid view" : "List view"}
+      toolTipText={showLabel ? undefined : listView ? "Grid view" : "List view"}
     >
       {!listView ? <TbLayoutList /> : <TbLayoutGrid />}
+      {showLabel && <span>{listView ? "Grid view" : "List view"}</span>}
     </Button>
   );
 }

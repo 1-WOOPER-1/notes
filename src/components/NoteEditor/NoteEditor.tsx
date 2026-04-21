@@ -6,6 +6,7 @@ import { Lexical } from "./components/Lexical";
 import styles from "./NoteEditor.module.scss";
 import { getBasePath } from "@/utils/routeUtils";
 import { useUIStore } from "@/stores/useUIStore";
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 
 export function NoteEditor() {
   const navigate = useNavigate();
@@ -17,6 +18,8 @@ export function NoteEditor() {
     })),
   );
   const editorRef = useRef(null);
+  useBodyScrollLock(!!openedNote);
+  console.log(openedNote);
 
   function closeEditor() {
     setOpenedNote(null);

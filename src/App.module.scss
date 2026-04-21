@@ -11,4 +11,9 @@
   padding: 2rem 1rem;
   display: flex;
   gap: 1rem;
+
+  @include m.tablet {
+    width: 100%;
+    margin-left: 0.5rem;
+  }
 }

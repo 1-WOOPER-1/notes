@@ -8,6 +8,9 @@ import { Button } from "@components/UI/Button/Button";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { useTheme } from "@/context/ThemeContext";
 import { TfiClose } from "react-icons/tfi";
+import { ToggleViewButton } from "./ToggleViewButton";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { UserModalButton } from "@/components/UserModal/UserModalButton";
 
 export function MenuButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,15 +19,28 @@ export function MenuButton() {
   const { theme, toggleTheme } = useTheme();
 
   useClickOutside(dropDownRef, btnRef, toggleDropDown);
+  const isTablet = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery("(max-width: 460px)");
 
   const items = [
-    <button onClick={toggleTheme}>
+    <Button onClick={toggleTheme} className={styles.menuListBtn}>
       {theme === "light" ? <FaMoon /> : <FaSun />}
       <span className={styles.text}>
         {theme === "light" ? "Night Mode" : "Day Mode"}
       </span>
-    </button>,
+    </Button>,
   ];
+
+  if (isTablet) {
+    if (!isMobile) {
+      items.push(
+        <ToggleViewButton showLabel={true} className={styles.menuListBtn} />,
+      );
+    }
+    items.push(
+      <UserModalButton showLabel={true} className={styles.menuListBtn} />,
+    );
+  }
 
   function toggleDropDown() {
     setIsOpen((prev) => !prev);

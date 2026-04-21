@@ -6,6 +6,7 @@ import { PiTrashBold, PiNotePencil } from "react-icons/pi";
 import { useNotesStore } from "@/stores/useNotesStore";
 import styles from "./Sidebar.module.scss";
 import { useUIStore } from "@/stores/useUIStore";
+import { Button } from "../Button/Button";
 
 export function Sidebar() {
   const sidebarItems = [
@@ -26,12 +27,12 @@ export function Sidebar() {
 
   return (
     <div className={styles.sidebar}>
-      <button className={styles.newNoteBtn} onClick={handleCreateNewNote}>
+      <Button className={styles.newNoteBtn} onClick={handleCreateNewNote}>
         <div className={styles.icon}>
           <PiNotePencil />
         </div>
         <span>New note</span>
-      </button>
+      </Button>
       {sidebarItems.map(({ to, icon: Icon, label }) => (
         <NavLink
           key={to}

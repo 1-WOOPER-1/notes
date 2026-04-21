@@ -1,14 +1,21 @@
 @use "@/styles/colors.scss" as c;
+@use "@/styles/mixins.scss" as m;
 
 .sidebar {
   position: sticky;
   top: 5rem;
-  width: 18rem;
+  max-width: 18rem;
+  width: 25%;
   height: fit-content;
   display: flex;
   flex-direction: column;
   padding: 0.5rem 0;
   list-style: none;
+
+  @include m.tablet {
+    width: fit-content;
+    min-width: fit-content;
+  }
 
   .newNoteBtn {
     padding: 0.4rem;
@@ -18,6 +25,12 @@
     border-radius: 3rem;
     background-color: var(--color-accent-secondary);
     color: c.$neutral-800;
+
+    @include m.tablet {
+      & span {
+        display: none;
+      }
+    }
 
     & .icon {
       transition: background-color 0.1s linear;
@@ -55,11 +68,17 @@
     .icon {
       font-size: 1.4rem;
       margin-left: 1.3rem;
+
+      @include m.tablet {
+        margin: auto;
+      }
     }
   }
 
   .text {
-    transform: translateY(0.1rem);
+    @include m.tablet {
+      display: none;
+    }
   }
 
   .active {

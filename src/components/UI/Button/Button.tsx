@@ -3,6 +3,7 @@ import styles from "./Button.module.scss";
 import { Tooltip } from "@components/UI/Tooltip/Tooltip";
 
 interface ButtonProps {
+  ref?: React.Ref<HTMLButtonElement>;
   children: React.ReactNode;
   className?: string;
   onClick: () => void;
@@ -10,6 +11,7 @@ interface ButtonProps {
 }
 
 export function Button({
+  ref,
   children,
   className,
   onClick,
@@ -22,6 +24,7 @@ export function Button({
 
   const button = (
     <button
+      ref={ref}
       className={`${styles.button} ${className || ""}`}
       onClick={handleClick}
     >

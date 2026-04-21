@@ -45,6 +45,7 @@ import { motion } from "motion/react";
 
 import styles from "../Lexical.module.scss";
 import { Tooltip } from "@components/UI/Tooltip/Tooltip";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 interface ToolbarPluginType {
   isMarkdownMode: boolean;
@@ -66,6 +67,7 @@ export function ToolbarPlugin({
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
   const [isStrikethrough, setIsStrikethrough] = useState(false);
+  const isTablet = useMediaQuery("(max-width: 768px)");
 
   const $updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -76,6 +78,18 @@ export function ToolbarPlugin({
       setIsStrikethrough(selection.hasFormat("strikethrough"));
     }
   }, []);
+
+  const animation = isTablet
+    ? {
+        initial: { y: "3rem", x: "-3rem", opacity: 0 },
+        animate: { y: "0rem", x: 0, opacity: 1 },
+        exit: { y: "3rem", x: 0, opacity: 0 },
+      }
+    : {
+        initial: { x: "3rem", y: 0, opacity: 0 },
+        animate: { x: "0rem", y: 0, opacity: 1 },
+        exit: { x: "3rem", y: 0, opacity: 0 },
+      };
 
   useEffect(() => {
     return mergeRegister(
@@ -136,11 +150,9 @@ export function ToolbarPlugin({
   return (
     <motion.div
       className={styles.toolbar}
-      initial={{ x: "3rem", opacity: 0 }}
-      animate={{ x: "0rem", opacity: 1 }}
+      {...animation}
       exit={{
-        x: "3rem",
-        opacity: 0,
+        ...animation.exit,
         transition: {
           type: "tween",
           ease: "easeOut",

@@ -1,9 +1,8 @@
-@use "@/styles/colors.scss" as c;
 @use "@/styles/mixins.scss" as m;
 
 .header {
   position: fixed;
-  z-index: 9999;
+  z-index: 10;
   top: 0;
   width: 100%;
   height: 5rem;
@@ -13,20 +12,37 @@
   &Container {
     width: 70%;
     margin: auto;
-    height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
+    @include m.desktop {
+      width: 80%;
+    }
+
+    @include m.laptop {
+      width: 90%;
+    }
+
+    @include m.tablet {
+      width: 100%;
+    }
+
     .logo {
       user-select: none;
       color: var(--color-text-primary);
+
+      @include m.mobile {
+        display: none;
+      }
     }
   }
 
   &Secondary {
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 1rem;
 
     .headerBtn {
@@ -60,8 +76,11 @@
         }
       }
 
-      .text {
-        transform: translateY(0.15rem);
+      .menuListBtn {
+        font-size: 1rem;
+        width: 100%;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        background-color: var(--color-bg-surface);
       }
 
       .open {
@@ -69,25 +88,27 @@
         color: var(--color-text-primary);
       }
     }
+
+    .userModalBtn {
+      color: var(--color-text-inverted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem;
+      border-radius: 2rem;
+      width: 2.8rem;
+      height: 2.8rem;
+      background-color: var(--color-bg-inverted);
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--color-text-primary);
+        opacity: 0.9;
+      }
+    }
   }
 }
 
 .scrolled {
   backdrop-filter: blur(12px);
-}
-
-@include m.tablet {
-  .header {
-    &Container {
-      width: 100%;
-
-      .logo {
-        display: none;
-      }
-    }
-
-    &Secondary {
-      width: 100%;
-    }
-  }
 }

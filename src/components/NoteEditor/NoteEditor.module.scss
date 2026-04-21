@@ -11,14 +11,29 @@
   align-items: center;
   background: var(--color-bg-overlay);
   z-index: 50;
+
+  @include m.tablet {
+    background: oklch(from var(--color-bg-overlay) l c h / 1);
+  }
 }
 
 .noteEditor {
-  width: 650px;
+  width: 70vw;
+  max-width: 42rem;
+  margin: auto;
   max-height: 85vh;
   position: fixed;
   top: 7rem;
-  left: calc(50% - 650px / 2);
-  z-index: 10000;
+  z-index: 9999;
   display: flex;
+
+  @include m.tablet {
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    margin: 0;
+    max-height: none;
+    max-width: none;
+  }
 }

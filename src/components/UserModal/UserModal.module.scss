@@ -1,22 +1,4 @@
-@use "@/styles/colors.scss" as c;
-
-.userModalBtn {
-  color: var(--color-text-inverted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.6rem;
-  border-radius: 2rem;
-  width: 2.8rem;
-  height: 2.8rem;
-  background-color: var(--color-bg-inverted);
-  cursor: pointer;
-
-  &:hover {
-    background-color: var(--color-text-primary);
-    opacity: 0.9;
-  }
-}
+@use "@/styles/mixins.scss" as m;
 
 .userModal {
   position: fixed;
@@ -28,9 +10,15 @@
   padding: 1rem 1rem 0 1rem;
   z-index: 9999;
   background-color: var(--color-bg-base);
-  top: 6rem;
+  top: 5rem;
   right: 1rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  min-width: 20rem;
+
+  @include m.tablet {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
   .avatar {
     font-size: 1.8rem;
