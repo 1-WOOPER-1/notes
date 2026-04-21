@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "motion/react";
 import { useShallow } from "zustand/shallow";
@@ -19,12 +19,11 @@ export function NoteEditor() {
   );
   const editorRef = useRef(null);
   useBodyScrollLock(!!openedNote);
-  console.log(openedNote);
 
-  function closeEditor() {
+  const closeEditor = useCallback(() => {
     setOpenedNote(null);
     navigate(getBasePath(location.pathname), { replace: true });
-  }
+  }, [setOpenedNote, location.pathname]);
 
   return (
     <AnimatePresence>

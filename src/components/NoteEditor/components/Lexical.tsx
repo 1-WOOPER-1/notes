@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, RefObject } from "react";
+import { useState, useEffect, useRef, RefObject, useCallback } from "react";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { motion } from "motion/react";
 
@@ -44,11 +44,19 @@ export function Lexical({ note, editorRef, closeEditor }: LexicalType) {
     localNoteRef.current.body = editorStateJSON;
   }
 
-  function checkIsEdited() {
+  const checkIsEdited = useCallback(() => {
     const original = JSON.stringify(note);
     const current = JSON.stringify(localNoteRef.current);
     return original === current;
-  }
+  }, [note]);
+
+  const handleSaveAndClose = useCallback(() => {
+    if (!checkIsEdited()) {
+      localNoteRef.current.editedAt = new Date().toISOString();
+      saveNote(localNoteRef.current);
+    }
+    closeEditor();
+  }, [checkIsEdited, saveNote, closeEditor]);
 
   useEffect(() => {
     localNoteRef.current = { ...note };
@@ -86,13 +94,7 @@ export function Lexical({ note, editorRef, closeEditor }: LexicalType) {
         <EditorHeader
           titleRef={titleRef}
           onChangeTitle={onChangeTitle}
-          onSaveAndClose={() => {
-            if (!checkIsEdited()) {
-              localNoteRef.current.editedAt = new Date().toISOString();
-              saveNote(localNoteRef.current);
-            }
-            closeEditor();
-          }}
+          onSaveAndClose={handleSaveAndClose}
         />
         {isMarkdownMode ? (
           <textarea

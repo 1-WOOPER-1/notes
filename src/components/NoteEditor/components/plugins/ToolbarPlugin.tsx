@@ -69,6 +69,30 @@ export function ToolbarPlugin({
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const isTablet = useMediaQuery("(max-width: 768px)");
 
+  const textFormatButtons = [
+    { format: "bold", icon: <RiBold />, state: isBold, label: "Bold" },
+    { format: "italic", icon: <RiItalic />, state: isItalic, label: "Italic" },
+    {
+      format: "underline",
+      icon: <RiUnderline />,
+      state: isUnderline,
+      label: "Underline",
+    },
+    {
+      format: "strikethrough",
+      icon: <RiStrikethrough />,
+      state: isStrikethrough,
+      label: "Strikethrough",
+    },
+  ] as const;
+
+  const alignButtons = [
+    { align: "left", icon: <RiAlignLeft />, label: "Left" },
+    { align: "center", icon: <RiAlignCenter />, label: "Center" },
+    { align: "right", icon: <RiAlignRight />, label: "Right" },
+    { align: "justify", icon: <RiAlignJustify />, label: "Justify" },
+  ] as const;
+
   const $updateToolbar = useCallback(() => {
     const selection = $getSelection();
     if ($isRangeSelection(selection)) {
@@ -190,89 +214,31 @@ export function ToolbarPlugin({
 
       <hr />
 
-      <Tooltip text="Bold">
-        <button
-          onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold")}
-          className={btnClass(isBold)}
-        >
-          <RiBold />
-        </button>
-      </Tooltip>
-
-      <Tooltip text="Italic">
-        <button
-          onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic")}
-          className={btnClass(isItalic)}
-        >
-          <RiItalic />
-        </button>
-      </Tooltip>
-
-      <Tooltip text="Underline">
-        <button
-          onClick={() =>
-            editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline")
-          }
-          className={btnClass(isUnderline)}
-        >
-          <RiUnderline />
-        </button>
-      </Tooltip>
-
-      <Tooltip text="Strikethrough">
-        <button
-          onClick={() =>
-            editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough")
-          }
-          className={btnClass(isStrikethrough)}
-        >
-          <RiStrikethrough />
-        </button>
-      </Tooltip>
+      {textFormatButtons.map(({ format, icon, state, label }) => (
+        <Tooltip key={format} text={label}>
+          <button
+            onClick={() => editor.dispatchCommand(FORMAT_TEXT_COMMAND, format)}
+            className={btnClass(state)}
+          >
+            {icon}
+          </button>
+        </Tooltip>
+      ))}
 
       <hr />
 
-      <Tooltip text="Left">
-        <button
-          onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left")}
-          className={styles.toolbarItem}
-        >
-          <RiAlignLeft />
-        </button>
-      </Tooltip>
-
-      <Tooltip text="Center">
-        <button
-          onClick={() =>
-            editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center")
-          }
-          className={styles.toolbarItem}
-        >
-          <RiAlignCenter />
-        </button>
-      </Tooltip>
-
-      <Tooltip text="Right">
-        <button
-          onClick={() =>
-            editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right")
-          }
-          className={styles.toolbarItem}
-        >
-          <RiAlignRight />
-        </button>
-      </Tooltip>
-
-      <Tooltip text="Justify">
-        <button
-          onClick={() =>
-            editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify")
-          }
-          className={styles.toolbarItem}
-        >
-          <RiAlignJustify />
-        </button>
-      </Tooltip>
+      {alignButtons.map(({ align, icon, label }) => (
+        <Tooltip key={align} text={label}>
+          <button
+            onClick={() =>
+              editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, align)
+            }
+            className={styles.toolbarItem}
+          >
+            {icon}
+          </button>
+        </Tooltip>
+      ))}
     </motion.div>
   );
 }
