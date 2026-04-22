@@ -1,12 +1,78 @@
-# React + Vite
+# 📝 Notes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Минималистичное приложение для заметок, вдохновленное эстетикой бренда **NOTHING**. Сочетание функциональности, «точечного» дизайна и плавных анимаций.
 
-Currently, two official plugins are available:
+[Посмотреть демо](https://1-wooper-1.github.io/notes/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🖼 О проекте
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Основная цель проекта — попытка создания приложения заметок с уникальным визуальным дизайном Nothing OS, реализованом локально прямо в браузере.
+
+### Ключевые особенности:
+
+- **Дизайн Nothing:** Максимальная попытка соблюдения дизайн-кода.
+- **Плавный UX:** Анимации переходов и появления элементов с помощью библиотеки framer-motion.
+- **Адаптивность:** Отзывчивый дизайн (Responsive design) для нормальной работы на различных платформах.
+
+---
+
+## 🛠 Стек технологий
+
+- **Frontend:** React + TypeScript
+- **Сборка:** Vite
+- **State Management:** Zustand
+- **Routing:** React Router
+- **Animations:** Framer Motion
+- **Styling:** SASS/SCSS Modules
+
+---
+
+## 🚀 Функционал
+
+- Создание, редактирование и удаление заметок.
+- Поиск по названию и содержимому.
+- Группировка на закрепленные и архивные заметки.
+- Сохранение данных в LocalStorage (полностью работает локально).
+- Отзывчивый дизайн под разные экраны.
+
+---
+
+## 📦 Установка и запуск
+
+1. Клонирование репозитория:
+
+   ```bash
+   git clone https://github.com/1-WOOPER-1/notes.git
+   ```
+
+2. Перейдите в папку проекта:
+
+   ```bash
+   cd notes
+   ```
+
+3. Установка зависимостей:
+
+   ```bash
+   npm install
+   ```
+
+4. Запуск проекта в режиме разработки:
+   ```bash
+   npm run dev
+   ```
+5. Сборка:
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 👨‍💻 Автор
+
+**Пахомов Владимир** — Frontend Developer
+
+- Telegram: [@I_WOOPER_I](https://t.me/I_WOOPER_I)
+- LinkedIn: [Vladimir Pakhomov](https://linkedin.com/in/vladimir-pakhomov-443525385)
