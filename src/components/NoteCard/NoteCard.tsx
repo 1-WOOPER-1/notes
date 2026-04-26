@@ -37,8 +37,8 @@ export const NoteCard = memo(function NoteCard({
   const classNames = useMemo(
     () => [
       styles.noteCard,
-      isOver ? styles.over : "",
-      isDragging ? styles.dragging : "",
+      isOver ? styles["noteCard--over"] : "",
+      isDragging ? styles["noteCard--dragging"] : "",
     ],
     [isOver, isDragging],
   );

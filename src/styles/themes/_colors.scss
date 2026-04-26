@@ -1,0 +1,41 @@
+@use "../abstracts/variables" as *;
+
+html.dark {
+  --color-text-primary: #{$white};
+  --color-text-secondary: #{$neutral-500};
+  --color-text-inverted: #{$neutral-800};
+
+  --color-bg-base: #{$black};
+  --color-bg-surface: #{$neutral-700};
+  --color-bg-inverted: #{$neutral-100};
+  --color-bg-code: #{$neutral-850};
+  --color-quote: #{$neutral-400};
+  --color-bg-overlay: #{$neutral-900}cc;
+  --color-border: #{$neutral-600};
+
+  --color-hover: #{$neutral-700};
+
+  --color-accent-primary: #{$red-500};
+  --color-accent-secondary: #{$yellow-400};
+  --color-accent-tertiary: #{$blue-500};
+}
+
+html.light {
+  --color-text-primary: #{$neutral-800};
+  --color-text-secondary: #{$neutral-500};
+  --color-text-inverted: #{$white};
+
+  --color-bg-base: #{$neutral-100};
+  --color-bg-inverted: #{$black};
+  --color-bg-surface: #{$white};
+  --color-bg-code: #{$neutral-300};
+  --color-quote: #{$neutral-400};
+  --color-bg-overlay: #{$neutral-200}cc;
+  --color-border: #{$neutral-100};
+
+  --color-hover: #{$neutral-200};
+
+  --color-accent-primary: #{$red-500};
+  --color-accent-secondary: #{$yellow-400};
+  --color-accent-tertiary: #{$blue-500};
+}

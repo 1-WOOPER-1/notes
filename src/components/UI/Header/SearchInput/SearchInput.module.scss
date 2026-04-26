@@ -1,4 +1,4 @@
-@use "@/styles/mixins.scss" as m;
+@use "@/styles/abstracts" as *;
 
 .inputWrapper {
   display: flex;
@@ -6,26 +6,25 @@
   gap: 0.5rem;
   width: fit-content;
   padding: 0.6rem 1rem;
+
   background-color: var(--color-bg-surface);
   border-radius: 2rem;
+}
 
-  input {
-    font-size: 1.05rem;
-    width: 10rem;
-    padding: 0.2rem;
-    transition: width 0.4s ease;
-  }
+.input {
+  font-size: 1.05rem;
+  width: 10rem;
+  padding: 0.2rem;
+  transition: width 0.4s ease;
 
-  .stretch {
-    @include m.desktop {
-      width: 20rem;
-    }
+  &--stretch {
+    width: 20rem;
 
-    @include m.laptop {
+    @include laptop {
       width: 15rem;
     }
 
-    @include m.tablet {
+    @include tablet {
       width: 10rem;
     }
   }

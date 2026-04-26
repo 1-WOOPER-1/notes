@@ -1,0 +1,35 @@
+@font-face {
+  font-family: "Ndot-55";
+  src:
+    url("@/assets/fonts/Ndot-55.woff2") format("woff2"),
+    url("@/assets/fonts/Ndot-55.woff") format("woff");
+  font: {
+    weight: bold;
+    style: normal;
+    display: swap;
+  }
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src:
+    url("@/assets/fonts/SpaceGrotesk-Regular.woff2") format("woff2"),
+    url("@/assets/fonts/SpaceGrotesk-Regular.woff") format("woff");
+  font : {
+    weight: 300;
+    style: normal;
+    display: swap;
+  }
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src:
+    url("@/assets/fonts/SpaceGrotesk-Bold.woff2") format("woff2"),
+    url("@/assets/fonts/SpaceGrotesk-Bold.woff") format("woff");
+  font: {
+    weight: bold;
+    style: normal;
+    display: swap;
+  }
+}

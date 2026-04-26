@@ -1,5 +1,4 @@
-@use "@/styles/colors.scss" as c;
-@use "@/styles/mixins.scss" as m;
+@use "@/styles/abstracts" as *;
 
 .sidebar {
   position: sticky;
@@ -12,7 +11,7 @@
   padding: 0.5rem 0;
   list-style: none;
 
-  @include m.tablet {
+  @include tablet {
     width: fit-content;
     min-width: fit-content;
   }
@@ -24,9 +23,9 @@
     gap: 1rem;
     border-radius: 3rem;
     background-color: var(--color-accent-secondary);
-    color: c.$neutral-800;
+    color: $neutral-800;
 
-    @include m.tablet {
+    @include tablet {
       & span {
         display: none;
       }
@@ -37,7 +36,7 @@
     }
 
     &:hover .icon {
-      background-color: c.$neutral-800;
+      background-color: $neutral-800;
       color: var(--color-accent-secondary);
     }
 
@@ -69,14 +68,14 @@
       font-size: 1.4rem;
       margin-left: 1.3rem;
 
-      @include m.tablet {
+      @include tablet {
         margin: auto;
       }
     }
   }
 
   .text {
-    @include m.tablet {
+    @include tablet {
       display: none;
     }
   }

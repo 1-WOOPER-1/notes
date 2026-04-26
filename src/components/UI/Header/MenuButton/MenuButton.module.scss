@@ -1,0 +1,34 @@
+.menuBtnWrapper {
+  position: relative;
+  width: 6rem;
+
+  .menuBtn {
+    padding-inline: 2rem;
+    margin: auto;
+
+    border-radius: 3rem;
+    background-color: var(--color-bg-inverted);
+    transition:
+      padding 0.3s ease-in-out,
+      background-color 0.15s linear;
+
+    color: var(--color-text-inverted);
+
+    &:hover {
+      padding-inline: 1.7rem;
+      filter: brightness(110%);
+    }
+
+    &--open {
+      background-color: var(--color-accent-secondary);
+      color: var(--color-text-primary);
+    }
+  }
+
+  .menuListBtn {
+    width: 100%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    background-color: var(--color-bg-surface);
+    font-size: 1rem;
+  }
+}

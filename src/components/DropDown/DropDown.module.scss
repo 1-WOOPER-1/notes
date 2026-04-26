@@ -1,28 +1,28 @@
-@use "@/styles/colors.scss" as c;
-@use "@/styles/mixins.scss" as m;
+@use "@/styles/abstracts" as *;
 
 .dropDown {
   position: absolute;
-  min-width: 9rem;
   left: 50%;
+
+  min-width: 9rem;
   transform: translateX(-50%);
   list-style: none;
 
-  @include m.tablet {
+  @include tablet {
     left: auto;
     right: 0;
     transform: translateX(0);
   }
+}
 
-  .dropDownItem {
-    width: 100%;
-    margin-top: 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.dropDownItem {
+  width: 100%;
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    &:hover {
-      filter: brightness(110%);
-    }
+  &:hover {
+    filter: brightness(110%);
   }
 }

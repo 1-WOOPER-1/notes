@@ -1,16 +1,17 @@
-@use "@/styles/common.scss" as cmn;
-@use "@/styles/mixins.scss" as m;
+@use "@/styles/abstracts" as *;
 
 .editorInner {
-  width: 100%;
-  background: var(--color-bg-surface);
-  border-radius: 1rem;
   position: relative;
+
+  width: 100%;
   box-sizing: border-box;
   padding: 1.2rem 0 1rem 1rem;
+
+  background: var(--color-bg-surface);
+  border-radius: 1rem;
   overflow-y: hidden;
 
-  @include m.tablet {
+  @include tablet {
     border-radius: 1rem 1rem 0 0;
     height: 100%;
   }
@@ -41,50 +42,57 @@
 }
 
 .editorBody {
+  position: relative;
+
   min-height: 150px;
   max-height: 92%;
   height: 100%;
+  padding-right: 1rem;
   resize: none;
+
   caret-color: var(--color-accent-primary);
-  position: relative;
   tab-size: 1;
   outline: 0;
   overflow-y: auto;
-  padding-right: 1rem;
 }
 
 .editInfo {
-  text-align: right;
-  padding: 0.45rem;
   position: absolute;
   right: 1rem;
   bottom: 0;
+
+  padding: 0.45rem;
   background-color: var(--color-bg-surface);
-  font-size: 0.7rem;
   border-radius: 0.7rem 0 0 0;
+
+  text-align: right;
+  font-size: 0.7rem;
   cursor: default;
 }
 
 .editorPlaceholder {
-  color: var(--color-text-secondary);
   position: absolute;
   top: 4.4rem;
   left: 0.7rem;
+
+  color: var(--color-text-secondary);
   user-select: none;
   pointer-events: none;
 }
 
 .editorMarkdown {
-  box-sizing: border-box;
-  background-color: transparent;
-  color: var(--color-text-primary);
-  font-family: "Space Grotesk";
-  line-height: 1.4rem;
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
+
+  background-color: transparent;
   outline: none;
   border: none;
   resize: none;
+
+  color: var(--color-text-primary);
+  font-family: "Space Grotesk";
+  line-height: 1.4rem;
 }
 
 .editorTextBold {
@@ -108,47 +116,47 @@
 }
 
 .editorTextCode {
-  @include cmn.textCode;
+  @include textCode;
 }
 
 .editorLink {
-  @include cmn.link;
+  @include link;
 }
 
 .editorCode {
-  @include cmn.code;
+  @include code;
 }
 
 .editorHeadingH1 {
-  @include cmn.h1;
+  @include h1;
 }
 .editorHeadingH2 {
-  @include cmn.h2;
+  @include h2;
 }
 .editorHeadingH3 {
-  @include cmn.h3;
+  @include h3;
 }
 .editorHeadingH4 {
-  @include cmn.h4;
+  @include h4;
 }
 .editorHeadingH5 {
-  @include cmn.h5;
+  @include h5;
 }
 .editorHeadingH6 {
-  @include cmn.h6;
+  @include h6;
 }
 .editorQuote {
-  @include cmn.quote;
+  @include quote;
 }
 .editorListOl {
-  @include cmn.ol;
+  @include ol;
 }
 .editorListUl {
-  @include cmn.ul;
+  @include ul;
 }
 
 .editorListItem {
-  margin: 0.5rem 2rem 0.5rem 2rem;
+  margin: 0.5rem 2rem;
 }
 
 .editorNestedListItem {
@@ -156,20 +164,21 @@
 }
 
 .toolbar {
+  margin-right: 0.5rem;
+  padding: 0.4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--color-bg-surface);
-  padding: 0.4rem;
-  margin-right: 0.5rem;
-  border-radius: 0.7rem;
   gap: 0.2rem;
 
-  @include m.tablet {
-    flex-direction: row;
+  border-radius: 0.7rem;
+  background: var(--color-bg-surface);
+
+  @include tablet {
+    height: 3rem;
     margin-right: auto;
     margin-block: 0.5rem;
-    height: 3rem;
+    flex-direction: row;
   }
 }
 
@@ -202,7 +211,7 @@
   margin: 0.25rem 0;
   background-color: var(--color-bg-base);
 
-  @include m.tablet {
+  @include tablet {
     width: 2px;
     height: 100%;
     margin: 0 0.25rem;

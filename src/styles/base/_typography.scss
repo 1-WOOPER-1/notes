@@ -1,0 +1,38 @@
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: "Space Grotesk", sans-serif;
+
+  background-color: var(--color-bg-base);
+  background-image: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--color-text-primary) 10%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 14px 14px;
+}
+
+p {
+  line-height: 1.5rem;
+}
+
+input {
+  outline: none;
+  color: inherit;
+  border: 0;
+  background-color: transparent;
+  font: {
+    family: "Space Grotesk", sans-serif;
+    size: 1rem;
+  }
+}
+
+button {
+  color: inherit;
+  display: flex;
+  align-items: center;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  font-family: "Space Grotesk", sans-serif;
+}

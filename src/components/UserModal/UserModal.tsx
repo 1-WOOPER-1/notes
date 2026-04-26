@@ -19,30 +19,28 @@ export function UserModal({ onClose }: UserModalProps) {
         </Button>
       </div>
       <DefaultUserIcon className={styles.avatar} />
-      <div className={`${styles.listItem} ${styles.listItemTop}`}>
-        <FiAtSign style={{ fontSize: "1.3rem" }} />
-        <input
-          className={styles.input}
-          type="text"
-          placeholder="Type your nickname"
-        />
+      <div className={`${styles.listItem} ${styles["listItem--top"]}`}>
+        <FiAtSign className={styles.icon} />
+        <input type="text" placeholder="Type your nickname" />
       </div>
-      <div className={`${styles.listItem} ${styles.listItemBottom}`}>
-        <PiEnvelopeSimpleBold style={{ fontSize: "1.3rem" }} />
+      <div className={`${styles.listItem} ${styles["listItem--bottom"]}`}>
+        <PiEnvelopeSimpleBold className={styles.icon} />
         <p style={{ color: "darkgray" }}>v123vladimir@gmail.com</p>
       </div>
-      <button
-        className={`${styles.listItem} ${styles.listItemTop} ${styles.btn}`}
+      <Button
+        className={`${styles.listItem} ${styles["listItem--top"]} ${styles.btn}`}
+        onClick={() => {}}
       >
-        <PiSignOutBold style={{ fontSize: "1.3rem" }} />
-        <p>Sign out</p>
-      </button>
-      <button
-        className={`${styles.listItem} ${styles.listItemBottom} ${styles.btn}`}
+        <PiSignOutBold className={styles.icon} />
+        <span>Sign out</span>
+      </Button>
+      <Button
+        className={`${styles.listItem} ${styles["listItem--bottom"]} ${styles.btn}`}
+        onClick={() => {}}
       >
         <FaRegTrashAlt style={{ fontSize: "1rem" }} />
-        <p>Delete account</p>
-      </button>
+        <span>Delete account</span>
+      </Button>
     </div>
   );
 }

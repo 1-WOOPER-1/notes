@@ -1,12 +1,11 @@
-@use "@/styles/colors.scss" as c;
-
 .button {
-  font-size: 1.2rem;
-  display: flex;
-  gap: 0.6rem;
-  align-items: center;
   padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
   border-radius: 2rem;
+  font-size: 1.2rem;
 
   span {
     transform: translateY(0.05rem);

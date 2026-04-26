@@ -2,13 +2,13 @@ import { useRef, useState } from "react";
 import { TbEqual } from "react-icons/tb";
 import { FaMoon, FaSun } from "react-icons/fa6";
 import { AnimatePresence, motion } from "motion/react";
-import styles from "./Header.module.scss";
+import styles from "./MenuButton.module.scss";
 import { DropDown } from "@/components/DropDown/DropDown";
 import { Button } from "@components/UI/Button/Button";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { useTheme } from "@/context/ThemeContext";
 import { TfiClose } from "react-icons/tfi";
-import { ToggleViewButton } from "./ToggleViewButton";
+import { ToggleViewButton } from "../ToggleViewButton";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { UserModalButton } from "@/components/UserModal/UserModalButton";
 
@@ -49,7 +49,7 @@ export function MenuButton() {
   return (
     <div ref={btnRef} className={styles.menuBtnWrapper}>
       <Button
-        className={`${styles.headerBtn} ${styles.menuBtn} ${isOpen ? styles.open : ""}`}
+        className={`${styles.headerBtn} ${styles.menuBtn} ${isOpen ? styles["menuBtn--open"] : ""}`}
         onClick={toggleDropDown}
         toolTipText="Settings"
       >

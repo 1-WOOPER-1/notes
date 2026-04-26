@@ -1,39 +1,43 @@
-@use "@/styles/mixins.scss" as m;
+@use "@/styles/abstracts" as *;
 
 .shadow {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 50;
+
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--color-bg-overlay);
-  z-index: 50;
 
-  @include m.tablet {
+  background: var(--color-bg-overlay);
+
+  @include tablet {
     background: oklch(from var(--color-bg-overlay) l c h / 1);
   }
 }
 
 .noteEditor {
-  width: 70vw;
-  max-width: 42rem;
-  margin: auto;
-  max-height: 85vh;
   position: fixed;
   top: 7rem;
   z-index: 9999;
+
+  width: 70vw;
+  max-width: 42rem;
+  max-height: 85vh;
+  margin: auto;
   display: flex;
 
-  @include m.tablet {
-    flex-direction: column;
+  @include tablet {
+    top: 0;
+
     width: 100vw;
     height: 100vh;
-    top: 0;
-    margin: 0;
     max-height: none;
     max-width: none;
+    margin: 0;
+    flex-direction: column;
   }
 }

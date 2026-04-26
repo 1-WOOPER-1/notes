@@ -23,7 +23,7 @@ export function SearchInput() {
     <div className={styles.inputWrapper}>
       <FaMagnifyingGlass />
       <input
-        className={focused ? styles.stretch : ""}
+        className={`${styles.input} ${focused ? styles["input--stretch"] : ""}`}
         type="text"
         placeholder="Search"
         value={value}

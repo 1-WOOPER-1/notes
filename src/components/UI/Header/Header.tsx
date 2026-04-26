@@ -1,7 +1,7 @@
 import styles from "./Header.module.scss";
 import { SearchInput } from "./SearchInput/SearchInput";
 import { UserModalButton } from "@/components/UserModal/UserModalButton";
-import { MenuButton } from "./MenuButton";
+import { MenuButton } from "./MenuButton/MenuButton";
 import { ToggleViewButton } from "./ToggleViewButton";
 import { useScrolled } from "@/hooks/useScrolled";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
@@ -11,7 +11,9 @@ export function Header() {
   const isTablet = useMediaQuery("(max-width: 768px)");
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
+    <header
+      className={`${styles.header} ${scrolled ? styles["header--scrolled"] : ""}`}
+    >
       <div className={styles.headerContainer}>
         <h1 className={styles.logo}>NOTES</h1>
         <div className={styles.headerSecondary}>

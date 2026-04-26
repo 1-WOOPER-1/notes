@@ -1,4 +1,4 @@
-@use "./styles/mixins" as m;
+@use "@/styles/abstracts" as *;
 
 .layout {
   display: flex;
@@ -12,7 +12,7 @@
   display: flex;
   gap: 1rem;
 
-  @include m.tablet {
+  @include tablet {
     width: 100%;
     margin-left: 0.5rem;
   }
